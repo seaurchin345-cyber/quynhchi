@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài 1: Hiện Tại Đơn vs Hiện Tại Tiếp Diễn — Lớp 4</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #4361ee;
+      --primary-light: #eef2ff;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', system-ui, sans-serif;
+      background: #f8fafc radial-gradient(#cbd5e1 1.2px, transparent 1.2px);
+      background-size: 24px 24px;
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 20px 16px 50px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    }
+    .back-btn {
+      text-decoration: none;
+      background: #f1f5f9;
+      color: var(--ink);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover { background: var(--primary-light); color: var(--primary); }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 25px -5px rgba(15,23,42,0.06);
+    }
+    .badge {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    h1 { font-size: 28px; font-weight: 900; margin-bottom: 8px; }
+    p { color: var(--muted); font-size: 15px; font-weight: 700; line-height: 1.6; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0; }
+    @media(max-width: 640px) { .grid2 { grid-template-columns: 1fr; } }
+    .box { border-radius: 16px; padding: 18px; border: 2px solid; }
+    .box.simple { border-color: #93c5fd; background: #eff6ff; }
+    .box.cont { border-color: #fbcfe8; background: #fdf2f8; }
+    .box h3 { font-size: 18px; margin-bottom: 6px; font-weight: 900; }
+    .ex { background: #ffffff; border-radius: 10px; padding: 10px; margin-top: 10px; font-weight: 800; font-size: 14px; }
+    .quiz-item {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+    .quiz-q { font-size: 16px; font-weight: 900; margin-bottom: 10px; }
+    .opt-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .opt-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px;
+      font-weight: 800;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: left;
+    }
+    .opt-btn.correct { background: #dcfce7; border-color: #22c55e; color: #15803d; }
+    .opt-btn.wrong { background: #fee2e2; border-color: #ef4444; color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <a href="index.html" class="back-btn">⬅️ Trang Chủ (Menu)</a>
+      <div style="font-weight: 900; font-size: 15px; color: var(--primary);">TIẾNG ANH LỚP 4 · UNIT 1</div>
+    </div>
+
+    <div class="card">
+      <span class="badge">BÀI 1 · KIẾN THỨC CỐT LÕI</span>
+      <h1>Hiện Tại Đơn vs Hiện Tại Tiếp Diễn</h1>
+      <p>Cùng phân biệt thói quen hàng ngày và hành động đang diễn ra ngay lúc nói nhé!</p>
+
+      <div class="grid2">
+        <div class="box simple">
+          <h3 style="color: #1d4ed8;">1. Hiện Tại Đơn (Present Simple)</h3>
+          <p>Nói về thói quen, lịch trình lặp đi lặp lại hàng ngày.</p>
+          <div class="ex">👉 I <b>walk</b> to school every day.<br>👉 She <b>likes</b> ice cream.</div>
+          <p style="margin-top: 8px; font-size: 13px;">Dấu hiệu: <i>always, usually, often, every day</i></p>
+        </div>
+
+        <div class="box cont">
+          <h3 style="color: #be185d;">2. Hiện Tại Tiếp Diễn (Present Continuous)</h3>
+          <p>Nói về hành động ĐANG XẢY RA ngay lúc này.</p>
+          <div class="ex">👉 S + am / is / are + V-ing<br>👉 I <b>am doing</b> my homework now.</div>
+          <p style="margin-top: 8px; font-size: 13px;">Dấu hiệu: <i>now, right now, at the moment, Look!</i></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 style="font-size: 20px; font-weight: 900; margin-bottom: 12px;">✏️ Thử Tài Nhanh</h2>
+      
+      <div class="quiz-item">
+        <div class="quiz-q">1. Look! The bus ______ .</div>
+        <div class="opt-btns">
+          <button class="opt-btn" onclick="check(this, false)">comes</button>
+          <button class="opt-btn" onclick="check(this, true)">is coming</button>
+          <button class="opt-btn" onclick="check(this, false)">come</button>
+          <button class="opt-btn" onclick="check(this, false)">came</button>
+        </div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="quiz-q">2. My brother ______ football every Sunday.</div>
+        <div class="opt-btns">
+          <button class="opt-btn" onclick="check(this, true)">plays</button>
+          <button class="opt-btn" onclick="check(this, false)">is playing</button>
+          <button class="opt-btn" onclick="check(this, false)">play</button>
+          <button class="opt-btn" onclick="check(this, false)">played</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function check(btn, isOk) {
+      const parent = btn.parentElement;
+      parent.querySelectorAll('button').forEach(b => b.disabled = true);
+      if (isOk) {
+        btn.classList.add('correct');
+      } else {
+        btn.classList.add('wrong');
+      }
+    }
+  </script>
+</body>
+</html>
