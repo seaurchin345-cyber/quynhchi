@@ -13,4 +13,5 @@
    - `quakhulop4.html`: Phân biệt Quá khứ đơn & Quá khứ tiếp diễn (Lớp 4) — gồm lý thuyết, 5 dạng bài tập, game cá nhân Dino và game kéo co/bấm chuông đồng đội.
    - `1.html`: Bài 1 (Unit 1)
    - `2.html`: Bài 2 (Unit 2)
+   - `quynhchi.html`: Trang giao diện Trái Tim Đập Đập lung linh, tương tác âm thanh và lời chúc dành tặng riêng cho Quỳnh Chi.
    - Các file HTML tiếp theo sẽ được đánh số hoặc đặt tên theo chủ đề và liên kết từ `index.html`.
