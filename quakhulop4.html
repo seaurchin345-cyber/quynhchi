@@ -1,0 +1,2809 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bí Kíp Ngữ Pháp Lớp 4: Quá Khứ Đơn & Quá Khứ Tiếp Diễn</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #e0e7ff;
+      --primary-dark: #3730a3;
+      --secondary: #06b6d4;
+      --accent-pink: #ec4899;
+      --accent-yellow: #f59e0b;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --accent-purple: #8b5cf6;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --ink: #0f172a;
+      --ink-muted: #64748b;
+      --border: #e2e8f0;
+      --radius-sm: 12px;
+      --radius-md: 18px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 4px 6px -1px rgba(0,0,0,0.06);
+      --shadow-md: 0 10px 25px -5px rgba(15,23,42,0.08);
+      --shadow-lg: 0 20px 35px -8px rgba(15,23,42,0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(#cbd5e1 1.2px, transparent 1.2px),
+        radial-gradient(#e2e8f0 1.2px, #f8fafc 1.2px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+      color: var(--ink);
+      min-height: 100vh;
+      padding-bottom: 50px;
+    }
+
+    button, input, select {
+      font-family: inherit;
+      outline: none;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+    }
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 20px;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 12px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 12px;
+      z-index: 100;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+    .brand-subtitle {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      display: block;
+    }
+
+    .nav-stats {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .stat-pill {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stat-pill.xp {
+      background: #fffbeb;
+      border-color: #fde68a;
+      color: #b45309;
+    }
+    .icon-btn {
+      background: #f1f5f9;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .icon-btn:hover {
+      background: #e2e8f0;
+      color: var(--primary);
+    }
+
+    /* Main Navigation Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 8px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      padding: 6px;
+      border-radius: var(--radius-lg);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      flex: 1;
+      min-width: 150px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--ink-muted);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      background: #f8fafc;
+      color: var(--ink);
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+    }
+
+    /* Common Card Styles */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 24px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .card-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+    .card-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .card-desc {
+      font-size: 14px;
+      color: var(--ink-muted);
+      font-weight: 600;
+    }
+
+    /* Tab Content Panels */
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* SECTION 1: GRAMMAR THEORY */
+    .theory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .tense-card {
+      background: #ffffff;
+      border: 2px solid;
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tense-card.past-simple {
+      border-color: #60a5fa;
+      background: linear-gradient(180deg, #eff6ff 0%, #ffffff 40%);
+    }
+    .tense-card.past-cont {
+      border-color: #f472b6;
+      background: linear-gradient(180deg, #fdf2f8 0%, #ffffff 40%);
+    }
+    .tense-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .past-simple .tense-badge {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+    .past-cont .tense-badge {
+      background: #fce7f3;
+      color: #be185d;
+    }
+    .tense-name {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tense-sub {
+      font-size: 14px;
+      color: var(--ink-muted);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .formula-box {
+      background: #ffffff;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+    .formula-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .formula-row:last-child { margin-bottom: 0; }
+    .formula-tag {
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 8px;
+      border-radius: 6px;
+      min-width: 60px;
+      text-align: center;
+    }
+    .formula-tag.plus { background: #dcfce7; color: #15803d; }
+    .formula-tag.minus { background: #fee2e2; color: #b91c1c; }
+    .formula-tag.question { background: #fef3c7; color: #b45309; }
+    .formula-code {
+      font-family: monospace;
+      font-size: 14px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .signal-box {
+      background: #f8fafc;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-top: 14px;
+    }
+    .signal-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #475569;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .signal-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .signal-pill {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    /* Comparison & Special Combo */
+    .magic-combo-card {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+    }
+    .magic-combo-card h3 {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .magic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .magic-item {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+    .magic-item h4 {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .magic-item p {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.5;
+      opacity: 0.95;
+    }
+    .magic-example {
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* Irregular Verbs Table */
+    .verb-search-box {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 10px;
+    }
+    .verb-input {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      border: 2px solid var(--border);
+      font-size: 15px;
+      font-weight: 700;
+      background: #f8fafc;
+    }
+    .verb-input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+    .verbs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+    .verb-card {
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .verb-card:hover {
+      background: #eef2ff;
+      border-color: #a5b4fc;
+      transform: translateY(-2px);
+    }
+    .verb-words {
+      display: flex;
+      flex-direction: column;
+    }
+    .verb-v1 {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .verb-v2 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .verb-meaning {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+    .speak-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+      color: #475569;
+    }
+    .speak-btn:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    /* SECTION 2: PRACTICE ZONES */
+    .practice-subtabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .subtab-btn {
+      padding: 10px 18px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 800;
+      background: #f1f5f9;
+      color: var(--ink-muted);
+      border: 1.5px solid transparent;
+    }
+    .subtab-btn.active {
+      background: #ffffff;
+      color: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(79, 70, 229, 0.15);
+    }
+    .practice-zone {
+      display: none;
+    }
+    .practice-zone.active {
+      display: block;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+    .quiz-num {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 4px 12px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+    }
+    .quiz-question {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .quiz-opt-btn {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #1e293b;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .quiz-opt-btn:hover {
+      background: #eef2ff;
+      border-color: #cbd5e1;
+    }
+    .quiz-opt-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .quiz-opt-btn.wrong {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+    .quiz-explanation {
+      display: none;
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 12px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    /* Fill in Blanks */
+    .fill-item {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px 20px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .fill-sentence {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    .fill-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .fill-input {
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: 2px solid #cbd5e1;
+      font-size: 15px;
+      font-weight: 800;
+      min-width: 140px;
+      color: var(--primary-dark);
+    }
+    .fill-input:focus {
+      border-color: var(--primary);
+    }
+    .fill-input.is-correct {
+      border-color: #10b981;
+      background: #ecfdf5;
+      color: #065f46;
+    }
+    .fill-input.is-wrong {
+      border-color: #ef4444;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+    .fill-check-btn {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .fill-hint-btn {
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      color: #b45309;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .fill-feedback {
+      font-size: 13px;
+      font-weight: 800;
+      display: none;
+    }
+
+    /* Word Scramble Builder */
+    .scramble-box {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+    .scramble-meaning {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink-muted);
+      margin-bottom: 12px;
+    }
+    .word-pool, .word-dropzone {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-height: 48px;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+    }
+    .word-dropzone {
+      background: #f1f5f9;
+      border: 2px dashed #cbd5e1;
+      align-items: center;
+    }
+    .word-chip {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 14px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #1e293b;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      transition: all 0.15s ease;
+    }
+    .word-chip:hover {
+      background: #eef2ff;
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .scramble-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    /* Chest Sorting Game */
+    .sorting-arena {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    @media (max-width: 680px) {
+      .sorting-arena { grid-template-columns: 1fr; }
+    }
+    .chest-card {
+      border: 3px dashed;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      min-height: 260px;
+      background: #ffffff;
+      text-align: center;
+    }
+    .chest-card.chest-simple {
+      border-color: #60a5fa;
+      background: #f0f9ff;
+    }
+    .chest-card.chest-cont {
+      border-color: #f472b6;
+      background: #fdf2f8;
+    }
+    .chest-header {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .chest-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sort-current-item {
+      background: #ffffff;
+      border: 2px solid var(--primary);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 18px;
+      font-weight: 900;
+      text-align: center;
+      color: var(--primary-dark);
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .sort-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .sort-btn {
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: 16px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .sort-btn.btn-simple {
+      background: #2563eb;
+    }
+    .sort-btn.btn-cont {
+      background: #db2777;
+    }
+
+    /* SECTION 3: SOLO GAME (SPACE DINO QUEST) */
+    .solo-game-board {
+      background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%);
+      color: #ffffff;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.4);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .solo-stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border-radius: 99px;
+      padding: 10px 24px;
+      margin-bottom: 24px;
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .solo-hearts {
+      display: flex;
+      gap: 4px;
+      font-size: 20px;
+    }
+    .solo-timer {
+      background: #f59e0b;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 99px;
+      font-weight: 900;
+    }
+    .solo-streak {
+      color: #38bdf8;
+    }
+    .solo-progress-track {
+      width: 100%;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 99px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+    .solo-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #f43f5e);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .solo-question-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .solo-q-text {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+    .solo-q-hint {
+      font-size: 14px;
+      color: #94a3b8;
+      font-weight: 700;
+    }
+    .solo-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    @media (max-width: 600px) {
+      .solo-options-grid { grid-template-columns: 1fr; }
+    }
+    .solo-opt-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 800;
+      transition: all 0.15s ease;
+    }
+    .solo-opt-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      border-color: #38bdf8;
+      transform: translateY(-2px);
+    }
+    .solo-start-screen, .solo-end-screen {
+      padding: 30px 10px;
+    }
+    .big-play-btn {
+      background: linear-gradient(135deg, #f59e0b, #ef4444);
+      color: #ffffff;
+      padding: 16px 40px;
+      border-radius: 99px;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(239, 68, 68, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* SECTION 4: TEAM BATTLES */
+    .battle-mode-switcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .battle-mode-card {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .battle-mode-card.active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+    .battle-mode-card h4 {
+      font-size: 16px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .battle-mode-card p {
+      font-size: 12px;
+      color: var(--ink-muted);
+      font-weight: 700;
+    }
+
+    /* Tug of War (2 Players on Same Screen) */
+    .tug-arena {
+      background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .tug-scoreboard {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .team-badge {
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      color: #ffffff;
+      font-weight: 900;
+      text-align: center;
+    }
+    .team-badge.red {
+      background: linear-gradient(135deg, #ef4444, #b91c1c);
+    }
+    .team-badge.blue {
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    }
+    .team-name { font-size: 18px; margin-bottom: 4px; }
+    .team-score { font-size: 26px; }
+
+    .rope-track {
+      background: #e2e8f0;
+      height: 24px;
+      border-radius: 99px;
+      position: relative;
+      margin-bottom: 24px;
+      overflow: hidden;
+      border: 2px solid #cbd5e1;
+    }
+    .rope-marker {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 30px;
+      margin-left: -15px;
+      background: #f59e0b;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.8);
+      transition: left 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .rope-center-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #94a3b8;
+    }
+
+    .tug-controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    @media (max-width: 600px) {
+      .tug-controls-grid { grid-template-columns: 1fr; }
+    }
+    .team-zone {
+      border: 2px solid;
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+    .team-zone.red-zone {
+      border-color: #fca5a5;
+      background: #fef2f2;
+    }
+    .team-zone.blue-zone {
+      border-color: #93c5fd;
+      background: #eff6ff;
+    }
+    .team-zone h5 {
+      font-size: 15px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .team-buttons-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .team-ans-btn {
+      padding: 12px 10px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      border: 2px solid transparent;
+      text-align: center;
+    }
+    .red-zone .team-ans-btn {
+      background: #ffffff;
+      color: #991b1b;
+      border-color: #fca5a5;
+    }
+    .blue-zone .team-ans-btn {
+      background: #ffffff;
+      color: #1e40af;
+      border-color: #93c5fd;
+    }
+
+    /* Classroom Arena (4 Teams & Buzzer) */
+    .classroom-arena {
+      display: none;
+    }
+    .classroom-teams-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .class-team-card {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      position: relative;
+    }
+    .class-team-card.team-1 { border-color: #f87171; }
+    .class-team-card.team-2 { border-color: #60a5fa; }
+    .class-team-card.team-3 { border-color: #34d399; }
+    .class-team-card.team-4 { border-color: #fbbf24; }
+    .class-team-name {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .class-team-score {
+      font-size: 32px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+    .score-btns {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+    }
+    .score-btn {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .score-btn.plus { background: #dcfce7; color: #166534; }
+    .score-btn.minus { background: #fee2e2; color: #991b1b; }
+
+    .buzzer-box {
+      text-align: center;
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .giant-buzzer-btn {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 900;
+      box-shadow: 0 12px 0 #991b1b, 0 20px 25px rgba(239, 68, 68, 0.4);
+      margin: 10px auto;
+      display: grid;
+      place-items: center;
+      transition: all 0.1s ease;
+    }
+    .giant-buzzer-btn:active {
+      transform: translateY(8px);
+      box-shadow: 0 4px 0 #991b1b, 0 10px 15px rgba(239, 68, 68, 0.3);
+    }
+    .buzzer-claimed-banner {
+      font-size: 20px;
+      font-weight: 900;
+      color: #b91c1c;
+      margin-top: 10px;
+      min-height: 30px;
+    }
+
+    /* SECTION 5: AWARDS & PRINT WORKSHEET */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .badge-card {
+      background: #f8fafc;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .badge-card.unlocked {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+    .badge-icon {
+      font-size: 38px;
+      margin-bottom: 8px;
+      filter: grayscale(100%);
+      opacity: 0.5;
+    }
+    .badge-card.unlocked .badge-icon {
+      filter: grayscale(0%);
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    .badge-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .badge-desc {
+      font-size: 12px;
+      color: var(--ink-muted);
+      font-weight: 700;
+    }
+
+    /* Certificate Box */
+    .certificate-container {
+      background: #ffffff;
+      border: 8px double #d97706;
+      border-radius: var(--radius-lg);
+      padding: 30px 40px;
+      text-align: center;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+    .cert-heading {
+      font-size: 16px;
+      font-weight: 900;
+      color: #b45309;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .cert-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 14px;
+    }
+    .cert-name-input {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--primary-dark);
+      border: none;
+      border-bottom: 3px solid var(--primary);
+      text-align: center;
+      padding: 6px 14px;
+      max-width: 360px;
+      margin: 10px auto 16px auto;
+      display: block;
+      background: transparent;
+    }
+    .cert-body {
+      font-size: 16px;
+      font-weight: 700;
+      color: #475569;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+    }
+    .cert-seal {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+    .print-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    /* Print Specific Styles */
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+        padding: 0;
+      }
+      .top-nav, .tab-bar, .print-actions, .stat-pill, .icon-btn, .tab-panel:not(.active) {
+        display: none !important;
+      }
+      .certificate-container {
+        border-color: #000;
+        box-shadow: none;
+        page-break-after: always;
+      }
+      .card {
+        border: 1px solid #ccc;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Top Nav Header -->
+    <header class="top-nav">
+      <a href="#" class="brand">
+        <div class="brand-icon">🚀</div>
+        <div>
+          <span>Past Tenses Lớp 4</span>
+          <span class="brand-subtitle">Quá khứ đơn & Quá khứ tiếp diễn</span>
+        </div>
+      </a>
+      
+      <div class="nav-stats">
+        <div class="stat-pill xp">
+          <span>⭐</span>
+          <span id="xpDisplay">0 XP</span>
+        </div>
+        <button class="icon-btn" id="soundToggleBtn" title="Bật/Tắt âm thanh">
+          <span id="soundIcon">🔊</span> Âm thanh
+        </button>
+        <a href="index.html" class="icon-btn" style="text-decoration: none;" title="Đấu trường lớp học">
+          <span>🎒</span> Đấu Trường
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Navigation Bar -->
+    <nav class="tab-bar">
+      <button class="tab-btn active" data-tab="theory">
+        <span>📖</span> Bí Kíp Ngữ Pháp
+      </button>
+      <button class="tab-btn" data-tab="practice">
+        <span>✏️</span> Luyện Tập Đa Dạng
+      </button>
+      <button class="tab-btn" data-tab="solo">
+        <span>👾</span> Game Cá Nhân
+      </button>
+      <button class="tab-btn" data-tab="team">
+        <span>⚔️</span> Game Đồng Đội
+      </button>
+      <button class="tab-btn" data-tab="awards">
+        <span>🏆</span> Vinh Danh & In Bài
+      </button>
+    </nav>
+
+    <!-- TAB 1: BÍ KÍP NGỮ PHÁP (THEORY) -->
+    <section class="tab-panel active" id="tab-theory">
+      
+      <!-- Magic Concept: Pizza vs Lightning -->
+      <div class="magic-combo-card">
+        <h3>⚡ Mẹo Nhớ Thần Kì: "Chiếc Pizza & Tia Chớp" 🍕</h3>
+        <p style="font-size: 15px; font-weight: 700; opacity: 0.95;">
+          Học sinh lớp 4 chỉ cần nhớ quy tắc siêu vui này là không bao giờ nhầm lẫn giữa 2 thì quá khứ:
+        </p>
+        <div class="magic-grid">
+          <div class="magic-item">
+            <h4>🍕 Quá Khứ Tiếp Diễn = Chiếc Pizza</h4>
+            <p>Là hành động <b>ĐANG DIỄN RA KÉO DÀI</b> tại một giờ cụ thể trong quá khứ. Giống như đang ngồi thong thả thưởng thức chiếc bánh pizza to đùng!</p>
+            <div class="magic-example">👉 At 8 PM yesterday, I <b>was watching</b> TV.</div>
+          </div>
+          <div class="magic-item">
+            <h4>⚡ Quá Khứ Đơn = Tia Chớp Xoẹt Qua</h4>
+            <p>Là hành động <b>ĐÃ XONG XUÔI</b> hoặc bất ngờ <b>XEN VÀO CẮT NGANG</b>. Giống như tia chớp đánh "Xoẹt!", xảy ra chớp nhoáng rồi chấm dứt!</p>
+            <div class="magic-example">👉 Yesterday, I <b>went</b> to the zoo.</div>
+          </div>
+          <div class="magic-item">
+            <h4>🤝 Khi Hai Bạn Gặp Nhau: WHEN & WHILE</h4>
+            <p>Đang ăn Pizza (tiếp diễn) thì Tia Chớp giáng xuống (quá khứ đơn cắt ngang):</p>
+            <div class="magic-example">
+              👉 While I <b>was studying</b>, the phone <b>rang</b>.<br>
+              (Sau <b>WHILE</b> dùng Tiếp diễn | Sau <b>WHEN</b> dùng Đơn)
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side-by-side Grammar Cards -->
+      <div class="theory-grid">
+        <!-- Past Simple Card -->
+        <div class="tense-card past-simple">
+          <span class="tense-badge">Hành Động Đã Chấm Dứt</span>
+          <h2 class="tense-name">1. Quá Khứ Đơn (Past Simple)</h2>
+          <div class="tense-sub">Diễn tả việc đã xảy ra và kết thúc hoàn toàn trong quá khứ.</div>
+
+          <div class="formula-box">
+            <div class="formula-row">
+              <span class="formula-tag plus">(+) Khẳng định</span>
+              <span class="formula-code">S + V-ed / V2 (bất quy tắc)</span>
+            </div>
+            <div class="formula-row">
+              <span class="formula-tag minus">(-) Phủ định</span>
+              <span class="formula-code">S + didn't + V (nguyên mẫu)</span>
+            </div>
+            <div class="formula-row">
+              <span class="formula-tag question">(?) Nghi vấn</span>
+              <span class="formula-code">Did + S + V (nguyên mẫu)?</span>
+            </div>
+          </div>
+
+          <div style="font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 8px;">
+            🌟 Với động từ <b>TO BE</b>:
+            <br>• <b>Was</b>: đi với I, He, She, It, 1 người (ngắn vì 1 người)
+            <br>• <b>Were</b>: đi với You, We, They, 2 người trở lên (dài vì đông người)
+          </div>
+
+          <div class="signal-box">
+            <div class="signal-title">🔍 Dấu hiệu nhận biết:</div>
+            <div class="signal-pills">
+              <span class="signal-pill">yesterday (hôm qua)</span>
+              <span class="signal-pill">last night / last week</span>
+              <span class="signal-pill">... ago (2 days ago)</span>
+              <span class="signal-pill">in 2022</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Past Continuous Card -->
+        <div class="tense-card past-cont">
+          <span class="tense-badge">Hành Động Đang Diễn Ra</span>
+          <h2 class="tense-name">2. Quá Khứ Tiếp Diễn (Past Continuous)</h2>
+          <div class="tense-sub">Diễn tả việc đang xảy ra tại một thời điểm xác định trong quá khứ.</div>
+
+          <div class="formula-box">
+            <div class="formula-row">
+              <span class="formula-tag plus">(+) Khẳng định</span>
+              <span class="formula-code">S + was / were + V-ing</span>
+            </div>
+            <div class="formula-row">
+              <span class="formula-tag minus">(-) Phủ định</span>
+              <span class="formula-code">S + wasn't / weren't + V-ing</span>
+            </div>
+            <div class="formula-row">
+              <span class="formula-tag question">(?) Nghi vấn</span>
+              <span class="formula-code">Was / Were + S + V-ing?</span>
+            </div>
+          </div>
+
+          <div style="font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 8px;">
+            🌟 Quy tắc thêm đuôi <b>-ing</b>:
+            <br>• Động từ kết thúc bằng 'e' bỏ 'e' thêm ing: <i>make ➔ making</i>
+            <br>• 1 nguyên âm kẹp giữa 2 phụ âm: gấp đôi phụ âm cuối: <i>run ➔ running, swim ➔ swimming</i>
+          </div>
+
+          <div class="signal-box">
+            <div class="signal-title">🔍 Dấu hiệu nhận biết:</div>
+            <div class="signal-pills">
+              <span class="signal-pill">at 7 o'clock yesterday</span>
+              <span class="signal-pill">at this time last Sunday</span>
+              <span class="signal-pill">all yesterday evening</span>
+              <span class="signal-pill">while (trong khi)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Irregular Verbs Lookup Table -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon" style="background:#e0e7ff; color:#4338ca;">📚</div>
+            <div>
+              <div class="card-title">Bảng Vàng Động Từ Bất Quy Tắc Lớp 4</div>
+              <div class="card-desc">24 động từ quen thuộc nhất cần nhớ trong bài thi</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="verb-search-box">
+          <input type="text" id="verbSearchInput" class="verb-input" placeholder="🔍 Gõ từ muốn tìm (ví dụ: go, eat, xem, đi...)">
+        </div>
+
+        <div class="verbs-grid" id="verbsContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: LUYỆN TẬP ĐA DẠNG (PRACTICE) -->
+    <section class="tab-panel" id="tab-practice">
+      
+      <!-- Sub-tabs for Exercises -->
+      <div class="practice-subtabs">
+        <button class="subtab-btn active" data-sub="sub-quiz">1. Trắc Nghiệm Thông Minh (10 Câu)</button>
+        <button class="subtab-btn" data-sub="sub-fill">2. Thám Tử Điền Động Từ (8 Câu)</button>
+        <button class="subtab-btn" data-sub="sub-mistake">3. Bác Sĩ Bắt Sâu Sửa Lỗi (6 Câu)</button>
+        <button class="subtab-btn" data-sub="sub-scramble">4. Ghép Mảnh Ghép Câu (5 Câu)</button>
+        <button class="subtab-btn" data-sub="sub-sort">5. Phân Loại Hòm Kho Báu</button>
+      </div>
+
+      <!-- Sub-zone 1: Multiple Choice Quiz -->
+      <div class="practice-zone active" id="sub-quiz">
+        <div id="quizContainer">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Sub-zone 2: Fill in the Blanks -->
+      <div class="practice-zone" id="sub-fill">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon" style="background:#fef3c7; color:#d97706;">🔍</div>
+              <div>
+                <div class="card-title">Thám Tử Điền Động Từ Đúng Dạng</div>
+                <div class="card-desc">Hãy chia động từ trong ngoặc ở thì Quá khứ đơn hoặc Quá khứ tiếp diễn nhé!</div>
+              </div>
+            </div>
+          </div>
+          <div id="fillContainer">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-zone 3: Spot the Mistake -->
+      <div class="practice-zone" id="sub-mistake">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon" style="background:#fee2e2; color:#dc2626;">🩺</div>
+              <div>
+                <div class="card-title">Bác Sĩ Ngữ Pháp - Bắt Sâu Sửa Lỗi</div>
+                <div class="card-desc">Tìm từ viết sai trong câu và bấm sửa lại cho chuẩn xác!</div>
+              </div>
+            </div>
+          </div>
+          <div id="mistakeContainer">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-zone 4: Sentence Scramble -->
+      <div class="practice-zone" id="sub-scramble">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon" style="background:#dcfce7; color:#15803d;">🧩</div>
+              <div>
+                <div class="card-title">Ghép Mảnh Ghép Từ Thành Câu Đúng</div>
+                <div class="card-desc">Nhấp chọn các từ theo đúng thứ tự để tạo thành câu hoàn chỉnh.</div>
+              </div>
+            </div>
+          </div>
+          <div id="scrambleContainer">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Sub-zone 5: Chest Sorting -->
+      <div class="practice-zone" id="sub-sort">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon" style="background:#f3e8ff; color:#7e22ce;">📦</div>
+              <div>
+                <div class="card-title">Phân Loại Hòm Kho Báu</div>
+                <div class="card-desc">Đọc thẻ bài bên dưới và bấm nút đưa vào đúng hòm tương ứng!</div>
+              </div>
+            </div>
+            <div style="font-weight: 800; color: var(--primary);" id="sortScoreDisplay">Điểm: 0/10</div>
+          </div>
+
+          <div id="sortActiveCardArea">
+            <div class="sort-current-item" id="sortCardText">Đang tải câu...</div>
+            <div class="sort-buttons">
+              <button class="sort-btn btn-simple" id="btnSortSimple">📦 Hòm Quá Khứ Đơn (Past Simple)</button>
+              <button class="sort-btn btn-cont" id="btnSortCont">⏳ Hòm Quá Khứ Tiếp Diễn (Past Continuous)</button>
+            </div>
+          </div>
+
+          <div class="sorting-arena">
+            <div class="chest-card chest-simple">
+              <div class="chest-header" style="color: #1d4ed8;">📦 Hòm Quá Khứ Đơn</div>
+              <div class="chest-items" id="chestSimpleList"></div>
+            </div>
+            <div class="chest-card chest-cont">
+              <div class="chest-header" style="color: #be185d;">⏳ Hòm Quá Khứ Tiếp Diễn</div>
+              <div class="chest-items" id="chestContList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 3: GAME CÁ NHÂN (SPACE DINO QUEST) -->
+    <section class="tab-panel" id="tab-solo">
+      <div class="solo-game-board">
+        
+        <!-- Start Screen -->
+        <div id="soloStartScreen" class="solo-start-screen">
+          <div style="font-size: 64px; margin-bottom: 16px;">🚀🦖</div>
+          <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 10px;">Thám Tử Dino Vượt Vũ Trụ Quá Khứ</h2>
+          <p style="font-size: 16px; color: #cbd5e1; max-width: 500px; margin: 0 auto 24px auto;">
+            Trả lời đúng các câu hỏi để giúp phi thuyền của Dino bay về Trái Đất an toàn. Bạn có 3 quả tim và 15 giây cho mỗi câu hỏi!
+          </p>
+          <button class="big-play-btn" id="startSoloGameBtn">
+            <span>BẮT ĐẦU VƯỢT ẢI</span> ➔
+          </button>
+        </div>
+
+        <!-- Gameplay Screen -->
+        <div id="soloPlayScreen" style="display: none;">
+          <div class="solo-stats-bar">
+            <div class="solo-hearts" id="soloHeartsDisplay">❤️❤️❤️</div>
+            <div class="solo-timer" id="soloTimerDisplay">⏱️ 15s</div>
+            <div class="solo-streak" id="soloStreakDisplay">🔥 Chuỗi: 0</div>
+            <div style="color: #fde047; font-weight: 900;" id="soloScoreDisplay">⭐ 0 Điểm</div>
+          </div>
+
+          <div class="solo-progress-track">
+            <div class="solo-progress-fill" id="soloProgressFill"></div>
+          </div>
+
+          <div class="solo-question-box">
+            <div class="solo-q-text" id="soloQText">Câu hỏi sẽ hiện ở đây...</div>
+            <div class="solo-q-hint" id="soloQHint">Dấu hiệu nhận biết: ...</div>
+          </div>
+
+          <div class="solo-options-grid" id="soloOptionsGrid">
+            <!-- 4 option buttons populated by JS -->
+          </div>
+        </div>
+
+        <!-- End Screen -->
+        <div id="soloEndScreen" class="solo-end-screen" style="display: none;">
+          <div id="soloEndIcon" style="font-size: 64px; margin-bottom: 12px;">🏆</div>
+          <h2 id="soloEndTitle" style="font-size: 32px; font-weight: 900; margin-bottom: 8px;">Chúc Mừng Bạn!</h2>
+          <div id="soloEndScore" style="font-size: 20px; color: #fde047; font-weight: 900; margin-bottom: 20px;">Bạn đạt 500 điểm!</div>
+          <button class="big-play-btn" id="restartSoloGameBtn">
+            <span>CHƠI LẠI LẦN NỮA</span> 🔄
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: GAME ĐỒNG ĐỘI (TEAM BATTLES) -->
+    <section class="tab-panel" id="tab-team">
+      
+      <!-- Battle Mode Switcher -->
+      <div class="battle-mode-switcher">
+        <div class="battle-mode-card active" id="btnModeTug">
+          <h4>🪢 Chế Độ 1: Kéo Co Siêu Tốc (2 Đội Đối Kháng)</h4>
+          <p>Hai bạn ngồi cạnh nhau thi bấm nhanh trên cùng màn hình</p>
+        </div>
+        <div class="battle-mode-card" id="btnModeClass">
+          <h4>🔔 Chế Độ 2: Đấu Trường Lớp Học (Bấm Chuông)</h4>
+          <p>Dành cho 2 - 4 đội trong lớp thi đấu ghi điểm trên máy chiếu</p>
+        </div>
+      </div>
+
+      <!-- Mode 1: Tug of War -->
+      <div class="tug-arena" id="tugWarArena">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon" style="background:#fee2e2; color:#ef4444;">🪢</div>
+            <div>
+              <div class="card-title">Đại Chiến Kéo Co: Đội Đỏ vs Đội Xanh</div>
+              <div class="card-desc">Đội nào trả lời đúng và nhanh hơn sẽ kéo sợi dây về phía mình!</div>
+            </div>
+          </div>
+          <button class="icon-btn" id="resetTugBtn">🔄 Bắt đầu ván mới</button>
+        </div>
+
+        <div class="tug-scoreboard">
+          <div class="team-badge red">
+            <div class="team-name">🦖 Đội Đỏ (Red Dino)</div>
+            <div class="team-score" id="redScore">0</div>
+          </div>
+          <div style="font-size: 24px; font-weight: 900; color: #94a3b8;">VS</div>
+          <div class="team-badge blue">
+            <div class="team-name">🚀 Đội Xanh (Blue Rocket)</div>
+            <div class="team-score" id="blueScore">0</div>
+          </div>
+        </div>
+
+        <!-- Tug Rope Track -->
+        <div class="rope-track">
+          <div class="rope-center-line"></div>
+          <div class="rope-marker" id="ropeMarker"></div>
+        </div>
+
+        <!-- Shared Question Box -->
+        <div style="background: #ffffff; border: 2px solid var(--border); border-radius: var(--radius-md); padding: 20px; text-align: center; margin-bottom: 20px;">
+          <div style="font-size: 13px; font-weight: 800; color: var(--primary); text-transform: uppercase;">CÂU HỎI ĐỐI KHÁNG</div>
+          <div style="font-size: 20px; font-weight: 900; margin-top: 6px;" id="tugQuestionText">Đang chuẩn bị câu hỏi...</div>
+        </div>
+
+        <!-- 2 Side-by-side Answer Zones -->
+        <div class="tug-controls-grid">
+          <!-- Red Team Zone (Left) -->
+          <div class="team-zone red-zone">
+            <h5>🔴 ĐỘI ĐỎ BẤM ĐÁP ÁN:</h5>
+            <div class="team-buttons-grid" id="redButtonsGrid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- Blue Team Zone (Right) -->
+          <div class="team-zone blue-zone">
+            <h5>🔵 ĐỘI XANH BẤM ĐÁP ÁN:</h5>
+            <div class="team-buttons-grid" id="blueButtonsGrid">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mode 2: Classroom Arena (4 Teams & Buzzer) -->
+      <div class="classroom-arena" id="classArena">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title-group">
+              <div class="card-icon" style="background:#e0e7ff; color:#4338ca;">🏫</div>
+              <div>
+                <div class="card-title">Đấu Trường Bấm Chuông Lớp Học</div>
+                <div class="card-desc">Thầy cô hoặc quản trò chiếu lên bảng, các đội tranh quyền bấm chuông trả lời!</div>
+              </div>
+            </div>
+            <button class="icon-btn" id="nextClassQuestionBtn">➡️ Câu hỏi tiếp theo</button>
+          </div>
+
+          <!-- 4 Teams Scoreboard -->
+          <div class="classroom-teams-grid">
+            <div class="class-team-card team-1">
+              <div class="class-team-name">🐯 Đội Hổ Con</div>
+              <div class="class-team-score" id="scoreTeam1">0</div>
+              <div class="score-btns">
+                <button class="score-btn plus" onclick="addScore(1, 10)">+10</button>
+                <button class="score-btn minus" onclick="addScore(1, -5)">-5</button>
+              </div>
+            </div>
+
+            <div class="class-team-card team-2">
+              <div class="class-team-name">🐲 Đội Rồng Lửa</div>
+              <div class="class-team-score" id="scoreTeam2">0</div>
+              <div class="score-btns">
+                <button class="score-btn plus" onclick="addScore(2, 10)">+10</button>
+                <button class="score-btn minus" onclick="addScore(2, -5)">-5</button>
+              </div>
+            </div>
+
+            <div class="class-team-card team-3">
+              <div class="class-team-name">🦅 Đội Đại Bàng</div>
+              <div class="class-team-score" id="scoreTeam3">0</div>
+              <div class="score-btns">
+                <button class="score-btn plus" onclick="addScore(3, 10)">+10</button>
+                <button class="score-btn minus" onclick="addScore(3, -5)">-5</button>
+              </div>
+            </div>
+
+            <div class="class-team-card team-4">
+              <div class="class-team-name">🐬 Đội Cá Heo</div>
+              <div class="class-team-score" id="scoreTeam4">0</div>
+              <div class="score-btns">
+                <button class="score-btn plus" onclick="addScore(4, 10)">+10</button>
+                <button class="score-btn minus" onclick="addScore(4, -5)">-5</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Classroom Question Box -->
+          <div style="background: #f8fafc; border: 2px solid var(--border); border-radius: var(--radius-md); padding: 22px; text-align: center; margin-bottom: 20px;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--primary);">CÂU HỎI THI ĐẤU</div>
+            <div style="font-size: 22px; font-weight: 900; margin: 8px 0;" id="classQText">Đang chuẩn bị câu hỏi...</div>
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 14px;">
+              <button class="icon-btn" id="revealAnsBtn">👀 Xem Đáp Án</button>
+              <span id="classCorrectAnswer" style="font-size: 16px; font-weight: 900; color: #166534; display: none; align-items: center;"></span>
+            </div>
+          </div>
+
+          <!-- Giant Buzzer -->
+          <div class="buzzer-box">
+            <div style="font-size: 15px; font-weight: 800; color: #475569;">BẤM CHUÔNG ĐỂ GIÀNH QUYỀN TRẢ LỜI:</div>
+            <button class="giant-buzzer-btn" id="giantBuzzerBtn">🔔 BẤM!</button>
+            <div class="buzzer-claimed-banner" id="buzzerBanner">Chưa có đội nào bấm chuông!</div>
+            <button class="icon-btn" id="resetBuzzerBtn" style="margin-top: 10px;">🔄 Mở lại chuông cho câu mới</button>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 5: VINH DANH & IN BÀI (AWARDS & PRINT) -->
+    <section class="tab-panel" id="tab-awards">
+      
+      <!-- Badges Collection -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title-group">
+            <div class="card-icon" style="background:#fef3c7; color:#d97706;">🏅</div>
+            <div>
+              <div class="card-title">Bộ Sưu Tập Huy Hiệu Của Em</div>
+              <div class="card-desc">Tích cực học bài và làm bài tập để mở khóa các huy hiệu danh giá nhé!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="awards-grid" id="badgesGrid">
+          <div class="badge-card unlocked" id="badge-novice">
+            <div class="badge-icon">🌱</div>
+            <div class="badge-title">Học Sinh Chăm Chỉ</div>
+            <div class="badge-desc">Đã tham gia học lý thuyết hôm nay</div>
+          </div>
+          <div class="badge-card" id="badge-quiz">
+            <div class="badge-icon">🎯</div>
+            <div class="badge-title">Xạ Thủ Trắc Nghiệm</div>
+            <div class="badge-desc">Trả lời đúng 5 câu trắc nghiệm</div>
+          </div>
+          <div class="badge-card" id="badge-doctor">
+            <div class="badge-icon">🩺</div>
+            <div class="badge-title">Bác Sĩ Ngữ Pháp</div>
+            <div class="badge-desc">Bắt sâu và sửa đúng lỗi sai</div>
+          </div>
+          <div class="badge-card" id="badge-solo">
+            <div class="badge-icon">🚀</div>
+            <div class="badge-title">Phi Hành Gia Vũ Trụ</div>
+            <div class="badge-desc">Hoàn thành game cá nhân</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Printable Certificate -->
+      <div class="certificate-container" id="printableCert">
+        <div class="cert-seal">🌟</div>
+        <div class="cert-heading">GIẤY KHEN DANH DỰ TIẾNG ANH LỚP 4</div>
+        <h2 class="cert-title">CHUYÊN GIA NGỮ PHÁP QUÁ KHỨ</h2>
+        <div class="cert-body">
+          Chứng nhận bạn học sinh siêu sao:
+        </div>
+        <input type="text" class="cert-name-input" id="studentCertName" value="Nguyễn Văn A" title="Nhấp để đổi tên em">
+        <div class="cert-body">
+          Đã xuất sắc nắm vững và phân biệt thành thạo hai thì<br>
+          <b>Quá Khứ Đơn (Past Simple)</b> & <b>Quá Khứ Tiếp Diễn (Past Continuous)</b>.
+        </div>
+        <div style="font-size: 14px; font-weight: 800; color: #b45309;">
+          Ban Giám Khảo: Giáo Viên Tiếng Anh & Bạn Khủng Long Dino 🦖
+        </div>
+      </div>
+
+      <div class="print-actions">
+        <button class="big-play-btn" onclick="window.print()" style="background: var(--primary);">
+          🖨️ In Giấy Khen Hoặc Lưu PDF
+        </button>
+      </div>
+
+    </section>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. SOUND EFFECTS (Web Audio API Synthesizer - 100% Offline & Reliable)
+       ========================================================================== */
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new AudioCtx();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      initAudio();
+      if (!audioCtx) return;
+
+      const now = audioCtx.currentTime;
+
+      if (type === 'click') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(400, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.05);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.05);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (type === 'correct') {
+        // High 2-tone chime
+        [523.25, 659.25, 783.99].forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.2, now + idx * 0.08);
+          gain.gain.linearRampToValueAtTime(0.01, now + idx * 0.08 + 0.2);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.2);
+        });
+      } else if (type === 'wrong') {
+        // Low boing
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(220, now);
+        osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'buzzer') {
+        // Loud buzzer horn
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(440, now);
+        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.4);
+      } else if (type === 'fanfare') {
+        // Victory fanfare
+        const notes = [440, 554, 659, 880];
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.12);
+          gain.gain.setValueAtTime(0.25, now + idx * 0.12);
+          gain.gain.linearRampToValueAtTime(0.01, now + idx * 0.12 + 0.35);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.12);
+          osc.stop(now + idx * 0.12 + 0.35);
+        });
+      }
+    }
+
+    // Toggle Sound Button
+    const soundToggleBtn = document.getElementById('soundToggleBtn');
+    const soundIcon = document.getElementById('soundIcon');
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      soundIcon.textContent = soundEnabled ? '🔊' : '🔇';
+      if (soundEnabled) playSound('click');
+    });
+
+    // Native Speech Synthesis for pronunciation
+    function speakWord(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9; // Slightly slower for primary school kids
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    /* ==========================================================================
+       2. USER XP & BADGES SYSTEM
+       ========================================================================== */
+    let userXP = 0;
+    const xpDisplay = document.getElementById('xpDisplay');
+
+    function addXP(points) {
+      userXP += points;
+      xpDisplay.textContent = `${userXP} XP`;
+      xpDisplay.style.transform = 'scale(1.2)';
+      setTimeout(() => xpDisplay.style.transform = 'scale(1)', 200);
+
+      // Check unlock badges
+      if (userXP >= 50) unlockBadge('badge-quiz');
+      if (userXP >= 100) unlockBadge('badge-doctor');
+      if (userXP >= 150) unlockBadge('badge-solo');
+    }
+
+    function unlockBadge(id) {
+      const el = document.getElementById(id);
+      if (el && !el.classList.contains('unlocked')) {
+        el.classList.add('unlocked');
+        playSound('fanfare');
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 40, spread: 60, origin: { y: 0.8 } });
+        }
+      }
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION TABS
+       ========================================================================== */
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        playSound('click');
+        const target = btn.getAttribute('data-tab');
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(`tab-${target}`).classList.add('active');
+      });
+    });
+
+    // Subtabs for practice section
+    const subtabBtns = document.querySelectorAll('.subtab-btn');
+    const practiceZones = document.querySelectorAll('.practice-zone');
+
+    subtabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        playSound('click');
+        const target = btn.getAttribute('data-sub');
+        subtabBtns.forEach(b => b.classList.remove('active'));
+        practiceZones.forEach(z => z.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+
+    /* ==========================================================================
+       4. IRREGULAR VERBS LIST & LIVE SEARCH
+       ========================================================================== */
+    const irregularVerbs = [
+      { v1: 'go', v2: 'went', vn: 'đi' },
+      { v1: 'see', v2: 'saw', vn: 'nhìn thấy' },
+      { v1: 'eat', v2: 'ate', vn: 'ăn' },
+      { v1: 'drink', v2: 'drank', vn: 'uống' },
+      { v1: 'buy', v2: 'bought', vn: 'mua' },
+      { v1: 'have', v2: 'had', vn: 'có' },
+      { v1: 'do', v2: 'did', vn: 'làm' },
+      { v1: 'make', v2: 'made', vn: 'tạo ra, làm' },
+      { v1: 'take', v2: 'took', vn: 'cầm, lấy' },
+      { v1: 'come', v2: 'came', vn: 'đến' },
+      { v1: 'run', v2: 'ran', vn: 'chạy' },
+      { v1: 'swim', v2: 'swam', vn: 'bơi' },
+      { v1: 'read', v2: 'read', vn: 'đọc' },
+      { v1: 'write', v2: 'wrote', vn: 'viết' },
+      { v1: 'sleep', v2: 'slept', vn: 'ngủ' },
+      { v1: 'give', v2: 'gave', vn: 'cho, tặng' },
+      { v1: 'sing', v2: 'sang', vn: 'hát' },
+      { v1: 'fly', v2: 'flew', vn: 'bay' },
+      { v1: 'sit', v2: 'sat', vn: 'ngồi' },
+      { v1: 'hear', v2: 'heard', vn: 'nghe' },
+      { v1: 'meet', v2: 'met', vn: 'gặp gỡ' },
+      { v1: 'win', v2: 'won', vn: 'chiến thắng' },
+      { v1: 'find', v2: 'found', vn: 'tìm thấy' },
+      { v1: 'ride', v2: 'rode', vn: 'lái (xe đạp/ngựa)' }
+    ];
+
+    const verbsContainer = document.getElementById('verbsContainer');
+    const verbSearchInput = document.getElementById('verbSearchInput');
+
+    function renderVerbs(filter = '') {
+      const f = filter.toLowerCase().trim();
+      const filtered = irregularVerbs.filter(v => 
+        v.v1.includes(f) || v.v2.includes(f) || v.vn.toLowerCase().includes(f)
+      );
+
+      verbsContainer.innerHTML = filtered.map(v => `
+        <div class="verb-card">
+          <div class="verb-words">
+            <span class="verb-v1">${v.v1} ➔ <span class="verb-v2">${v.v2}</span></span>
+            <span class="verb-meaning">${v.vn}</span>
+          </div>
+          <button class="speak-btn" onclick="speakWord('${v.v2}')" title="Nghe phát âm">🔊</button>
+        </div>
+      `).join('');
+    }
+    renderVerbs();
+
+    verbSearchInput.addEventListener('input', (e) => {
+      renderVerbs(e.target.value);
+    });
+
+    /* ==========================================================================
+       5. PRACTICE EXERCISES DATA & LOGIC
+       ========================================================================== */
+
+    // --- 5.1 Multiple Choice Quiz ---
+    const quizData = [
+      {
+        q: "Yesterday, I ______ to the zoo with my family.",
+        options: ["go", "went", "was going", "goes"],
+        answer: 1,
+        why: "Có từ 'yesterday' (hôm qua) chỉ việc đã xong xuôi ➔ Dùng Quá khứ đơn: went."
+      },
+      {
+        q: "At 8 PM yesterday, Nam ______ his English homework.",
+        options: ["was doing", "did", "were doing", "do"],
+        answer: 0,
+        why: "Có mốc giờ cụ thể trong quá khứ 'At 8 PM yesterday' ➔ Dùng Quá khứ tiếp diễn. Nam là 1 người nên đi với 'was doing'."
+      },
+      {
+        q: "While my mom was cooking, my dad ______ a book.",
+        options: ["read", "was reading", "reads", "were reading"],
+        answer: 1,
+        why: "Hai hành động đang diễn ra song song cùng lúc trong quá khứ (While...) ➔ Dùng 'was reading'."
+      },
+      {
+        q: "Linda ______ a delicious ice cream two hours ago.",
+        options: ["ate", "was eating", "eat", "eats"],
+        answer: 0,
+        why: "Có 'two hours ago' (cách đây 2 giờ) ➔ Dùng Quá khứ đơn: ate (V2 của eat)."
+      },
+      {
+        q: "They ______ football when it suddenly started to rain.",
+        options: ["played", "were playing", "was playing", "play"],
+        answer: 1,
+        why: "Họ đang chơi bóng đá (hành động dài) thì trời bỗng đổ mưa cắt ngang (started). 'They' số nhiều nên đi với 'were playing'."
+      },
+      {
+        q: "My brother didn't ______ to school yesterday because he was sick.",
+        options: ["went", "go", "going", "goes"],
+        answer: 1,
+        why: "Sau trợ động từ 'didn't' trong quá khứ đơn, động từ luôn trở về NGUYÊN MẪU: didn't go."
+      },
+      {
+        q: "What ______ you doing at 3 o'clock last Sunday?",
+        options: ["did", "was", "were", "are"],
+        answer: 2,
+        why: "Câu hỏi tiếp diễn ở quá khứ: Chủ ngữ 'you' luôn đi với 'were'."
+      },
+      {
+        q: "When the teacher came into the classroom, the students ______ noisy.",
+        options: ["were being", "were", "was", "are"],
+        answer: 1,
+        why: "Động từ To Be ở quá khứ với chủ ngữ số nhiều 'the students' là 'were'."
+      },
+      {
+        q: "I was sleeping when the alarm clock ______ .",
+        options: ["rang", "was ringing", "rings", "ring"],
+        answer: 0,
+        why: "Tớ đang ngủ (was sleeping) thì chuông reo cắt ngang (rang - quá khứ đơn của ring)."
+      },
+      {
+        q: "Last night, Peter and Tony ______ board games at 7 PM.",
+        options: ["played", "was playing", "were playing", "play"],
+        answer: 2,
+        why: "Peter và Tony là 2 người (số nhiều) vào lúc 7h tối qua ➔ 'were playing'."
+      }
+    ];
+
+    const quizContainer = document.getElementById('quizContainer');
+    quizContainer.innerHTML = quizData.map((item, idx) => `
+      <div class="quiz-card" id="quiz-card-${idx}">
+        <div class="quiz-num">Câu ${idx + 1}</div>
+        <div class="quiz-question">${item.q}</div>
+        <div class="quiz-options">
+          ${item.options.map((opt, optIdx) => `
+            <button class="quiz-opt-btn" onclick="checkQuiz(${idx}, ${optIdx})">
+              <span>${String.fromCharCode(65 + optIdx)}.</span> ${opt}
+            </button>
+          `).join('')}
+        </div>
+        <div class="quiz-explanation" id="quiz-exp-${idx}">
+          💡 <b>Giải thích:</b> ${item.why}
+        </div>
+      </div>
+    `).join('');
+
+    function checkQuiz(qIdx, optIdx) {
+      const card = document.getElementById(`quiz-card-${qIdx}`);
+      const btns = card.querySelectorAll('.quiz-opt-btn');
+      const exp = document.getElementById(`quiz-exp-${qIdx}`);
+      const correctIdx = quizData[qIdx].answer;
+
+      // Disable further clicks on this question
+      btns.forEach(b => b.disabled = true);
+
+      if (optIdx === correctIdx) {
+        btns[optIdx].classList.add('correct');
+        playSound('correct');
+        addXP(10);
+      } else {
+        btns[optIdx].classList.add('wrong');
+        btns[correctIdx].classList.add('correct');
+        playSound('wrong');
+      }
+      exp.style.display = 'block';
+    }
+
+    // --- 5.2 Fill in Blanks ---
+    const fillData = [
+      {
+        sentence: "Yesterday, Mai (buy) [blank] a beautiful notebook.",
+        answer: "bought",
+        hint: "Quá khứ đơn của 'buy'"
+      },
+      {
+        sentence: "At 9 PM last night, I (sleep) [blank] in my bed.",
+        answer: "was sleeping",
+        hint: "Mốc giờ cụ thể: S + was/were + V-ing (chủ ngữ 'I')"
+      },
+      {
+        sentence: "While they (play) [blank] games, the light went out.",
+        answer: "were playing",
+        hint: "Sau 'While': They + were + V-ing"
+      },
+      {
+        sentence: "Tom didn't (eat) [blank] breakfast this morning.",
+        answer: "eat",
+        hint: "Sau didn't là động từ nguyên mẫu!"
+      },
+      {
+        sentence: "We (visit) [blank] our grandparents last weekend.",
+        answer: "visited",
+        hint: "Động từ có quy tắc: thêm đuôi -ed"
+      },
+      {
+        sentence: "At 4 PM yesterday, the boys (swim) [blank] in the pool.",
+        answer: "were swimming",
+        hint: "Gấp đôi chữ 'm': swimming, chủ ngữ số nhiều dùng 'were'"
+      },
+      {
+        sentence: "She (see) [blank] an accident when she was walking to school.",
+        answer: "saw",
+        hint: "Bất ngờ nhìn thấy (cắt ngang): V2 của see"
+      },
+      {
+        sentence: "(Did) you [blank] (watch) cartoons yesterday?",
+        answer: "watch",
+        hint: "Trong câu hỏi Did + S + V nguyên mẫu"
+      }
+    ];
+
+    const fillContainer = document.getElementById('fillContainer');
+    fillContainer.innerHTML = fillData.map((item, idx) => {
+      const parts = item.sentence.split('[blank]');
+      return `
+        <div class="fill-item" id="fill-item-${idx}">
+          <div class="fill-sentence">
+            ${parts[0]} <input type="text" class="fill-input" id="fill-input-${idx}" placeholder="nhập từ..."> ${parts[1] || ''}
+          </div>
+          <div class="fill-controls">
+            <button class="fill-check-btn" onclick="checkFill(${idx})">Kiểm tra ✅</button>
+            <button class="fill-hint-btn" onclick="showFillHint(${idx})">💡 Gợi ý</button>
+            <span class="fill-feedback" id="fill-fb-${idx}"></span>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    function checkFill(idx) {
+      const input = document.getElementById(`fill-input-${idx}`);
+      const fb = document.getElementById(`fill-fb-${idx}`);
+      const val = input.value.trim().toLowerCase();
+      const expected = fillData[idx].answer.toLowerCase();
+
+      fb.style.display = 'inline-block';
+      if (val === expected) {
+        input.classList.remove('is-wrong');
+        input.classList.add('is-correct');
+        fb.style.color = '#10b981';
+        fb.textContent = '🎉 Tuyệt vời! Chính xác 100%!';
+        playSound('correct');
+        addXP(10);
+      } else {
+        input.classList.remove('is-correct');
+        input.classList.add('is-wrong');
+        fb.style.color = '#ef4444';
+        fb.textContent = `❌ Chưa đúng rồi. Đáp án đúng là: "${fillData[idx].answer}"`;
+        playSound('wrong');
+      }
+    }
+
+    function showFillHint(idx) {
+      const fb = document.getElementById(`fill-fb-${idx}`);
+      fb.style.display = 'inline-block';
+      fb.style.color = '#d97706';
+      fb.textContent = `💡 Gợi ý: ${fillData[idx].hint}`;
+      playSound('click');
+    }
+
+    // --- 5.3 Spot & Fix Mistakes ---
+    const mistakeData = [
+      {
+        full: "I didn't went to the park yesterday.",
+        wrongWord: "went",
+        correctWord: "go",
+        why: "Sau 'didn't' phải dùng động từ nguyên mẫu: didn't go."
+      },
+      {
+        full: "At 8 PM yesterday, they was watching TV.",
+        wrongWord: "was",
+        correctWord: "were",
+        why: "Chủ ngữ 'They' là số nhiều, phải dùng 'were' chứ không dùng 'was'."
+      },
+      {
+        full: "While I were doing homework, my brother sang.",
+        wrongWord: "were",
+        correctWord: "was",
+        why: "Chủ ngữ 'I' đi với 'was' trong quá khứ tiếp diễn."
+      },
+      {
+        full: "She was cook dinner when the bell rang.",
+        wrongWord: "cook",
+        correctWord: "cooking",
+        why: "Quá khứ tiếp diễn cần có đuôi -ing: was cooking."
+      },
+      {
+        full: "Last night, he eat a very big pizza.",
+        wrongWord: "eat",
+        correctWord: "ate",
+        why: "'Last night' (tối qua) là quá khứ đơn, động từ 'eat' đổi thành 'ate'."
+      },
+      {
+        full: "What was you doing at 7 o'clock yesterday?",
+        wrongWord: "was",
+        correctWord: "were",
+        why: "Chủ ngữ 'you' luôn luôn đi với 'were': What were you doing...?"
+      }
+    ];
+
+    const mistakeContainer = document.getElementById('mistakeContainer');
+    mistakeContainer.innerHTML = mistakeData.map((item, idx) => {
+      const words = item.full.split(' ');
+      return `
+        <div class="fill-item" id="mistake-item-${idx}">
+          <div class="fill-sentence">
+            ${words.map((w, wIdx) => `<span class="word-chip" onclick="checkMistake(${idx}, ${wIdx})">${w}</span>`).join(' ')}
+          </div>
+          <div id="mistake-feedback-${idx}" style="font-size: 14px; font-weight: 800; display: none;"></div>
+        </div>
+      `;
+    }).join('');
+
+    function checkMistake(idx, clickedWordIdx) {
+      const item = mistakeData[idx];
+      const words = item.full.split(' ');
+      const clickedWord = words[clickedWordIdx];
+      const cleanClicked = clickedWord.replace(/[^a-zA-Z]/g, '').toLowerCase();
+      const fb = document.getElementById(`mistake-feedback-${idx}`);
+      fb.style.display = 'block';
+
+      if (cleanClicked === item.wrongWord.toLowerCase()) {
+        fb.innerHTML = `✅ <b>Chính xác!</b> Từ sai là "<b>${item.wrongWord}</b>". Sửa đúng thành: "<b>${item.correctWord}</b>".<br><span style="color:#64748b;">${item.why}</span>`;
+        fb.style.color = '#065f46';
+        playSound('correct');
+        addXP(15);
+      } else {
+        fb.innerHTML = `❌ Từ "<b>${clickedWord}</b>" không bị sai. Hãy tìm kỹ lại nhé!`;
+        fb.style.color = '#991b1b';
+        playSound('wrong');
+      }
+    }
+
+    // --- 5.4 Sentence Scramble ---
+    const scrambleData = [
+      {
+        words: ["Yesterday,", "I", "went", "to", "the", "library."],
+        meaning: "Hôm qua, tớ đã đi đến thư viện."
+      },
+      {
+        words: ["At", "8 PM,", "she", "was", "reading", "books."],
+        meaning: "Lúc 8 giờ tối, bạn ấy đang đọc sách."
+      },
+      {
+        words: ["While", "we", "were", "playing,", "it", "rained."],
+        meaning: "Trong khi chúng tớ đang chơi thì trời mưa."
+      },
+      {
+        words: ["They", "didn't", "watch", "TV", "last", "night."],
+        meaning: "Tối qua họ đã không xem tivi."
+      },
+      {
+        words: ["Was", "he", "sleeping", "at", "that", "time?"],
+        meaning: "Lúc đó cậu ấy có đang ngủ không?"
+      }
+    ];
+
+    const scrambleContainer = document.getElementById('scrambleContainer');
+    scrambleContainer.innerHTML = scrambleData.map((item, idx) => `
+      <div class="scramble-box" id="scramble-box-${idx}">
+        <div class="scramble-meaning">💡 Dịch nghĩa: "${item.meaning}"</div>
+        <div class="word-dropzone" id="dropzone-${idx}">
+          <span style="color:#94a3b8; font-weight:700; font-size:13px;" id="drop-placeholder-${idx}">Bấm từ bên dưới để đưa vào đây...</span>
+        </div>
+        <div class="word-pool" id="pool-${idx}">
+          ${shuffle([...item.words]).map((w, wIdx) => `
+            <span class="word-chip" onclick="moveScrambleWord(${idx}, this)">${w}</span>
+          `).join('')}
+        </div>
+        <div class="scramble-actions">
+          <button class="fill-check-btn" onclick="checkScramble(${idx})">Kiểm tra ✅</button>
+          <button class="fill-hint-btn" onclick="resetScramble(${idx})">🔄 Xếp lại</button>
+          <span id="scramble-fb-${idx}" style="font-weight: 800; font-size: 14px; margin-left: 10px; align-self: center;"></span>
+        </div>
+      </div>
+    `).join('');
+
+    function moveScrambleWord(idx, chip) {
+      playSound('click');
+      const dropzone = document.getElementById(`dropzone-${idx}`);
+      const pool = document.getElementById(`pool-${idx}`);
+      const placeholder = document.getElementById(`drop-placeholder-${idx}`);
+
+      if (chip.parentElement === pool) {
+        if (placeholder) placeholder.style.display = 'none';
+        dropzone.appendChild(chip);
+      } else {
+        pool.appendChild(chip);
+        if (dropzone.children.length === 1 && placeholder) {
+          placeholder.style.display = 'inline';
+        }
+      }
+    }
+
+    function checkScramble(idx) {
+      const dropzone = document.getElementById(`dropzone-${idx}`);
+      const fb = document.getElementById(`scramble-fb-${idx}`);
+      const chips = dropzone.querySelectorAll('.word-chip');
+      const currentSentence = Array.from(chips).map(c => c.textContent).join(' ');
+      const targetSentence = scrambleData[idx].words.join(' ');
+
+      if (currentSentence === targetSentence) {
+        fb.style.color = '#10b981';
+        fb.textContent = '🎉 Xuất sắc! Câu hoàn chỉnh và đúng 100%!';
+        playSound('correct');
+        addXP(15);
+      } else {
+        fb.style.color = '#ef4444';
+        fb.textContent = '❌ Trật tự từ chưa đúng, hãy thử lại nhé!';
+        playSound('wrong');
+      }
+    }
+
+    function resetScramble(idx) {
+      playSound('click');
+      const dropzone = document.getElementById(`dropzone-${idx}`);
+      const pool = document.getElementById(`pool-${idx}`);
+      const placeholder = document.getElementById(`drop-placeholder-${idx}`);
+      const chips = dropzone.querySelectorAll('.word-chip');
+
+      chips.forEach(c => pool.appendChild(c));
+      if (placeholder) placeholder.style.display = 'inline';
+      document.getElementById(`scramble-fb-${idx}`).textContent = '';
+    }
+
+    // --- 5.5 Chest Sorting Game ---
+    const sortItems = [
+      { text: "yesterday (hôm qua)", type: "simple" },
+      { text: "at 8 PM last night", type: "cont" },
+      { text: "two days ago", type: "simple" },
+      { text: "While I was studying...", type: "cont" },
+      { text: "in 2021", type: "simple" },
+      { text: "all yesterday afternoon", type: "cont" },
+      { text: "Suddenly, the phone rang", type: "simple" },
+      { text: "at that exact moment", type: "cont" },
+      { text: "last summer vacation", type: "simple" },
+      { text: "were playing football at 4 PM", type: "cont" }
+    ];
+
+    let currentSortIdx = 0;
+    let sortScore = 0;
+    const sortCardText = document.getElementById('sortCardText');
+    const sortScoreDisplay = document.getElementById('sortScoreDisplay');
+    const chestSimpleList = document.getElementById('chestSimpleList');
+    const chestContList = document.getElementById('chestContList');
+
+    function updateSortCard() {
+      if (currentSortIdx < sortItems.length) {
+        sortCardText.textContent = `Thẻ ${currentSortIdx + 1}/${sortItems.length}: "${sortItems[currentSortIdx].text}"`;
+      } else {
+        sortCardText.innerHTML = `🎉 <b>CHÚC MỪNG EM ĐÃ HOÀN THÀNH PHÂN LOẠI!</b><br>Đạt điểm: ${sortScore}/${sortItems.length}`;
+        document.getElementById('btnSortSimple').disabled = true;
+        document.getElementById('btnSortCont').disabled = true;
+        playSound('fanfare');
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 50, spread: 70 });
+        }
+      }
+      sortScoreDisplay.textContent = `Điểm: ${sortScore}/${sortItems.length}`;
+    }
+    updateSortCard();
+
+    document.getElementById('btnSortSimple').addEventListener('click', () => handleSortChoice('simple'));
+    document.getElementById('btnSortCont').addEventListener('click', () => handleSortChoice('cont'));
+
+    function handleSortChoice(chosenType) {
+      if (currentSortIdx >= sortItems.length) return;
+      const item = sortItems[currentSortIdx];
+
+      if (chosenType === item.type) {
+        playSound('correct');
+        sortScore++;
+        addXP(10);
+        const div = document.createElement('div');
+        div.className = 'signal-pill';
+        div.style.background = '#dcfce7';
+        div.style.borderColor = '#86efac';
+        div.textContent = `✅ ${item.text}`;
+        if (chosenType === 'simple') chestSimpleList.appendChild(div);
+        else chestContList.appendChild(div);
+      } else {
+        playSound('wrong');
+        const div = document.createElement('div');
+        div.className = 'signal-pill';
+        div.style.background = '#fee2e2';
+        div.style.borderColor = '#fca5a5';
+        div.textContent = `❌ ${item.text}`;
+        if (chosenType === 'simple') chestSimpleList.appendChild(div);
+        else chestContList.appendChild(div);
+      }
+
+      currentSortIdx++;
+      updateSortCard();
+    }
+
+    /* ==========================================================================
+       6. SOLO GAME: SPACE DINO QUEST
+       ========================================================================== */
+    const soloQuestionsPool = [
+      { q: "Yesterday, my mother ______ a big cake.", opts: ["made", "was making", "make", "makes"], a: 0, hint: "yesterday ➔ Quá khứ đơn" },
+      { q: "At 7 PM yesterday, they ______ badminton.", opts: ["played", "were playing", "was playing", "play"], a: 1, hint: "Giờ cụ thể trong quá khứ ➔ Past Continuous" },
+      { q: "While Tom ______ a book, his cat jumped on the table.", opts: ["read", "was reading", "were reading", "reads"], a: 1, hint: "Sau While ➔ Past Continuous (Tom = 1 người)" },
+      { q: "They didn't ______ to school last Monday.", opts: ["go", "went", "going", "goes"], a: 0, hint: "Sau didn't là động từ nguyên mẫu" },
+      { q: "When I was walking home, it suddenly ______ .", opts: ["rained", "was raining", "rain", "rains"], a: 0, hint: "Bất ngờ đổ mưa (cắt ngang) ➔ Past Simple" },
+      { q: "At this time last Sunday, we ______ at the beach.", opts: ["swam", "were swimming", "was swimming", "swim"], a: 1, hint: "We ➔ were + V-ing" },
+      { q: "Did you ______ television last night?", opts: ["watched", "watch", "watching", "was watch"], a: 1, hint: "Did + S + V nguyên mẫu" },
+      { q: "I ______ sleeping when someone knocked on the door.", opts: ["were", "was", "did", "am"], a: 1, hint: "I ➔ was" },
+      { q: "Two days ago, Linda ______ a new bicycle.", opts: ["bought", "was buying", "buy", "buys"], a: 0, hint: "two days ago ➔ Past Simple: bought" },
+      { q: "What were you ______ at 8 o'clock yesterday?", opts: ["do", "did", "doing", "done"], a: 2, hint: "were you + V-ing" }
+    ];
+
+    let soloQuestions = [];
+    let soloQIdx = 0;
+    let soloHearts = 3;
+    let soloScore = 0;
+    let soloStreak = 0;
+    let soloTimer = null;
+    let soloTimeLeft = 15;
+
+    const startSoloGameBtn = document.getElementById('startSoloGameBtn');
+    const restartSoloGameBtn = document.getElementById('restartSoloGameBtn');
+    const soloStartScreen = document.getElementById('soloStartScreen');
+    const soloPlayScreen = document.getElementById('soloPlayScreen');
+    const soloEndScreen = document.getElementById('soloEndScreen');
+
+    startSoloGameBtn.addEventListener('click', startSoloGame);
+    restartSoloGameBtn.addEventListener('click', startSoloGame);
+
+    function startSoloGame() {
+      playSound('click');
+      soloQuestions = shuffle([...soloQuestionsPool]);
+      soloQIdx = 0;
+      soloHearts = 3;
+      soloScore = 0;
+      soloStreak = 0;
+
+      soloStartScreen.style.display = 'none';
+      soloEndScreen.style.display = 'none';
+      soloPlayScreen.style.display = 'block';
+
+      loadSoloQuestion();
+    }
+
+    function loadSoloQuestion() {
+      clearInterval(soloTimer);
+      if (soloQIdx >= soloQuestions.length || soloHearts <= 0) {
+        endSoloGame();
+        return;
+      }
+
+      const q = soloQuestions[soloQIdx];
+      document.getElementById('soloQText').textContent = `Câu ${soloQIdx + 1}: ${q.q}`;
+      document.getElementById('soloQHint').textContent = `🔍 Gợi ý: ${q.hint}`;
+      document.getElementById('soloHeartsDisplay').textContent = '❤️'.repeat(soloHearts) + '🖤'.repeat(3 - soloHearts);
+      document.getElementById('soloScoreDisplay').textContent = `⭐ ${soloScore} Điểm`;
+      document.getElementById('soloStreakDisplay').textContent = `🔥 Chuỗi: ${soloStreak}`;
+      document.getElementById('soloProgressFill').style.width = `${((soloQIdx) / soloQuestions.length) * 100}%`;
+
+      const grid = document.getElementById('soloOptionsGrid');
+      grid.innerHTML = q.opts.map((opt, idx) => `
+        <button class="solo-opt-btn" onclick="answerSolo(${idx})">${opt}</button>
+      `).join('');
+
+      soloTimeLeft = 15;
+      document.getElementById('soloTimerDisplay').textContent = `⏱️ ${soloTimeLeft}s`;
+      soloTimer = setInterval(() => {
+        soloTimeLeft--;
+        document.getElementById('soloTimerDisplay').textContent = `⏱️ ${soloTimeLeft}s`;
+        if (soloTimeLeft <= 0) {
+          clearInterval(soloTimer);
+          soloHearts--;
+          soloStreak = 0;
+          playSound('wrong');
+          soloQIdx++;
+          loadSoloQuestion();
+        }
+      }, 1000);
+    }
+
+    function answerSolo(chosenIdx) {
+      clearInterval(soloTimer);
+      const q = soloQuestions[soloQIdx];
+      const btns = document.querySelectorAll('.solo-opt-btn');
+      btns.forEach(b => b.disabled = true);
+
+      if (chosenIdx === q.a) {
+        btns[chosenIdx].style.background = '#10b981';
+        btns[chosenIdx].style.borderColor = '#059669';
+        playSound('correct');
+        soloStreak++;
+        const multiplier = soloStreak >= 3 ? 2 : 1;
+        soloScore += (100 + soloTimeLeft * 5) * multiplier;
+        addXP(20);
+      } else {
+        btns[chosenIdx].style.background = '#ef4444';
+        btns[q.a].style.background = '#10b981';
+        playSound('wrong');
+        soloHearts--;
+        soloStreak = 0;
+      }
+
+      setTimeout(() => {
+        soloQIdx++;
+        loadSoloQuestion();
+      }, 1200);
+    }
+
+    function endSoloGame() {
+      clearInterval(soloTimer);
+      soloPlayScreen.style.display = 'none';
+      soloEndScreen.style.display = 'block';
+
+      const title = document.getElementById('soloEndTitle');
+      const scoreTxt = document.getElementById('soloEndScore');
+      const icon = document.getElementById('soloEndIcon');
+
+      if (soloHearts > 0) {
+        icon.textContent = '🏆';
+        title.textContent = 'DINO ĐÃ VỀ TRÁI ĐẤT THÀNH CÔNG!';
+        scoreTxt.textContent = `Tổng điểm: ${soloScore} Điểm | Giữ lại được ${soloHearts} quả tim ❤️`;
+        playSound('fanfare');
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 70, spread: 80 });
+        }
+      } else {
+        icon.textContent = '🛸💥';
+        title.textContent = 'TÀU HẾT NHIÊN LIỆU MẤT RỒI!';
+        scoreTxt.textContent = `Điểm đạt được: ${soloScore} Điểm. Cùng thử lại để giải cứu Dino nhé!`;
+        playSound('wrong');
+      }
+    }
+
+    /* ==========================================================================
+       7. TEAM BATTLES: TUG OF WAR & CLASSROOM
+       ========================================================================== */
+
+    // Switch between Battle Submodes
+    const btnModeTug = document.getElementById('btnModeTug');
+    const btnModeClass = document.getElementById('btnModeClass');
+    const tugWarArena = document.getElementById('tugWarArena');
+    const classArena = document.getElementById('classArena');
+
+    btnModeTug.addEventListener('click', () => {
+      playSound('click');
+      btnModeTug.classList.add('active');
+      btnModeClass.classList.remove('active');
+      tugWarArena.style.display = 'block';
+      classArena.style.display = 'none';
+    });
+
+    btnModeClass.addEventListener('click', () => {
+      playSound('click');
+      btnModeClass.classList.add('active');
+      btnModeTug.classList.remove('active');
+      tugWarArena.style.display = 'none';
+      classArena.style.display = 'block';
+      loadClassQuestion();
+    });
+
+    // --- Mode 1: Tug of War Data & Logic ---
+    const tugQuestions = [
+      { q: "Yesterday, Mai ______ to Da Nang city.", opts: ["went", "was going", "goes", "go"], a: 0 },
+      { q: "At 8 PM yesterday, we ______ cartoons.", opts: ["watched", "were watching", "was watching", "watch"], a: 1 },
+      { q: "While Nam was studying, his mom ______ home.", opts: ["came", "was coming", "come", "comes"], a: 0 },
+      { q: "They ______ football all yesterday afternoon.", opts: ["played", "were playing", "was playing", "play"], a: 1 },
+      { q: "She didn't ______ her homework last night.", opts: ["do", "did", "doing", "does"], a: 0 },
+      { q: "The boys ______ in the lake when it rained.", opts: ["swam", "were swimming", "was swimming", "swim"], a: 1 },
+      { q: "My father ______ a new car last month.", opts: ["bought", "was buying", "buy", "buys"], a: 0 },
+      { q: "What was Tony doing when you ______ him?", opts: ["saw", "were seeing", "see", "seen"], a: 0 }
+    ];
+
+    let tugIdx = 0;
+    let redScore = 0;
+    let blueScore = 0;
+    let ropeOffset = 0; // -5 is red win, +5 is blue win
+
+    const redScoreEl = document.getElementById('redScore');
+    const blueScoreEl = document.getElementById('blueScore');
+    const ropeMarker = document.getElementById('ropeMarker');
+    const tugQText = document.getElementById('tugQuestionText');
+    const redBtnsGrid = document.getElementById('redButtonsGrid');
+    const blueBtnsGrid = document.getElementById('blueButtonsGrid');
+
+    function loadTugQuestion() {
+      if (tugIdx >= tugQuestions.length) {
+        checkTugWinner();
+        return;
+      }
+      const q = tugQuestions[tugIdx];
+      tugQText.textContent = `Câu ${tugIdx + 1}: ${q.q}`;
+
+      // Red Buttons
+      redBtnsGrid.innerHTML = q.opts.map((opt, i) => `
+        <button class="team-ans-btn" onclick="tugAnswer('red', ${i})">${opt}</button>
+      `).join('');
+
+      // Blue Buttons
+      blueBtnsGrid.innerHTML = q.opts.map((opt, i) => `
+        <button class="team-ans-btn" onclick="tugAnswer('blue', ${i})">${opt}</button>
+      `).join('');
+    }
+    loadTugQuestion();
+
+    let tugQuestionLocked = false;
+    function tugAnswer(team, chosenIdx) {
+      if (tugQuestionLocked) return;
+      const q = tugQuestions[tugIdx];
+
+      if (chosenIdx === q.a) {
+        tugQuestionLocked = true;
+        playSound('correct');
+        if (team === 'red') {
+          redScore += 10;
+          redScoreEl.textContent = redScore;
+          ropeOffset -= 8;
+        } else {
+          blueScore += 10;
+          blueScoreEl.textContent = blueScore;
+          ropeOffset += 8;
+        }
+
+        // Clamp between -40% and +40%
+        ropeOffset = Math.max(-40, Math.min(40, ropeOffset));
+        ropeMarker.style.left = `calc(50% + ${ropeOffset}%)`;
+
+        setTimeout(() => {
+          tugIdx++;
+          tugQuestionLocked = false;
+          loadTugQuestion();
+        }, 800);
+      } else {
+        playSound('wrong');
+      }
+    }
+
+    function checkTugWinner() {
+      let winText = "HÒA NHAU RỒI!";
+      if (ropeOffset < 0) winText = "🦖 ĐỘI ĐỎ (RED DINO) CHIẾN THẮNG!";
+      else if (ropeOffset > 0) winText = "🚀 ĐỘI XANH (BLUE ROCKET) CHIẾN THẮNG!";
+
+      tugQText.innerHTML = `🏆 <b>${winText}</b>`;
+      redBtnsGrid.innerHTML = '';
+      blueBtnsGrid.innerHTML = '';
+      playSound('fanfare');
+      if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 80 });
+    }
+
+    document.getElementById('resetTugBtn').addEventListener('click', () => {
+      playSound('click');
+      tugIdx = 0;
+      redScore = 0;
+      blueScore = 0;
+      ropeOffset = 0;
+      redScoreEl.textContent = '0';
+      blueScoreEl.textContent = '0';
+      ropeMarker.style.left = '50%';
+      tugQuestionLocked = false;
+      loadTugQuestion();
+    });
+
+    // --- Mode 2: Classroom Arena (4 Teams & Buzzer) ---
+    const classScores = { 1: 0, 2: 0, 3: 0, 4: 0 };
+    function addScore(teamNum, delta) {
+      playSound('click');
+      classScores[teamNum] = Math.max(0, classScores[teamNum] + delta);
+      document.getElementById(`scoreTeam${teamNum}`).textContent = classScores[teamNum];
+    }
+
+    const classQuestions = [
+      { q: "Tom (break) ______ his leg when he was playing soccer.", a: "broke (Quá khứ đơn của break)" },
+      { q: "At 7 PM last night, we (eat) ______ dinner together.", a: "were eating (Past Continuous)" },
+      { q: "She didn't (buy) ______ that dress yesterday.", a: "buy (Sau didn't dùng V nguyên mẫu)" },
+      { q: "While the students were doing tests, the bell (ring) ______ .", a: "rang (Hành động cắt ngang ➔ V2 của ring)" },
+      { q: "What (be) ______ you doing at this time last Sunday?", a: "were (Chủ ngữ 'you' đi với were)" }
+    ];
+
+    let classQIdx = 0;
+    const classQText = document.getElementById('classQText');
+    const classCorrectAnswer = document.getElementById('classCorrectAnswer');
+    const revealAnsBtn = document.getElementById('revealAnsBtn');
+    const nextClassQuestionBtn = document.getElementById('nextClassQuestionBtn');
+    const giantBuzzerBtn = document.getElementById('giantBuzzerBtn');
+    const buzzerBanner = document.getElementById('buzzerBanner');
+    const resetBuzzerBtn = document.getElementById('resetBuzzerBtn');
+
+    let buzzerLocked = false;
+
+    function loadClassQuestion() {
+      const q = classQuestions[classQIdx % classQuestions.length];
+      classQText.textContent = `Câu ${classQIdx + 1}: ${q.q}`;
+      classCorrectAnswer.style.display = 'none';
+      classCorrectAnswer.textContent = `👉 Đáp án: ${q.a}`;
+      buzzerBanner.textContent = "Chưa có đội nào bấm chuông!";
+      buzzerBanner.style.color = "#475569";
+      buzzerLocked = false;
+    }
+
+    revealAnsBtn.addEventListener('click', () => {
+      playSound('click');
+      classCorrectAnswer.style.display = 'inline-flex';
+    });
+
+    nextClassQuestionBtn.addEventListener('click', () => {
+      playSound('click');
+      classQIdx++;
+      loadClassQuestion();
+    });
+
+    giantBuzzerBtn.addEventListener('click', () => {
+      if (buzzerLocked) return;
+      buzzerLocked = true;
+      playSound('buzzer');
+      const teams = ["🐯 Đội Hổ Con", "🐲 Đội Rồng Lửa", "🦅 Đội Đại Bàng", "🐬 Đội Cá Heo"];
+      const lucky = teams[Math.floor(Math.random() * teams.length)];
+      buzzerBanner.textContent = `🔔 TING TING! ${lucky} GIÀNH QUYỀN TRẢ LỜI!`;
+      buzzerBanner.style.color = "#b91c1c";
+    });
+
+    resetBuzzerBtn.addEventListener('click', () => {
+      playSound('click');
+      buzzerLocked = false;
+      buzzerBanner.textContent = "Chuông đã mở! Mời các đội chuẩn bị bấm!";
+      buzzerBanner.style.color = "#059669";
+    });
+
+    /* ==========================================================================
+       8. UTILITY FUNCTIONS
+       ========================================================================== */
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+  </script>
+</body>
+</html>
