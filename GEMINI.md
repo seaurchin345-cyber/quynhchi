@@ -31,7 +31,4 @@
 
 ## 📁 4. DANH SÁCH CÁC TRANG HIỆN TẠI
 1. `index.html`: Bảng mục lục điều hướng tất cả các trang html (mở tab mới).
-2. `1.html`: Bài 1 (Hiện tại đơn vs Hiện tại tiếp diễn).
-3. `2.html`: Bài 2 (Danh từ số ít & Số nhiều).
-4. `quakhulop4.html`: Bài Quá khứ đơn & Quá khứ tiếp diễn lớp 4 (Lý thuyết, 5 dạng bài tập, Game Dino, Đấu trường lớp học).
-5. `quynhchi.html`: Trái Tim Quỳnh Chi (Hiệu ứng trái tim đập đập lung linh, mưa tim, âm thanh nhịp tim và lời chúc).
+2. `quakhulop4.html`: Bí kíp Quá khứ đơn & Quá khứ tiếp diễn lớp 4 (Lý thuyết Pizza & Tia Chớp, 12 câu quiz trắc nghiệm nhanh, Game thi đấu 2-3 đội và bảng tra cứu động từ).

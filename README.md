@@ -22,7 +22,4 @@
 
 ## 📁 Danh mục các file HTML hiện có:
 1. `index.html`: Bảng mục lục danh sách các file HTML.
-2. `1.html`: Bài 1 (Hiện tại đơn vs Tiếp diễn).
-3. `2.html`: Bài 2 (Danh từ số ít & Số nhiều).
-4. `quakhulop4.html`: Quá khứ đơn & Quá khứ tiếp diễn lớp 4.
-5. `quynhchi.html`: Trái Tim Quỳnh Chi (Trái tim đập đập lung linh).
+2. `quakhulop4.html`: Bí kíp Quá khứ đơn & Quá khứ tiếp diễn lớp 4 (Lý thuyết Pizza & Tia Chớp, 12 câu quiz trắc nghiệm nhanh, Game thi đấu 2-3 đội và bảng tra cứu động từ).
