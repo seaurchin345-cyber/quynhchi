@@ -663,14 +663,15 @@
       border-left: 4px solid #dc2626;
     }
 
-    /* TEAM GAME SECTION */
-    .team-mode-selector {
+    /* AUCTION QUIZ SECTION */
+    .auction-mode-selector {
       display: flex;
       gap: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       justify-content: center;
+      flex-wrap: wrap;
     }
-    .team-mode-btn {
+    .auction-mode-btn {
       padding: 10px 22px;
       border-radius: 99px;
       font-size: 14px;
@@ -679,206 +680,398 @@
       color: #475569;
       border: 2px solid #cbd5e1;
       cursor: pointer;
+      transition: all 0.2s ease;
     }
-    .team-mode-btn.active {
-      background: var(--primary);
+    .auction-mode-btn.active {
+      background: #d97706;
       color: #ffffff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+      border-color: #b45309;
+      box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35);
     }
 
-    .teams-scoreboard-grid {
+    /* Teams Gold Cards */
+    .auction-teams-grid {
       display: grid;
       gap: 16px;
       margin-bottom: 24px;
     }
-    .teams-scoreboard-grid.two-teams {
+    .auction-teams-grid.two-teams {
       grid-template-columns: 1fr 1fr;
     }
-    .teams-scoreboard-grid.three-teams {
+    .auction-teams-grid.three-teams {
       grid-template-columns: 1fr 1fr 1fr;
     }
     @media (max-width: 768px) {
-      .teams-scoreboard-grid.two-teams,
-      .teams-scoreboard-grid.three-teams {
+      .auction-teams-grid.two-teams,
+      .auction-teams-grid.three-teams {
         grid-template-columns: 1fr;
       }
     }
 
-    .team-card {
+    .auction-team-card {
       border: 2.5px solid;
       border-radius: var(--radius-md);
-      padding: 18px;
+      padding: 18px 20px;
       text-align: center;
       box-shadow: var(--shadow-sm);
       transition: all 0.2s ease;
       background: #ffffff;
+      position: relative;
     }
-    .team-card.team-a {
+    .auction-team-card.team-a {
       border-color: #f87171;
       background: linear-gradient(180deg, #fef2f2 0%, #ffffff 100%);
     }
-    .team-card.team-b {
+    .auction-team-card.team-b {
       border-color: #60a5fa;
       background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
     }
-    .team-card.team-c {
+    .auction-team-card.team-c {
       border-color: #fbbf24;
       background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
     }
 
-    .team-header {
-      font-size: 18px;
+    .auction-team-name {
+      font-size: 17px;
       font-weight: 900;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
-    .team-a .team-header { color: #dc2626; }
-    .team-b .team-header { color: #2563eb; }
-    .team-c .team-header { color: #d97706; }
+    .team-a .auction-team-name { color: #dc2626; }
+    .team-b .auction-team-name { color: #2563eb; }
+    .team-c .auction-team-name { color: #d97706; }
 
-    .team-score {
-      font-size: 38px;
+    .auction-gold-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fffbeb;
+      border: 2px solid #fde68a;
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 24px;
+      font-weight: 900;
+      color: #b45309;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 5px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Bidding Controls within Team Card */
+    .bid-input-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .bid-display-pill {
+      background: #ffffff;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 6px 14px;
+      font-size: 16px;
       font-weight: 900;
       color: #0f172a;
-      line-height: 1;
-      margin-bottom: 12px;
+      min-width: 110px;
     }
-    .score-buttons-row {
+    .quick-bid-btns {
       display: flex;
-      gap: 8px;
+      gap: 5px;
       justify-content: center;
+      flex-wrap: wrap;
     }
-    .score-btn {
-      padding: 6px 14px;
+    .btn-quick-bid {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 5px 9px;
       border-radius: 8px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #334155;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-quick-bid:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+    .btn-quick-bid.all-in {
+      background: #fef2f2;
+      border-color: #fca5a5;
+      color: #dc2626;
+    }
+    .btn-quick-bid.clear {
+      background: #f1f5f9;
+      color: #94a3b8;
+    }
+
+    /* Auction Stage Card (Main Display) */
+    .auction-arena-box {
+      background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+      border: 2px solid #fcd34d;
+      border-radius: var(--radius-lg);
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.08);
+      position: relative;
+    }
+
+    .auction-info-banner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1.5px dashed #fde68a;
+    }
+    .auction-lot-badge {
+      background: #fef3c7;
+      border: 1.5px solid #fde68a;
+      color: #b45309;
       font-size: 13px;
       font-weight: 900;
-      cursor: pointer;
+      padding: 6px 14px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .score-btn.plus {
-      background: #22c55e;
-      color: #ffffff;
+    .auction-difficulty-badge {
+      font-size: 13px;
+      font-weight: 900;
+      padding: 6px 14px;
+      border-radius: 99px;
     }
-    .score-btn.plus:hover { background: #16a34a; }
-    .score-btn.minus {
-      background: #f1f5f9;
-      color: #64748b;
-      border: 1px solid #cbd5e1;
-    }
-    .score-btn.minus:hover { background: #e2e8f0; color: #dc2626; }
+    .diff-easy { background: #dcfce7; color: #15803d; border: 1.5px solid #86efac; }
+    .diff-medium { background: #e0f2fe; color: #0369a1; border: 1.5px solid #7dd3fc; }
+    .diff-hard { background: #fee2e2; color: #b91c1c; border: 1.5px solid #fca5a5; }
 
-    /* Team Question Box */
-    .game-arena-box {
-      background: #f8fafc;
-      border: 2px solid var(--border);
+    /* Topic Preview Box */
+    .auction-topic-box {
+      text-align: center;
+      padding: 16px 20px;
+      background: #ffffff;
+      border: 2px solid #fde68a;
+      border-radius: var(--radius-md);
+      margin-bottom: 20px;
+    }
+    .auction-topic-title {
+      font-size: 13px;
+      font-weight: 900;
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .auction-topic-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+    .auction-topic-hint {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #64748b;
+      margin-top: 6px;
+    }
+
+    /* Secret Question Sealed Card */
+    .question-sealed-box {
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
       border-radius: var(--radius-md);
       padding: 24px;
       text-align: center;
       margin-bottom: 20px;
     }
-    .type-pill {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 900;
-      padding: 4px 14px;
-      border-radius: 99px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      background: var(--purple-light);
-      color: var(--purple);
+    .sealed-icon {
+      font-size: 44px;
+      margin-bottom: 8px;
+      animation: pulseLock 2s infinite ease-in-out;
     }
-    .game-q-text {
+    @keyframes pulseLock {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+    .sealed-text {
+      font-size: 17px;
+      font-weight: 900;
+      color: #64748b;
+    }
+    .sealed-sub {
+      font-size: 13px;
+      font-weight: 700;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    /* Question Revealed Box */
+    .question-revealed-box {
+      display: none;
+      background: #ffffff;
+      border: 2px solid #10b981;
+      border-radius: var(--radius-md);
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.1);
+      animation: fadeIn 0.3s ease;
+    }
+    .revealed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .active-bidder-pill {
+      background: #ecfdf5;
+      border: 1.5px solid #a7f3d0;
+      color: #065f46;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 6px 14px;
+      border-radius: 99px;
+    }
+    .countdown-timer-pill {
+      background: #fff7ed;
+      border: 1.5px solid #fdba74;
+      color: #c2410c;
+      font-size: 15px;
+      font-weight: 900;
+      padding: 6px 14px;
+      border-radius: 99px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .revealed-q-text {
       font-size: 22px;
       font-weight: 900;
       color: #0f172a;
       line-height: 1.4;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
-    .game-q-hint {
+    .revealed-hint {
       font-size: 14px;
       font-weight: 700;
-      color: #64748b;
+      color: #475569;
+    }
+
+    /* Big Action Controls */
+    .gavel-action-box {
+      text-align: center;
       margin-bottom: 16px;
     }
-    .game-controls-row {
+    .btn-gavel-hammer {
+      background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+      color: #ffffff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 99px;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 8px 20px rgba(180, 83, 9, 0.35);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s ease;
+    }
+    .btn-gavel-hammer:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(180, 83, 9, 0.45);
+    }
+    .btn-gavel-hammer:active {
+      transform: translateY(2px);
+    }
+
+    /* Result & Judgement Controls */
+    .judgement-controls {
+      display: none;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 2px dashed #e2e8f0;
+      text-align: center;
+    }
+    .judgement-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: #475569;
+      margin-bottom: 12px;
+    }
+    .judgement-btns-row {
       display: flex;
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
     }
-    .btn-arena {
-      padding: 10px 20px;
+    .btn-judge {
+      padding: 12px 24px;
       border-radius: 12px;
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      cursor: pointer;
+      transition: all 0.15s ease;
     }
-    .btn-arena.primary {
-      background: var(--primary);
+    .btn-judge.correct {
+      background: #16a34a;
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
     }
-    .btn-arena.secondary {
-      background: #ffffff;
-      border: 1.5px solid var(--border);
-      color: var(--ink);
+    .btn-judge.correct:hover { background: #15803d; transform: translateY(-2px); }
+    .btn-judge.wrong {
+      background: #dc2626;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
     }
-    .btn-arena:hover {
-      transform: translateY(-2px);
+    .btn-judge.wrong:hover { background: #b91c1c; transform: translateY(-2px); }
+
+    /* Second Chance Banner */
+    .second-chance-banner {
+      display: none;
+      background: #fef2f2;
+      border: 2px solid #f87171;
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      margin: 16px 0;
+      color: #991b1b;
+      font-size: 15px;
+      font-weight: 800;
+      animation: fadeIn 0.3s ease;
     }
 
-    .reveal-answer-box {
+    /* Answer Explanation Accordion */
+    .auction-exp-box {
       display: none;
       margin-top: 16px;
-      padding: 14px;
-      background: #ecfdf5;
-      border: 1.5px solid #a7f3d0;
+      padding: 16px 20px;
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
       border-radius: var(--radius-sm);
-      font-size: 16px;
-      font-weight: 900;
-      color: #065f46;
-      animation: fadeIn 0.25s ease;
+      text-align: left;
+      font-size: 15px;
+      font-weight: 800;
+      color: #166534;
+      line-height: 1.5;
     }
 
-    /* Giant Buzzer */
-    .buzzer-container {
-      text-align: center;
-      padding: 20px 0 10px;
-    }
-    .giant-buzzer {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ef4444, #991b1b);
-      color: #ffffff;
-      font-size: 22px;
-      font-weight: 900;
-      box-shadow: 0 10px 0 #7f1d1d, 0 16px 25px rgba(239, 68, 68, 0.4);
-      cursor: pointer;
-      margin: 0 auto 16px;
+    /* Utility Row */
+    .auction-utility-row {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      gap: 4px;
-      transition: all 0.1s ease;
-    }
-    .giant-buzzer:active {
-      transform: translateY(8px);
-      box-shadow: 0 2px 0 #7f1d1d, 0 6px 15px rgba(239, 68, 68, 0.4);
-    }
-    .buzzer-claimed-text {
-      font-size: 18px;
-      font-weight: 900;
-      min-height: 28px;
-      color: #b91c1c;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     /* Confetti Canvas */
@@ -939,7 +1132,7 @@
       <button class="nav-btn" onclick="scrollToSection('sec-combo')">🍕⚡ 3. So Sánh & Mẹo Nhớ</button>
       <button class="nav-btn" onclick="scrollToSection('sec-verbs')">📚 4. Bảng Tra Cứu</button>
       <button class="nav-btn" onclick="scrollToSection('sec-quiz')">🎯 5. Quiz 12 Câu</button>
-      <button class="nav-btn" onclick="scrollToSection('sec-game')">🏆 6. Game 2-3 Đội</button>
+      <button class="nav-btn" onclick="scrollToSection('sec-game')">🔨 6. Đấu Giá Câu Hỏi</button>
     </nav>
 
     <!-- Hero Banner -->
@@ -1267,101 +1460,179 @@
       </div>
     </section>
 
-    <!-- SECTION 6: TEAM GAME (2 OR 3 TEAMS) -->
+    <!-- SECTION 6: AUCTION QUIZ (ĐẤU GIÁ CÂU HỎI) -->
     <section class="card" id="sec-game">
       <div class="card-header">
         <div class="card-title-group">
-          <div class="card-icon" style="background: #fef3c7; color: #d97706;">🏆</div>
+          <div class="card-icon" style="background: #fef3c7; color: #d97706;">🔨</div>
           <div>
-            <div class="card-title">6. Game Thi Đấu Đồng Đội (2 Đội & 3 Đội)</div>
-            <div class="card-desc">Đấu trường sôi động trên lớp với nhiều dạng bài tập: chia động từ, tìm lỗi sai, nghe phân biệt thì...</div>
+            <div class="card-title">6. Game "Đấu Giá Câu Hỏi" (Auction Quiz) 💰</div>
+            <div class="card-desc">Các đội dùng vàng đấu giá quyền trả lời: Đúng nhân đôi tiền thưởng, Sai mất trắng và cơ hội sang đội nhì!</div>
           </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-arena secondary" onclick="resetAllGold()">🔄 Phát lại 100 Vàng</button>
         </div>
       </div>
 
       <!-- 2 or 3 Teams Switcher -->
-      <div class="team-mode-selector">
-        <button class="team-mode-btn active" id="modeBtn2" onclick="switchTeamMode(2)">🦖 Đấu 2 Đội (Đỏ vs Xanh)</button>
-        <button class="team-mode-btn" id="modeBtn3" onclick="switchTeamMode(3)">🐯 Đấu 3 Đội (Hổ vs Đại Bàng vs Cá Heo)</button>
+      <div class="auction-mode-selector">
+        <button class="auction-mode-btn active" id="modeBtn2" onclick="switchAuctionMode(2)">🦖 Đấu 2 Đội (Đỏ vs Xanh)</button>
+        <button class="auction-mode-btn" id="modeBtn3" onclick="switchAuctionMode(3)">🐯 Đấu 3 Đội (Hổ vs Đại Bàng vs Cá Heo)</button>
       </div>
 
-      <!-- Scoreboard Grid -->
-      <div class="teams-scoreboard-grid two-teams" id="scoreboardGrid">
+      <!-- Teams Gold & Bidding Deck -->
+      <div class="auction-teams-grid two-teams" id="auctionTeamsGrid">
         <!-- Team A -->
-        <div class="team-card team-a">
-          <div class="team-header">
+        <div class="auction-team-card team-a" id="cardTeamA">
+          <div class="auction-team-name">
             <span>🦖</span> <span id="teamAName">Đội Khủng Long Đỏ</span>
           </div>
-          <div class="team-score" id="scoreA">0</div>
-          <div class="score-buttons-row">
-            <button class="score-btn plus" onclick="addTeamScore('A', 10)">+10 Điểm</button>
-            <button class="score-btn minus" onclick="addTeamScore('A', -5)">-5</button>
+          <div class="auction-gold-badge" id="goldBadgeA">🪙 <span id="goldA">100</span> Vàng</div>
+          <div class="bid-input-row">
+            <span style="font-size: 13px; font-weight: 800; color: #dc2626;">Đấu giá:</span>
+            <div class="bid-display-pill" id="bidDisplayA">0 Vàng</div>
+          </div>
+          <div class="quick-bid-btns" id="bidBtnsA">
+            <button class="btn-quick-bid" onclick="changeBid('A', 5)">+5</button>
+            <button class="btn-quick-bid" onclick="changeBid('A', 10)">+10</button>
+            <button class="btn-quick-bid" onclick="changeBid('A', 20)">+20</button>
+            <button class="btn-quick-bid all-in" onclick="bidAllIn('A')">All-in</button>
+            <button class="btn-quick-bid clear" onclick="clearBid('A')">Xóa</button>
           </div>
         </div>
 
         <!-- Team B -->
-        <div class="team-card team-b">
-          <div class="team-header">
+        <div class="auction-team-card team-b" id="cardTeamB">
+          <div class="auction-team-name">
             <span>🚀</span> <span id="teamBName">Đội Tên Lửa Xanh</span>
           </div>
-          <div class="team-score" id="scoreB">0</div>
-          <div class="score-buttons-row">
-            <button class="score-btn plus" onclick="addTeamScore('B', 10)">+10 Điểm</button>
-            <button class="score-btn minus" onclick="addTeamScore('B', -5)">-5</button>
+          <div class="auction-gold-badge" id="goldBadgeB">🪙 <span id="goldB">100</span> Vàng</div>
+          <div class="bid-input-row">
+            <span style="font-size: 13px; font-weight: 800; color: #2563eb;">Đấu giá:</span>
+            <div class="bid-display-pill" id="bidDisplayB">0 Vàng</div>
+          </div>
+          <div class="quick-bid-btns" id="bidBtnsB">
+            <button class="btn-quick-bid" onclick="changeBid('B', 5)">+5</button>
+            <button class="btn-quick-bid" onclick="changeBid('B', 10)">+10</button>
+            <button class="btn-quick-bid" onclick="changeBid('B', 20)">+20</button>
+            <button class="btn-quick-bid all-in" onclick="bidAllIn('B')">All-in</button>
+            <button class="btn-quick-bid clear" onclick="clearBid('B')">Xóa</button>
           </div>
         </div>
 
         <!-- Team C (hidden in 2-team mode) -->
-        <div class="team-card team-c" id="teamCCard" style="display: none;">
-          <div class="team-header">
-            <span>🐬</span> <span>Đội Cá Heo Vàng</span>
+        <div class="auction-team-card team-c" id="cardTeamC" style="display: none;">
+          <div class="auction-team-name">
+            <span>🐬</span> <span id="teamCName">Đội Cá Heo Vàng</span>
           </div>
-          <div class="team-score" id="scoreC">0</div>
-          <div class="score-buttons-row">
-            <button class="score-btn plus" onclick="addTeamScore('C', 10)">+10 Điểm</button>
-            <button class="score-btn minus" onclick="addTeamScore('C', -5)">-5</button>
+          <div class="auction-gold-badge" id="goldBadgeC">🪙 <span id="goldC">100</span> Vàng</div>
+          <div class="bid-input-row">
+            <span style="font-size: 13px; font-weight: 800; color: #d97706;">Đấu giá:</span>
+            <div class="bid-display-pill" id="bidDisplayC">0 Vàng</div>
+          </div>
+          <div class="quick-bid-btns" id="bidBtnsC">
+            <button class="btn-quick-bid" onclick="changeBid('C', 5)">+5</button>
+            <button class="btn-quick-bid" onclick="changeBid('C', 10)">+10</button>
+            <button class="btn-quick-bid" onclick="changeBid('C', 20)">+20</button>
+            <button class="btn-quick-bid all-in" onclick="bidAllIn('C')">All-in</button>
+            <button class="btn-quick-bid clear" onclick="clearBid('C')">Xóa</button>
           </div>
         </div>
       </div>
 
-      <!-- Question Arena Box -->
-      <div class="game-arena-box">
-        <div class="type-pill" id="gameTypePill">Dạng bài: Chia động từ</div>
-        <div class="game-q-text" id="gameQText">Đang chuẩn bị câu hỏi thi đấu...</div>
-        <div class="game-q-hint" id="gameQHint">Gợi ý câu hỏi...</div>
+      <!-- Main Auction Stage Box -->
+      <div class="auction-arena-box">
+        
+        <!-- Info Banner (Lot number & Difficulty) -->
+        <div class="auction-info-banner">
+          <div class="auction-lot-badge">
+            <span>📦</span> <span id="auctionLotText">Gói Đấu Giá #1</span>
+          </div>
+          <div class="auction-difficulty-badge diff-medium" id="auctionDiffBadge">
+            ⭐⭐ Độ Khó: Trung Bình
+          </div>
+        </div>
 
-        <div class="game-controls-row">
-          <button class="btn-arena secondary" id="btnAudioGame" onclick="playGameAudio()" style="display: none;">
-            📢 Bấm để nghe câu
-          </button>
-          <button class="btn-arena secondary" onclick="toggleRevealAnswer()">
-            👀 Xem Đáp Án
-          </button>
-          <button class="btn-arena primary" onclick="nextGameQuestion()">
-            ➡️ Câu Hỏi Tiếp Theo
-          </button>
-          <button class="btn-arena secondary" onclick="celebrateWinner()">
-            👑 Trao Cúp Chiến Thắng
+        <!-- Topic Preview (Visible before bidding) -->
+        <div class="auction-topic-box">
+          <div class="auction-topic-title">CHỦ ĐỀ ĐẤU GIÁ (CHƯA MỞ CÂU HỎI)</div>
+          <div class="auction-topic-name" id="auctionTopicName">Mẹo Nhớ Pizza & Tia Chớp (When / While)</div>
+          <div class="auction-topic-hint" id="auctionTopicHint">💡 Gợi ý: Gói câu hỏi về cách phối hợp 2 thì khi có hành động xen vào!</div>
+        </div>
+
+        <!-- Secret Question Sealed Box (Shown before Gavel) -->
+        <div class="question-sealed-box" id="questionSealedBox">
+          <div class="sealed-icon">🔒📦</div>
+          <div class="sealed-text">Nội dung câu hỏi đang được niêm phong trong hòm bảo mật!</div>
+          <div class="sealed-sub">Các đội hãy bàn bạc và đặt cược số vàng mong muốn, sau đó Quản trò bấm "GÕ BÚA CHỐT ĐẤU GIÁ"!</div>
+        </div>
+
+        <!-- Question Revealed Box (Shown after Gavel) -->
+        <div class="question-revealed-box" id="questionRevealedBox">
+          <div class="revealed-header">
+            <div class="active-bidder-pill" id="activeBidderPill">
+              👑 Đội trả lời: Đang xác định...
+            </div>
+            <div class="countdown-timer-pill" id="countdownTimerPill">
+              <span>⏱️</span> <span id="timerText">20s</span>
+            </div>
+          </div>
+          <div class="revealed-q-text" id="revealedQText">Câu hỏi sẽ hiện ở đây...</div>
+          <div class="revealed-hint" id="revealedQHint">Gợi ý câu hỏi...</div>
+
+          <!-- Audio button if available -->
+          <div style="margin-top: 14px;" id="auctionAudioRow">
+            <button class="btn-arena secondary" id="btnAudioAuction" onclick="playAuctionAudio()" style="display: none;">
+              📢 Bấm để nghe đọc câu tiếng Anh
+            </button>
+          </div>
+        </div>
+
+        <!-- Second Chance Banner (If Team 1 fails) -->
+        <div class="second-chance-banner" id="secondChanceBanner">
+          ⚡ <b>CƠ HỘI CHUYỂN GIAO:</b> Đội ra giá cao thứ nhì giành quyền cướp câu trả lời!
+        </div>
+
+        <!-- Hammer Action Button -->
+        <div class="gavel-action-box" id="gavelActionBox">
+          <button class="btn-gavel-hammer" onclick="strikeGavel()">
+            <span style="font-size: 26px;">🔨</span>
+            <span>GÕ BÚA CHỐT ĐẤU GIÁ!</span>
           </button>
         </div>
 
-        <div class="reveal-answer-box" id="revealAnswerBox">
-          <!-- Answer displayed here -->
+        <!-- Judgement Controls (Visible after Reveal) -->
+        <div class="judgement-controls" id="judgementControls">
+          <div class="judgement-title" id="judgementTitle">QUẢN TRÒ / THẦY CÔ CHẤM CÂU TRẢ LỜI:</div>
+          <div class="judgement-btns-row">
+            <button class="btn-judge correct" id="btnJudgeCorrect" onclick="judgeAnswer(true)">
+              <span>✅</span> <span id="judgeCorrectText">ĐÚNG (+ GẤP ĐÔI TIỀN CƯỢC)</span>
+            </button>
+            <button class="btn-judge wrong" id="btnJudgeWrong" onclick="judgeAnswer(false)">
+              <span>❌</span> <span id="judgeWrongText">SAI (MẤT TRẮNG TIỀN CƯỢC)</span>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- Giant Buzzer Section -->
-      <div class="buzzer-container">
-        <button class="giant-buzzer" onclick="hitBuzzer()">
-          <span style="font-size: 32px;">🔔</span>
-          <span>BẤM!</span>
-        </button>
-        <div class="buzzer-claimed-text" id="buzzerText">
-          Chuông sẵn sàng! Bấm chuông để giành quyền trả lời!
+        <!-- Explanation Box -->
+        <div class="auction-exp-box" id="auctionExpBox">
+          <!-- Populated by JS -->
         </div>
-        <button class="btn-arena secondary" style="margin-top: 10px;" onclick="resetBuzzer()">
-          🔄 Mở lại chuông câu mới
-        </button>
+
+        <!-- Utility Row -->
+        <div class="auction-utility-row">
+          <button class="btn-arena secondary" onclick="toggleAuctionAnswer()">
+            👀 Xem Đáp Án & Mẹo
+          </button>
+          <button class="btn-arena primary" id="btnNextLot" onclick="nextAuctionLot()" style="display: none;">
+            ➡️ Gói Đấu Giá Tiếp Theo
+          </button>
+          <button class="btn-arena secondary" onclick="showRichLeaderboard()">
+            👑 Xếp Hạng Đại Gia Vàng
+          </button>
+        </div>
+
       </div>
 
     </section>
@@ -1457,6 +1728,22 @@
           osc.start(now + idx * 0.1);
           osc.stop(now + idx * 0.1 + 0.35);
         });
+      } else if (type === 'gavel') {
+        // Triple woodblock gavel knock
+        [0, 0.14, 0.28].forEach((delay) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now + delay);
+          osc.frequency.exponentialRampToValueAtTime(80, now + delay + 0.09);
+          gain.gain.setValueAtTime(0.5, now + delay);
+          gain.gain.linearRampToValueAtTime(0.01, now + delay + 0.09);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + delay);
+          osc.stop(now + delay + 0.09);
+        });
+      }
       }
     }
 
@@ -1777,214 +2064,453 @@
     renderQuiz();
 
     /* ==========================================================================
-       6. TEAM GAME ENGINE (2 TEAMS & 3 TEAMS MODES + MULTI-QUESTION TYPES)
+       6. AUCTION QUIZ ENGINE ("ĐẤU GIÁ CÂU HỎI")
        ========================================================================== */
-    let currentTeamMode = 2; // 2 or 3
-    let scores = { A: 0, B: 0, C: 0 };
-    let buzzerLocked = false;
-    let currentGameIndex = 0;
+    let auctionMode = 2; // 2 or 3 teams
+    let gold = { A: 100, B: 100, C: 100 };
+    let bids = { A: 0, B: 0, C: 0 };
+    let currentLotIndex = 0;
+    let activeBidder = null;
+    let activeBidAmount = 0;
+    let runnerUpBidder = null;
+    let runnerUpBidAmount = 0;
+    let timerInterval = null;
+    let timerSeconds = 20;
 
-    const gameQuestionsPool = [
-      // Dạng 1: Chia động từ
+    const auctionLotsPool = [
       {
-        type: "Dạng 1: Chia động từ",
-        text: "Yesterday, Lan (go) ______ to the bookshop to buy a ruler.",
-        hint: "Nhận biết: 'yesterday' ➔ Chia thì Quá khứ đơn của từ 'go'",
-        ans: "went",
-        explain: "Vì có 'yesterday' nên động từ 'go' đổi thành 'went' (V2)."
+        topic: "Mẹo Nhớ Pizza & Tia Chớp (When / While)",
+        diff: "medium",
+        diffText: "⭐⭐ Độ Khó: Trung Bình",
+        text: "Hoàn thành câu: 'While I was doing my homework, my cat (jump) ______ onto the table.'",
+        hint: "Đang làm bài tập (was doing) thì chú mèo bất ngờ nhảy lên bàn xen vào! Động từ jump chia ở thì gì?",
+        ans: "jumped",
+        explain: "Hành động đang diễn ra (quá khứ tiếp diễn) thì hành động khác bất ngờ xen vào chia Quá khứ đơn (jumped).",
+        audioText: "While I was doing my homework, my cat jumped onto the table."
       },
       {
-        type: "Dạng 1: Chia động từ",
-        text: "At 7 PM yesterday, they (watch) ______ a cartoon on TV.",
-        hint: "Nhận biết: Mốc giờ 'At 7 PM yesterday' + chủ ngữ 'they' số nhiều",
-        ans: "were watching",
-        explain: "Chủ ngữ 'they' số nhiều + giờ cụ thể ➔ were watching."
-      },
-      // Dạng 2: Tìm lỗi sai
-      {
-        type: "Dạng 2: Bác sĩ bắt sâu - Tìm lỗi sai",
-        text: "Câu sai: 'She didn't went to school yesterday because of rain.'",
-        hint: "Tìm từ viết sai trong câu trên và sửa lại cho đúng!",
-        ans: "Sửa 'went' thành 'go' (sau didn't dùng động từ nguyên mẫu)",
-        explain: "Sau trợ động từ 'didn't', động từ phải ở dạng NGUYÊN MẪU 'go'."
+        topic: "Động Từ Bất Quy Tắc Siêu Tốc",
+        diff: "easy",
+        diffText: "⭐ Độ Khó: Dễ",
+        text: "Đố bạn: Dạng quá khứ (V2) của 2 động từ quen thuộc: GO (đi) và EAT (ăn) là gì?",
+        hint: "Nhớ lại bảng động từ bất quy tắc mini ở phần 4!",
+        ans: "go ➔ WENT | eat ➔ ATE",
+        explain: "Quá khứ của go là went; quá khứ của eat là ate.",
+        audioText: "go, went. eat, ate."
       },
       {
-        type: "Dạng 2: Bác sĩ bắt sâu - Tìm lỗi sai",
-        text: "Câu sai: 'While I was played football, my mother called me.'",
-        hint: "Chú ý vế sau chữ While: was + V-ing!",
-        ans: "Sửa 'played' thành 'playing' (was playing)",
-        explain: "Sau 'was' trong quá khứ tiếp diễn phải là 'playing'."
+        topic: "Bác Sĩ Bắt Sâu - Sửa Lỗi Sai",
+        diff: "hard",
+        diffText: "⭐⭐⭐ Độ Khó: Thử Thách",
+        text: "Tìm và sửa lỗi sai trong câu: 'She didn't went to school yesterday because of heavy rain.'",
+        hint: "Chú ý động từ đứng ngay sau trợ động từ 'didn't'!",
+        ans: "Sửa 'went' thành 'go' (didn't go)",
+        explain: "Sau trợ động từ 'didn't', động từ chính luôn trở về NGUYÊN MẪU (go).",
+        audioText: "She didn't go to school yesterday."
       },
-      // Dạng 3: Nghe & Phân biệt thì (Có nút đọc âm thanh)
       {
-        type: "Dạng 3: Nghe & Phân biệt thì",
-        audioText: "At this time last Sunday, we were swimming in the sea.",
-        text: "🎧 Hãy bấm nút nghe câu và đoán xem câu này là thì Quá Khứ Đơn hay Quá Khứ Tiếp Diễn?",
-        hint: "Lắng nghe xem có 'were swimming' không nhé!",
+        topic: "Nghe & Phân Biệt Thì (Audio Challenge)",
+        diff: "medium",
+        diffText: "⭐⭐ Độ Khó: Trung Bình",
+        text: "🎧 Hãy bấm nút nghe câu tiếng Anh và cho biết: Câu này dùng thì Quá Khứ Đơn hay Quá Khứ Tiếp Diễn?",
+        hint: "Lắng nghe xem có xuất hiện 'were watching' và mốc giờ cụ thể không nhé!",
         ans: "Thì Quá khứ tiếp diễn (Past Continuous)",
-        explain: "Câu có 'were swimming' và 'At this time last Sunday' ➔ Quá khứ tiếp diễn."
+        explain: "Câu có 'were watching' và mốc thời gian cụ thể 'at 8 PM yesterday' ➔ Quá khứ tiếp diễn.",
+        audioText: "At eight PM yesterday, we were watching a funny cartoon."
       },
       {
-        type: "Dạng 3: Nghe & Phân biệt thì",
-        audioText: "My father bought a new bicycle three days ago.",
-        text: "🎧 Hãy bấm nút nghe câu và đoán xem câu này là thì Quá Khứ Đơn hay Quá Khứ Tiếp Diễn?",
-        hint: "Lắng nghe xem có 'bought' và 'three days ago' không nhé!",
+        topic: "Dấu Hiệu Nhận Biết Thì Quá Khứ",
+        diff: "easy",
+        diffText: "⭐ Độ Khó: Dễ",
+        text: "Trong 2 cụm từ sau, cụm từ nào là dấu hiệu của Quá khứ tiếp diễn: 'yesterday' hay 'at 7 o'clock yesterday'?",
+        hint: "Thì tiếp diễn cần có mốc giờ cụ thể chính xác hay chỉ chung chung?",
+        ans: "'at 7 o'clock yesterday' (vào lúc 7 giờ hôm qua)",
+        explain: "Có mốc giờ cụ thể 'at 7 o'clock' là dấu hiệu đặc trưng của Quá khứ tiếp diễn.",
+        audioText: "at seven o'clock yesterday."
+      },
+      {
+        topic: "Động Từ To-Be Trong Quá Khứ",
+        diff: "easy",
+        diffText: "⭐ Độ Khó: Dễ",
+        text: "Điền 'was' hay 'were' vào chỗ trống: 'They ______ very happy at the amusement park last Sunday.'",
+        hint: "Chủ ngữ 'They' (họ, chúng nó) là số ít hay số nhiều? Từ dài hay từ ngắn?",
+        ans: "were (4 chữ cái)",
+        explain: "Chủ ngữ 'They' số nhiều nên đi với 'were' (4 chữ cái).",
+        audioText: "They were very happy at the amusement park last Sunday."
+      },
+      {
+        topic: "Phân Biệt When & While Cắt Ngang",
+        diff: "hard",
+        diffText: "⭐⭐⭐ Độ Khó: Thử Thách",
+        text: "Chia động từ trong ngoặc: 'I was sleeping in my bedroom when the alarm clock (ring) ______ .'",
+        hint: "Tớ đang ngủ (was sleeping) thì chuông báo thức reo cắt ngang! Sau 'when' dùng thì gì?",
+        ans: "rang (V2 của ring)",
+        explain: "Sau 'when' diễn tả hành động cắt ngang chia Quá khứ đơn: ring ➔ rang.",
+        audioText: "I was sleeping when the alarm clock rang."
+      },
+      {
+        topic: "Quy Tắc Thêm Đuôi -ING",
+        diff: "medium",
+        diffText: "⭐⭐ Độ Khó: Trung Bình",
+        text: "Hãy biến đổi 2 động từ sau khi thêm đuôi -ing: RUN (chạy) và DANCE (khiêu vũ)?",
+        hint: "Chú ý quy tắc kẹp bánh mì (gấp đôi phụ âm) và quy tắc tận cùng bằng 'e'!",
+        ans: "run ➔ RUNNING (gấp đôi n) | dance ➔ DANCING (bỏ e)",
+        explain: "run kẹp 1 nguyên âm giữa 2 phụ âm ➔ running. dance tận cùng 'e' ➔ bỏ e thêm ing = dancing.",
+        audioText: "run, running. dance, dancing."
+      },
+      {
+        topic: "Bác Sĩ Bắt Sâu - Sửa Lỗi Sai",
+        diff: "hard",
+        diffText: "⭐⭐⭐ Độ Khó: Thử Thách",
+        text: "Tìm và sửa lỗi sai trong câu: 'While they was playing football, it suddenly started to rain.'",
+        hint: "Nhìn kĩ chủ ngữ 'they' đi kèm với 'was' hay 'were'?",
+        ans: "Sửa 'was' thành 'were' (were playing)",
+        explain: "Chủ ngữ 'they' số nhiều nên phải đi với 'were playing', không dùng 'was'.",
+        audioText: "While they were playing football, it suddenly started to rain."
+      },
+      {
+        topic: "Nghe & Phân Biệt Thì (Audio Challenge)",
+        diff: "medium",
+        diffText: "⭐⭐ Độ Khó: Trung Bình",
+        text: "🎧 Hãy bấm nút nghe câu tiếng Anh và cho biết: Câu này dùng thì Quá Khứ Đơn hay Quá Khứ Tiếp Diễn?",
+        hint: "Lắng nghe từ 'bought' và 'two days ago'!",
         ans: "Thì Quá khứ đơn (Past Simple)",
-        explain: "Câu có 'bought' (V2) và 'three days ago' ➔ Quá khứ đơn."
-      },
-      // Dạng 4: Động từ bất quy tắc siêu tốc
-      {
-        type: "Dạng 4: Động từ bất quy tắc",
-        text: "Đố bạn: Dạng quá khứ (V2) của động từ 'EAT' (ăn) và 'SEE' (nhìn thấy) là gì?",
-        hint: "Nhớ lại bảng động từ bất quy tắc mini!",
-        ans: "eat ➔ ATE | see ➔ SAW",
-        explain: "eat biến thành ate; see biến thành saw."
+        explain: "Câu có 'bought' (V2 của buy) và 'two days ago' ➔ Hành động đã hoàn thành trong quá khứ.",
+        audioText: "My father bought a wonderful new bicycle two days ago."
       },
       {
-        type: "Dạng 4: Động từ bất quy tắc",
-        text: "Đố bạn: Dạng quá khứ (V2) của động từ 'BUY' (mua) và 'RUN' (chạy) là gì?",
+        topic: "Động Từ Bất Quy Tắc Siêu Tốc",
+        diff: "easy",
+        diffText: "⭐ Độ Khó: Dễ",
+        text: "Đố bạn: Dạng quá khứ (V2) của động từ BUY (mua) và SEE (nhìn thấy) là gì?",
         hint: "Đọc to lên nào!",
-        ans: "buy ➔ BOUGHT | run ➔ RAN",
-        explain: "buy biến thành bought; run biến thành ran."
-      },
-      // Dạng 5: Chọn dấu hiệu nhận biết phù hợp
-      {
-        type: "Dạng 5: Dấu hiệu nhận biết",
-        text: "Từ nào sau đây là dấu hiệu của Quá khứ tiếp diễn: 'yesterday' hay 'at 8 o'clock yesterday'?",
-        hint: "Thì tiếp diễn cần có mốc thời gian cụ thể hay chỉ chung chung?",
-        ans: "'at 8 o'clock yesterday' (có giờ cụ thể)",
-        explain: "'yesterday' dùng cho Quá khứ đơn, còn có giờ cụ thể 'at 8 o'clock yesterday' dùng cho Quá khứ tiếp diễn."
+        ans: "buy ➔ BOUGHT | see ➔ SAW",
+        explain: "buy đổi thành bought; see đổi thành saw.",
+        audioText: "buy, bought. see, saw."
       },
       {
-        type: "Dạng 5: Dấu hiệu nhận biết",
-        text: "Điền 'When' hay 'While' vào chỗ trống: '______ I was doing homework, my cat jumped onto the table.'",
-        hint: "Đứng trước hành động kéo dài (was doing) ta dùng từ gì?",
-        ans: "Dùng từ 'While'",
-        explain: "Sau 'While' đi với hành động đang tiếp diễn: While + S + was/were + V-ing."
+        topic: "Hai Hành Động Song Song Với While",
+        diff: "hard",
+        diffText: "⭐⭐⭐ Độ Khó: Thử Thách",
+        text: "Chia động từ trong ngoặc: 'While Lan was cooking dinner, her brother (read) ______ a comic book.'",
+        hint: "Cả hai bạn đều đang làm việc của mình song song cùng lúc trong quá khứ!",
+        ans: "was reading",
+        explain: "Hai hành động song song cùng diễn ra trong quá khứ với While ➔ Cả 2 vế đều dùng Quá khứ tiếp diễn (was reading).",
+        audioText: "While Lan was cooking dinner, her brother was reading a comic book."
       }
     ];
 
-    function switchTeamMode(mode) {
-      currentTeamMode = mode;
+    function getTeamName(teamKey) {
+      if (teamKey === 'A') return auctionMode === 2 ? '🦖 Đội Khủng Long Đỏ' : '🐯 Đội Hổ Vàng';
+      if (teamKey === 'B') return auctionMode === 2 ? '🚀 Đội Tên Lửa Xanh' : '🦅 Đội Đại Bàng';
+      if (teamKey === 'C') return '🐬 Đội Cá Heo Vàng';
+      return teamKey;
+    }
+
+    function switchAuctionMode(mode) {
+      auctionMode = mode;
       document.getElementById('modeBtn2').classList.toggle('active', mode === 2);
       document.getElementById('modeBtn3').classList.toggle('active', mode === 3);
 
-      const grid = document.getElementById('scoreboardGrid');
-      const teamCCard = document.getElementById('teamCCard');
+      const grid = document.getElementById('auctionTeamsGrid');
+      const cardC = document.getElementById('cardTeamC');
 
       if (mode === 2) {
-        grid.className = 'teams-scoreboard-grid two-teams';
-        teamCCard.style.display = 'none';
+        grid.className = 'auction-teams-grid two-teams';
+        cardC.style.display = 'none';
         document.getElementById('teamAName').textContent = 'Đội Khủng Long Đỏ';
         document.getElementById('teamBName').textContent = 'Đội Tên Lửa Xanh';
       } else {
-        grid.className = 'teams-scoreboard-grid three-teams';
-        teamCCard.style.display = 'block';
+        grid.className = 'auction-teams-grid three-teams';
+        cardC.style.display = 'block';
         document.getElementById('teamAName').textContent = 'Đội Hổ Vàng';
         document.getElementById('teamBName').textContent = 'Đội Đại Bàng';
       }
       playSound('ping');
     }
 
-    function addTeamScore(team, delta) {
-      scores[team] = Math.max(0, scores[team] + delta);
-      document.getElementById(`score${team}`).textContent = scores[team];
-      if (delta > 0) {
-        playSound('ping');
+    function updateGoldUI() {
+      document.getElementById('goldA').textContent = gold.A;
+      document.getElementById('goldB').textContent = gold.B;
+      document.getElementById('goldC').textContent = gold.C;
+    }
+
+    function updateBidDisplay(team) {
+      document.getElementById(`bidDisplay${team}`).textContent = `${bids[team]} Vàng`;
+    }
+
+    function changeBid(team, amount) {
+      const maxAllowed = gold[team];
+      if (bids[team] + amount > maxAllowed) {
+        bids[team] = maxAllowed;
+        alert(`🪙 ${getTeamName(team)} chỉ có tối đa ${maxAllowed} Vàng!`);
       } else {
-        playSound('wrong');
+        bids[team] += amount;
+      }
+      updateBidDisplay(team);
+      playSound('ping');
+    }
+
+    function bidAllIn(team) {
+      bids[team] = gold[team];
+      updateBidDisplay(team);
+      playSound('fanfare');
+      alert(`🔥 TẤT TAY! ${getTeamName(team)} đặt cược toàn bộ ${gold[team]} Vàng!`);
+    }
+
+    function clearBid(team) {
+      bids[team] = 0;
+      updateBidDisplay(team);
+    }
+
+    function resetAllGold() {
+      if (confirm('Bạn có chắc muốn phát lại 100 Vàng ban đầu cho tất cả các đội không?')) {
+        gold = { A: 100, B: 100, C: 100 };
+        bids = { A: 0, B: 0, C: 0 };
+        updateGoldUI();
+        updateBidDisplay('A');
+        updateBidDisplay('B');
+        updateBidDisplay('C');
+        loadAuctionLot();
+        playSound('fanfare');
+        alert('🪙 Đã phát lại 100 Vàng cho mỗi đội! Chúc các đội đấu giá may mắn!');
       }
     }
 
-    function loadGameQuestion() {
-      const q = gameQuestionsPool[currentGameIndex % gameQuestionsPool.length];
-      document.getElementById('gameTypePill').textContent = q.type;
-      document.getElementById('gameQText').textContent = q.text;
-      document.getElementById('gameQHint').textContent = `💡 ${q.hint}`;
+    function loadAuctionLot() {
+      stopTimer();
+      const lot = auctionLotsPool[currentLotIndex % auctionLotsPool.length];
 
-      const audioBtn = document.getElementById('btnAudioGame');
-      if (q.audioText) {
+      // Reset bids
+      bids = { A: 0, B: 0, C: 0 };
+      updateBidDisplay('A');
+      updateBidDisplay('B');
+      updateBidDisplay('C');
+
+      // Update Info
+      document.getElementById('auctionLotText').textContent = `Gói Đấu Giá #${(currentLotIndex % auctionLotsPool.length) + 1}`;
+      const diffBadge = document.getElementById('auctionDiffBadge');
+      diffBadge.textContent = lot.diffText;
+      diffBadge.className = `auction-difficulty-badge diff-${lot.diff}`;
+
+      document.getElementById('auctionTopicName').textContent = lot.topic;
+      document.getElementById('auctionTopicHint').textContent = `💡 ${lot.hint}`;
+
+      // Reset UI elements
+      document.getElementById('questionSealedBox').style.display = 'block';
+      document.getElementById('questionRevealedBox').style.display = 'none';
+      document.getElementById('secondChanceBanner').style.display = 'none';
+      document.getElementById('gavelActionBox').style.display = 'block';
+      document.getElementById('judgementControls').style.display = 'none';
+      document.getElementById('auctionExpBox').style.display = 'none';
+      document.getElementById('btnNextLot').style.display = 'none';
+
+      // Fill revealed question
+      document.getElementById('revealedQText').textContent = lot.text;
+      document.getElementById('revealedQHint').textContent = `💡 Gợi ý: ${lot.hint}`;
+
+      const audioBtn = document.getElementById('btnAudioAuction');
+      if (lot.audioText) {
         audioBtn.style.display = 'inline-flex';
       } else {
         audioBtn.style.display = 'none';
       }
 
-      // Hide reveal answer
-      const rev = document.getElementById('revealAnswerBox');
-      rev.style.display = 'none';
-      rev.innerHTML = `✅ <b>ĐÁP ÁN:</b> ${q.ans}<br><span style="font-size:14px; font-weight:700; color:#15803d;">Giải thích: ${q.explain}</span>`;
+      // Fill explanation box
+      document.getElementById('auctionExpBox').innerHTML = `
+        ✅ <b>ĐÁP ÁN CHUẨN XÁC:</b> <span style="font-size: 17px; color: #15803d;">${lot.ans}</span><br>
+        <div style="margin-top: 6px; font-size: 14px; color: #334155;"><b>Giải thích ngữ pháp:</b> ${lot.explain}</div>
+      `;
+
+      // Enable bid buttons
+      setBidButtonsDisabled(false);
     }
 
-    function playGameAudio() {
-      const q = gameQuestionsPool[currentGameIndex % gameQuestionsPool.length];
-      if (q.audioText) {
-        speakSentence(q.audioText);
+    function setBidButtonsDisabled(disabled) {
+      document.querySelectorAll('.btn-quick-bid').forEach(btn => btn.disabled = disabled);
+    }
+
+    function strikeGavel() {
+      playSound('gavel');
+
+      const activeTeams = auctionMode === 2 ? ['A', 'B'] : ['A', 'B', 'C'];
+      const teamBids = activeTeams.map(t => ({ team: t, bid: bids[t], gold: gold[t] }));
+
+      // Check all 0
+      const maxBid = Math.max(...teamBids.map(b => b.bid));
+      if (maxBid <= 0) {
+        alert('⚠️ Chưa có đội nào ra giá! Vui lòng đặt cược ít nhất 5 Vàng để tham gia đấu giá gói câu hỏi này!');
+        return;
+      }
+
+      // Check tie for highest bid
+      const topBidders = teamBids.filter(b => b.bid === maxBid);
+      if (topBidders.length > 1) {
+        const tiedNames = topBidders.map(b => getTeamName(b.team)).join(' & ');
+        alert(`🔔 HÒA GIÁ! ${tiedNames} cùng ra giá ${maxBid} Vàng!\nQuản trò hãy cho các đội 10 giây để nâng giá phân định thắng thua!`);
+        return;
+      }
+
+      // Sort by bid descending
+      teamBids.sort((a, b) => b.bid - a.bid);
+      const winner = teamBids[0];
+      const runnerUp = teamBids[1].bid > 0 ? teamBids[1] : null;
+
+      activeBidder = winner.team;
+      activeBidAmount = winner.bid;
+      runnerUpBidder = runnerUp ? runnerUp.team : null;
+      runnerUpBidAmount = runnerUp ? runnerUp.bid : 0;
+
+      // Lock bidding
+      setBidButtonsDisabled(true);
+      document.getElementById('gavelActionBox').style.display = 'none';
+
+      // Reveal Question
+      document.getElementById('questionSealedBox').style.display = 'none';
+      document.getElementById('questionRevealedBox').style.display = 'block';
+
+      const bidderPill = document.getElementById('activeBidderPill');
+      bidderPill.innerHTML = `👑 <b>${getTeamName(activeBidder)}</b> GIÀNH QUYỀN TRẢ LỜI VỚI <b>${activeBidAmount} VÀNG</b>!`;
+
+      // Setup Judgement buttons
+      document.getElementById('judgementTitle').textContent = `QUẢN TRÒ CHẤM CÂU TRẢ LỜI CỦA ${getTeamName(activeBidder)}:`;
+      document.getElementById('judgeCorrectText').textContent = `ĐÚNG (Thu về gấp đôi: +${activeBidAmount * 2} Vàng)`;
+      document.getElementById('judgeWrongText').textContent = `SAI (Mất trắng: -${activeBidAmount} Vàng)`;
+      document.getElementById('judgementControls').style.display = 'block';
+
+      // Start 20s countdown
+      startTimer(20);
+    }
+
+    function startTimer(seconds) {
+      stopTimer();
+      timerSeconds = seconds;
+      const timerText = document.getElementById('timerText');
+      timerText.textContent = `${timerSeconds}s`;
+
+      timerInterval = setInterval(() => {
+        timerSeconds--;
+        timerText.textContent = `${timerSeconds}s`;
+        if (timerSeconds <= 5 && timerSeconds > 0) {
+          playSound('ping');
+        }
+        if (timerSeconds <= 0) {
+          stopTimer();
+          timerText.textContent = 'HẾT GIỜ!';
+          playSound('wrong');
+        }
+      }, 1000);
+    }
+
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
       }
     }
 
-    function toggleRevealAnswer() {
-      const rev = document.getElementById('revealAnswerBox');
-      if (rev.style.display === 'block') {
-        rev.style.display = 'none';
+    function judgeAnswer(isCorrect) {
+      stopTimer();
+
+      if (isCorrect) {
+        // Correct: Earn DOUBLE the bet (+ activeBidAmount added to total gold)
+        gold[activeBidder] += activeBidAmount;
+        updateGoldUI();
+
+        playSound('fanfare');
+        triggerConfetti();
+
+        document.getElementById('judgementControls').style.display = 'none';
+        document.getElementById('secondChanceBanner').style.display = 'none';
+        document.getElementById('auctionExpBox').style.display = 'block';
+        document.getElementById('btnNextLot').style.display = 'inline-flex';
+
+        alert(`🎉 TUYỆT VỜI! ${getTeamName(activeBidder)} TRẢ LỜI CHÍNH XÁC!\n\n💰 Thu về gấp đôi: +${activeBidAmount * 2} Vàng!\n🪙 Tổng tài sản hiện tại: ${gold[activeBidder]} Vàng!`);
       } else {
-        rev.style.display = 'block';
+        // Wrong: Lose the bet
+        gold[activeBidder] = Math.max(0, gold[activeBidder] - activeBidAmount);
+        updateGoldUI();
+        playSound('wrong');
+
+        // Check runner up
+        if (runnerUpBidder && runnerUpBidAmount > 0) {
+          const secondBanner = document.getElementById('secondChanceBanner');
+          secondBanner.style.display = 'block';
+          secondBanner.innerHTML = `⚡ <b>CƠ HỘI CHUYỂN GIAO:</b> ${getTeamName(activeBidder)} trả lời sai và mất ${activeBidAmount} Vàng!<br>👉 Quyền trả lời lập tức chuyển sang <b>${getTeamName(runnerUpBidder)}</b> (ra giá cao thứ nhì với mức cược <b>${runnerUpBidAmount} Vàng</b>)!`;
+
+          // Switch active bidder to runner-up
+          activeBidder = runnerUpBidder;
+          activeBidAmount = runnerUpBidAmount;
+          runnerUpBidder = null; // No third chance
+
+          // Update Judgement controls for runner up
+          document.getElementById('judgementTitle').textContent = `QUẢN TRÒ CHẤM CÂU TRẢ LỜI CỦA ${getTeamName(activeBidder)}:`;
+          document.getElementById('judgeCorrectText').textContent = `ĐÚNG (Thu về gấp đôi: +${activeBidAmount * 2} Vàng)`;
+          document.getElementById('judgeWrongText').textContent = `SAI (Mất trắng: -${activeBidAmount} Vàng)`;
+
+          // Give runner up 15 seconds
+          startTimer(15);
+        } else {
+          // No runner-up or runner-up also failed
+          document.getElementById('judgementControls').style.display = 'none';
+          document.getElementById('auctionExpBox').style.display = 'block';
+          document.getElementById('btnNextLot').style.display = 'inline-flex';
+          alert(`❌ Rất tiếc, câu trả lời chưa đúng!\n${getTeamName(activeBidder)} đã mất trắng số tiền cược. Không còn đội nào giành quyền, cùng xem đáp án chi tiết nhé!`);
+        }
+      }
+    }
+
+    function toggleAuctionAnswer() {
+      const expBox = document.getElementById('auctionExpBox');
+      if (expBox.style.display === 'block') {
+        expBox.style.display = 'none';
+      } else {
+        expBox.style.display = 'block';
         playSound('ping');
       }
     }
 
-    function nextGameQuestion() {
-      currentGameIndex++;
-      loadGameQuestion();
-      resetBuzzer();
+    function playAuctionAudio() {
+      const lot = auctionLotsPool[currentLotIndex % auctionLotsPool.length];
+      if (lot.audioText) {
+        speakSentence(lot.audioText);
+      }
+    }
+
+    function nextAuctionLot() {
+      currentLotIndex++;
+      loadAuctionLot();
       playSound('ping');
     }
 
-    function hitBuzzer() {
-      if (buzzerLocked) return;
-      buzzerLocked = true;
-      playSound('buzzer');
-
-      let teams = [];
-      if (currentTeamMode === 2) {
-        teams = ["🦖 ĐỘI KHỦNG LONG ĐỎ", "🚀 ĐỘI TÊN LỬA XANH"];
+    function showRichLeaderboard() {
+      let ranks = [];
+      if (auctionMode === 2) {
+        ranks = [
+          { name: getTeamName('A'), gold: gold.A },
+          { name: getTeamName('B'), gold: gold.B }
+        ];
       } else {
-        teams = ["🐯 ĐỘI HỔ VÀNG", "🦅 ĐỘI ĐẠI BÀNG", "🐬 ĐỘI CÁ HEO VÀNG"];
+        ranks = [
+          { name: getTeamName('A'), gold: gold.A },
+          { name: getTeamName('B'), gold: gold.B },
+          { name: getTeamName('C'), gold: gold.C }
+        ];
       }
 
-      const luckyTeam = teams[Math.floor(Math.random() * teams.length)];
-      const buzzerText = document.getElementById('buzzerText');
-      buzzerText.textContent = `🔔 TING TING! ${luckyTeam} ĐÃ BẤM CHUÔNG NHANH NHẤT!`;
-      buzzerText.style.color = "#dc2626";
-    }
+      ranks.sort((a, b) => b.gold - a.gold);
 
-    function resetBuzzer() {
-      buzzerLocked = false;
-      const buzzerText = document.getElementById('buzzerText');
-      buzzerText.textContent = "Chuông sẵn sàng! Bấm chuông để giành quyền trả lời!";
-      buzzerText.style.color = "#16a34a";
-      playSound('ping');
-    }
-
-    function celebrateWinner() {
-      let winner = "";
-      if (currentTeamMode === 2) {
-        if (scores.A > scores.B) winner = "🦖 ĐỘI KHỦNG LONG ĐỎ CHIẾN THẮNG!";
-        else if (scores.B > scores.A) winner = "🚀 ĐỘI TÊN LỬA XANH CHIẾN THẮNG!";
-        else winner = "HÒA NHAU! CẢ 2 ĐỘI ĐỀU XUẤT SẮC!";
-      } else {
-        const max = Math.max(scores.A, scores.B, scores.C);
-        let winners = [];
-        if (scores.A === max) winners.push("🐯 Đội Hổ");
-        if (scores.B === max) winners.push("🦅 Đội Đại Bàng");
-        if (scores.C === max) winners.push("🐬 Đội Cá Heo");
-        winner = `${winners.join(" & ")} ĐẠT ĐIỂM CAO NHẤT VỚI ${max} ĐIỂM!`;
-      }
+      let msg = "👑 BẢNG XẾP HẠNG ĐẠI GIA VÀNG LỚP 4 🪙\n\n";
+      const medals = ["🥇 Quán Quân:", "🥈 Á Quân:", "🥉 Hạng Ba:"];
+      ranks.forEach((r, idx) => {
+        msg += `${medals[idx]} ${r.name} ➔ ${r.gold} Vàng\n`;
+      });
 
       triggerConfetti();
-      alert(`🏆 TỔNG KẾT TRẬN ĐẤU ĐỒNG ĐỘI:\n\n👑 ${winner}\n\nCả lớp hãy cùng vỗ tay khen ngợi các đội nào! 👏👏👏`);
+      alert(msg);
     }
 
-    loadGameQuestion();
+    loadAuctionLot();
 
   </script>
 </body>

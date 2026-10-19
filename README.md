@@ -22,4 +22,4 @@
 
 ## 📁 Danh mục các file HTML hiện có:
 1. `index.html`: Bảng mục lục danh sách các file HTML.
-2. `quakhulop4.html`: Bí kíp Quá khứ đơn & Quá khứ tiếp diễn lớp 4 (Lý thuyết Pizza & Tia Chớp, 12 câu quiz trắc nghiệm nhanh, Game thi đấu 2-3 đội và bảng tra cứu động từ).
+2. `quakhulop4.html`: Bí kíp Quá khứ đơn & Quá khứ tiếp diễn lớp 4 (Lý thuyết Pizza & Tia Chớp, 12 câu quiz trắc nghiệm nhanh, Game Đấu Giá Câu Hỏi 2-3 đội và bảng tra cứu động từ).
