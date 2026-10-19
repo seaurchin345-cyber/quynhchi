@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bí Kíp Câu Bị Động: Hiện Tại Đơn & Quá Khứ Đơn (Passive Voice)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Nunito', 'Quicksand', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(#cbd5e1 1.2px, transparent 1.2px),
+        radial-gradient(#e2e8f0 1.2px, #f8fafc 1.2px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+    .arrow-flow {
+      position: relative;
+    }
+    .arrow-flow::after {
+      content: '➔';
+      font-weight: 900;
+      color: #6366f1;
+      margin: 0 6px;
+    }
+    .arrow-flow:last-child::after {
+      content: '';
+      margin: 0;
+    }
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+    .animate-pulse-soft {
+      animation: pulseSoft 2.5s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen pb-16 antialiased">
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Container -->
+  <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6 sm:py-6">
+
+    <!-- Top Sticky Header -->
+    <header class="sticky top-3 z-50 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm px-5 py-3 mb-6 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-tr from-indigo-500 to-purple-500 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-indigo-200">
+          🔄
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-800 leading-tight">Chuyên Đề Câu Bị Động (Passive Voice)</h1>
+          <p class="text-xs font-bold text-indigo-600">Hiện Tại Đơn & Quá Khứ Đơn · Sư Phạm ESL Chuẩn Trực Quan</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="bg-amber-50 border border-amber-200 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-extrabold text-amber-800 flex items-center gap-1.5 shadow-sm">
+          <span>⭐</span> <span id="xpDisplay">0 Điểm EXP</span>
+        </div>
+        <button id="soundToggleBtn" onclick="toggleSound()" class="bg-slate-100 hover:bg-slate-200 border border-slate-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-700 flex items-center gap-1.5 transition">
+          <span id="soundIcon">🔊</span> Âm thanh: BẬT
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="flex gap-2 bg-white border border-slate-200 p-2 rounded-2xl shadow-sm mb-6 overflow-x-auto scrollbar-none">
+      <button onclick="switchTab('tab-theory')" id="nav-theory" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-extrabold transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-md shadow-indigo-200">
+        📚 1. Lý Thuyết & Sơ Đồ
+      </button>
+      <button onclick="switchTab('tab-practice')" id="nav-practice" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-extrabold transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        ✍️ 2. Luyện Tập 3 Dạng
+      </button>
+      <button onclick="switchTab('tab-rush')" id="nav-rush" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-extrabold transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        ⚡ 3. Thử Thách 60s
+      </button>
+      <button onclick="switchTab('tab-auction')" id="nav-auction" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-extrabold transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        🔨 4. Game Đấu Giá Đội
+      </button>
+      <button onclick="switchTab('tab-verbs')" id="nav-verbs" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-extrabold transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        📖 5. Tra Cứu V1-V2-V3
+      </button>
+    </nav>
+
+    <!-- TAB 1: THEORY HUB -->
+    <section id="tab-theory" class="tab-content block space-y-6">
+
+      <!-- Hero Banner -->
+      <div class="bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-700 text-white p-6 sm:p-8 rounded-3xl shadow-lg relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl">
+          <span class="bg-white/20 text-white text-xs font-black uppercase px-3 py-1 rounded-full tracking-wider">Khái Niệm Cốt Lõi</span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2 mb-3">Câu Bị Động Là Gì? Khi Nào Cần Dùng? 💡</h2>
+          <p class="text-indigo-100 text-sm sm:text-base font-medium leading-relaxed">
+            Câu bị động dùng khi ta muốn <b>nhấn mạnh vào đối tượng chịu tác động của hành động</b>, hoặc khi người thực hiện hành động là hiển nhiên, không quan trọng, hay chưa biết rõ ai làm.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold">
+            <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg">👉 Chủ động: Nam quét phòng.</span>
+            <span class="bg-emerald-400/30 text-emerald-100 border border-emerald-300/40 px-3 py-1.5 rounded-lg">👉 Bị động: Căn phòng được quét bởi Nam.</span>
+          </div>
+        </div>
+        <div class="absolute right-4 bottom-2 text-8xl opacity-15 pointer-events-none select-none">
+          🔄✨
+        </div>
+      </div>
+
+      <!-- Side-by-side Formula Comparison -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <!-- Present Simple Passive -->
+        <div class="bg-white border-2 border-emerald-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full uppercase">Thì Hiện Tại Đơn</span>
+            <span class="text-emerald-500 font-extrabold text-sm">Present Simple Passive</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Được / Bị làm (Thói quen, sự thật)</h3>
+          
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 my-3 text-center">
+            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-1">CÔNG THỨC CHUẨN</span>
+            <div class="text-lg sm:text-xl font-black text-emerald-950 font-mono tracking-tight">
+              S + <span class="text-emerald-700 bg-white px-2 py-0.5 rounded-lg border border-emerald-300">am / is / are</span> + <span class="text-purple-700 bg-white px-2 py-0.5 rounded-lg border border-purple-300">V3 / V-ed</span> (+ by O)
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm font-semibold text-slate-700">
+            <div class="flex items-start gap-2">
+              <span class="text-emerald-600 font-black">●</span>
+              <span><b>am:</b> đi với chủ ngữ <b>I</b></span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-emerald-600 font-black">●</span>
+              <span><b>is:</b> đi với <b>He, She, It, Danh từ số ít</b></span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-emerald-600 font-black">●</span>
+              <span><b>are:</b> đi với <b>You, We, They, Danh từ số nhiều</b></span>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs sm:text-sm">
+            <div class="font-bold text-slate-800">Ví dụ:</div>
+            <div class="text-slate-600 mt-1 italic">Active: She cleans the floor every morning.</div>
+            <div class="text-emerald-700 font-extrabold mt-0.5">➔ Passive: The floor <b>is cleaned</b> (by her) every morning.</div>
+          </div>
+        </div>
+
+        <!-- Past Simple Passive -->
+        <div class="bg-white border-2 border-sky-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-sky-100 text-sky-800 text-xs font-black px-3 py-1 rounded-full uppercase">Thì Quá Khứ Đơn</span>
+            <span class="text-sky-500 font-extrabold text-sm">Past Simple Passive</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Đã được / Đã bị làm (Trong quá khứ)</h3>
+          
+          <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 my-3 text-center">
+            <span class="text-xs font-bold text-sky-700 uppercase tracking-wider block mb-1">CÔNG THỨC CHUẨN</span>
+            <div class="text-lg sm:text-xl font-black text-sky-950 font-mono tracking-tight">
+              S + <span class="text-sky-700 bg-white px-2 py-0.5 rounded-lg border border-sky-300">was / were</span> + <span class="text-purple-700 bg-white px-2 py-0.5 rounded-lg border border-purple-300">V3 / V-ed</span> (+ by O)
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm font-semibold text-slate-700">
+            <div class="flex items-start gap-2">
+              <span class="text-sky-600 font-black">●</span>
+              <span><b>was:</b> đi với <b>I, He, She, It, Danh từ số ít</b> (3 chữ)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-sky-600 font-black">●</span>
+              <span><b>were:</b> đi với <b>You, We, They, Danh từ số nhiều</b> (4 chữ)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-sky-600 font-black">●</span>
+              <span>Dấu hiệu: <i>yesterday, last week, 2 years ago, in 1995...</i></span>
+            </div>
+          </div>
+
+          <div class="mt-4 bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs sm:text-sm">
+            <div class="font-bold text-slate-800">Ví dụ:</div>
+            <div class="text-slate-600 mt-1 italic">Active: Leonardo da Vinci painted the Mona Lisa.</div>
+            <div class="text-sky-700 font-extrabold mt-0.5">➔ Passive: The Mona Lisa <b>was painted</b> by Leonardo da Vinci.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4-Step Interactive Transformation Diagram -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-indigo-100 text-indigo-700 rounded-xl flex items-center justify-center font-black text-lg">
+            🔄
+          </div>
+          <div>
+            <h3 class="text-xl font-black text-slate-800">Sơ Đồ Động 4 Bước Chuyển Đổi Sang Bị Động</h3>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">Bấm nút để xem đường đi chuyển chéo vị trí của các thành phần trong câu!</p>
+          </div>
+        </div>
+
+        <!-- Visual Step Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div class="bg-amber-50/70 border border-amber-200 p-4 rounded-2xl">
+            <div class="w-7 h-7 bg-amber-500 text-white rounded-full flex items-center justify-center font-black text-xs mb-2">1</div>
+            <div class="font-black text-sm text-amber-900">B1: Tân ngữ (O) lên đầu</div>
+            <p class="text-xs text-amber-800 font-semibold mt-1">Lấy tân ngữ sau động từ chủ động đưa lên làm chủ ngữ mới.</p>
+          </div>
+
+          <div class="bg-emerald-50/70 border border-emerald-200 p-4 rounded-2xl">
+            <div class="w-7 h-7 bg-emerald-500 text-white rounded-full flex items-center justify-center font-black text-xs mb-2">2</div>
+            <div class="font-black text-sm text-emerald-900">B2: Thêm động từ TO BE</div>
+            <p class="text-xs text-emerald-800 font-semibold mt-1">Hiện tại: <b>am/is/are</b><br>Quá khứ: <b>was/were</b> (theo chủ ngữ mới!).</p>
+          </div>
+
+          <div class="bg-purple-50/70 border border-purple-200 p-4 rounded-2xl">
+            <div class="w-7 h-7 bg-purple-500 text-white rounded-full flex items-center justify-center font-black text-xs mb-2">3</div>
+            <div class="font-black text-sm text-purple-900">B3: Đổi động từ sang V3/ed</div>
+            <p class="text-xs text-purple-800 font-semibold mt-1">Động từ chính luôn ở dạng quá khứ phân từ (Past Participle).</p>
+          </div>
+
+          <div class="bg-rose-50/70 border border-rose-200 p-4 rounded-2xl">
+            <div class="w-7 h-7 bg-rose-500 text-white rounded-full flex items-center justify-center font-black text-xs mb-2">4</div>
+            <div class="font-black text-sm text-rose-900">B4: Thêm "by + Chủ ngữ cũ"</div>
+            <p class="text-xs text-rose-800 font-semibold mt-1">Đưa chủ ngữ cũ về sau thành tân ngữ: by him, by Mary...</p>
+          </div>
+        </div>
+
+        <!-- Interactive Animated Comparison Box -->
+        <div class="bg-slate-900 text-white rounded-2xl p-6 text-center space-y-4">
+          <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">MINH HỌA ĐỔI VỊ TRÍ TRỰC QUAN</div>
+
+          <!-- Active Sentence -->
+          <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg font-black">
+            <span class="bg-blue-600 px-3 py-1.5 rounded-xl shadow">Mary (S)</span>
+            <span class="bg-purple-600 px-3 py-1.5 rounded-xl shadow">wrote (V-quá khứ)</span>
+            <span class="bg-amber-600 px-3 py-1.5 rounded-xl shadow">this letter (O)</span>
+            <span class="bg-slate-700 px-3 py-1.5 rounded-xl text-slate-300">yesterday.</span>
+          </div>
+
+          <!-- Transforming Arrows -->
+          <div class="text-xl sm:text-2xl text-indigo-400 font-black py-1">
+            ⬇️ CHUYỂN THÀNH BỊ ĐỘNG ⬇️
+          </div>
+
+          <!-- Passive Sentence -->
+          <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-base sm:text-lg font-black">
+            <span class="bg-amber-600 px-3 py-1.5 rounded-xl shadow">This letter (S mới)</span>
+            <span class="bg-emerald-600 px-3 py-1.5 rounded-xl shadow">was (to be)</span>
+            <span class="bg-purple-600 px-3 py-1.5 rounded-xl shadow">written (V3)</span>
+            <span class="bg-blue-600 px-3 py-1.5 rounded-xl shadow">by Mary</span>
+            <span class="bg-slate-700 px-3 py-1.5 rounded-xl text-slate-300">yesterday.</span>
+          </div>
+
+          <!-- Voice Pronunciation Button -->
+          <div class="pt-2">
+            <button onclick="speakText('This letter was written by Mary yesterday.')" class="inline-flex items-center gap-2 bg-indigo-500 hover:bg-indigo-400 text-white font-extrabold text-xs sm:text-sm px-4 py-2 rounded-xl transition shadow">
+              <span>📢 Bấm nghe phát âm câu Bị động chuẩn</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Special Notes Box -->
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs sm:text-sm">
+          <div class="bg-yellow-50 border border-yellow-200 rounded-2xl p-4">
+            <div class="font-black text-amber-900 mb-1 flex items-center gap-1.5">
+              <span>💡</span> Quy tắc lược bỏ "by + O"
+            </div>
+            <p class="text-amber-800 font-medium">
+              Có thể bỏ <b>by someone, by people, by them, by us, by him, by her</b> nếu đối tượng không quan trọng hoặc ai cũng biết.
+              <br><span class="italic text-amber-900 font-bold">Ví dụ: English is spoken (by people) all over the world.</span>
+            </p>
+          </div>
+
+          <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4">
+            <div class="font-black text-indigo-900 mb-1 flex items-center gap-1.5">
+              <span>📍</span> Thứ tự Nơi chốn & Thời gian (Place - By - Time)
+            </div>
+            <p class="text-indigo-800 font-medium">
+              Ghi nhớ quy tắc thần chú: <b>Nơi chốn + by O + Thời gian</b>.
+              <br><span class="italic text-indigo-900 font-bold">Ví dụ: The cake was made <u>in the kitchen</u> <u>by Lan</u> <u>yesterday</u>.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 2: INTERACTIVE PRACTICE -->
+    <section id="tab-practice" class="tab-content hidden space-y-6">
+
+      <!-- Exercise Mode Selector Sub-bar -->
+      <div class="flex gap-2 bg-slate-100 p-1.5 rounded-2xl max-w-lg mx-auto overflow-x-auto">
+        <button onclick="switchPractice('p-scramble')" id="btn-p-scramble" class="sub-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-black transition bg-white text-indigo-600 shadow-sm">
+          🧩 1. Xếp Từ
+        </button>
+        <button onclick="switchPractice('p-quiz')" id="btn-p-quiz" class="sub-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-black transition text-slate-600 hover:text-slate-900">
+          🎯 2. Trắc Nghiệm
+        </button>
+        <button onclick="switchPractice('p-rewrite')" id="btn-p-rewrite" class="sub-btn flex-1 py-2 px-3 rounded-xl text-xs sm:text-sm font-black transition text-slate-600 hover:text-slate-900">
+          ✍️ 3. Viết Lại Câu
+        </button>
+      </div>
+
+      <!-- SUB-PRACTICE 1: WORD SCRAMBLE -->
+      <div id="practice-scramble" class="practice-panel block">
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+          <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+            <div>
+              <h3 class="text-xl font-black text-slate-800">Dạng 1: Ghép Các Mảnh Từ Thành Câu Bị Động Hoàn Chỉnh</h3>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500">Nhấp chọn các từ vào ô trả lời. Nhấp lại vào từ trên ô trả lời để gỡ ra.</p>
+            </div>
+            <div class="bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full text-xs font-black" id="scrambleProgress">Câu 1/6</div>
+          </div>
+
+          <div id="scrambleCardContainer" class="space-y-6">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PRACTICE 2: MULTIPLE CHOICE QUIZ -->
+      <div id="practice-quiz" class="practice-panel hidden">
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+          <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+            <div>
+              <h3 class="text-xl font-black text-slate-800">Dạng 2: Trắc Nghiệm Dạng Đúng Của "To Be" & "V3/ed"</h3>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500">Chọn 1 phương án chính xác nhất để hoàn thành câu bị động.</p>
+            </div>
+            <button onclick="resetPracticeQuiz()" class="text-xs font-extrabold text-indigo-600 hover:text-indigo-800 bg-indigo-50 px-3 py-1.5 rounded-lg">
+              🔄 Làm lại trắc nghiệm
+            </button>
+          </div>
+
+          <div id="practiceQuizGrid" class="space-y-4">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-PRACTICE 3: SENTENCE REWRITE -->
+      <div id="practice-rewrite" class="practice-panel hidden">
+        <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+          <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+            <div>
+              <h3 class="text-xl font-black text-slate-800">Dạng 3: Chuyển Đổi Câu Trực Tiếp (Active ➔ Passive)</h3>
+              <p class="text-xs sm:text-sm font-semibold text-slate-500">Nhập câu bị động tương ứng. Hệ thống tự động phân tích lỗi sai và chấp nhận rút gọn "by + O".</p>
+            </div>
+          </div>
+
+          <div id="rewriteContainer" class="space-y-5">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- TAB 3: PASSIVE RUSH CHALLENGE (60 SECONDS) -->
+    <section id="tab-rush" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm text-center">
+        
+        <!-- Game Intro Screen -->
+        <div id="rushIntroScreen" class="py-6 max-w-lg mx-auto space-y-4">
+          <div class="w-20 h-20 bg-gradient-to-tr from-amber-400 to-orange-500 text-white rounded-3xl mx-auto flex items-center justify-center text-4xl shadow-lg shadow-orange-200 animate-pulse-soft">
+            ⚡
+          </div>
+          <h3 class="text-2xl sm:text-3xl font-black text-slate-800">Thử Thách 60 Giây: Passive Rush</h3>
+          <p class="text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed">
+            Bạn có 60 giây để chọn thật nhanh dạng đúng của TO BE (am/is/are/was/were) hoặc nhận diện thì của câu. Chuỗi trả lời đúng càng dài thì điểm nhân đôi càng cao!
+          </p>
+          <div class="pt-2">
+            <button onclick="startRushGame()" class="bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-black text-base px-8 py-3.5 rounded-2xl shadow-lg shadow-orange-200 transition transform hover:-translate-y-0.5 active:translate-y-0">
+              🚀 BẮT ĐẦU 60 GIÂY VƯỢT THỬ THÁCH
+            </button>
+          </div>
+        </div>
+
+        <!-- Active Game Screen -->
+        <div id="rushPlayScreen" class="hidden space-y-6 py-2 max-w-xl mx-auto">
+          <!-- Top Stats Bar -->
+          <div class="flex justify-between items-center bg-slate-50 border border-slate-200 rounded-2xl p-3 px-5 text-sm font-black">
+            <div class="text-rose-600 flex items-center gap-1.5">
+              <span>⏱️</span> <span id="rushTimer">60s</span>
+            </div>
+            <div class="text-amber-600 flex items-center gap-1.5">
+              <span>🔥 Chuỗi:</span> <span id="rushStreak">0</span>
+            </div>
+            <div class="text-indigo-600 flex items-center gap-1.5">
+              <span>⭐ Điểm:</span> <span id="rushScore">0</span>
+            </div>
+          </div>
+
+          <!-- Rush Question Box -->
+          <div class="bg-gradient-to-br from-indigo-50 to-purple-50 border-2 border-indigo-200 rounded-3xl p-6 sm:p-8 space-y-3">
+            <div class="text-xs font-black uppercase tracking-wider text-indigo-600" id="rushQCategory">Chọn To Be Phù Hợp</div>
+            <div class="text-xl sm:text-2xl font-black text-slate-800" id="rushQText">The window ______ broken by the storm yesterday.</div>
+            <div class="text-xs font-semibold text-slate-500" id="rushQHint">Dấu hiệu: yesterday + the window (số ít)</div>
+          </div>
+
+          <!-- Rush Options Grid -->
+          <div class="grid grid-cols-2 gap-3 sm:gap-4" id="rushOptionsGrid">
+            <!-- Buttons populated by JS -->
+          </div>
+        </div>
+
+        <!-- End Game Screen -->
+        <div id="rushEndScreen" class="hidden py-6 max-w-md mx-auto space-y-4">
+          <div class="text-5xl">🏆</div>
+          <h3 class="text-2xl font-black text-slate-800">HẾT GIỜ! HOÀN THÀNH XUẤT SẮC!</h3>
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 space-y-2">
+            <div class="text-xs font-bold text-amber-800 uppercase">TỔNG KẾT ĐIỂM SỐ</div>
+            <div class="text-4xl font-black text-amber-900" id="rushFinalScore">0</div>
+            <div class="text-xs font-extrabold text-amber-700" id="rushRankBadge">Danh hiệu: Tập Sự Bị Động</div>
+          </div>
+          <button onclick="startRushGame()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold text-sm px-6 py-3 rounded-xl transition shadow">
+            🔄 Chơi lại lần nữa
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 4: TEAM AUCTION QUIZ (ĐẤU GIÁ CÂU HỎI) -->
+    <section id="tab-auction" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        
+        <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2">
+              <span>🔨</span> Game Đấu Giá Câu Hỏi Bị Động (Auction Quiz) 💰
+            </h3>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">Mỗi đội có 100 Vàng ban đầu. Đấu giá quyền trả lời: Đúng nhân đôi cược, Sai mất trắng sang đội nhì!</p>
+          </div>
+          <button onclick="resetAuctionGame()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition">
+            🔄 Phát lại 100 Vàng
+          </button>
+        </div>
+
+        <!-- 2 or 3 Teams Switcher -->
+        <div class="flex justify-center gap-2 mb-6">
+          <button onclick="setAuctionTeams(2)" id="btnTeamMode2" class="px-4 py-2 rounded-full text-xs font-black bg-indigo-600 text-white shadow-sm">
+            🦖 Đấu 2 Đội (Đỏ vs Xanh)
+          </button>
+          <button onclick="setAuctionTeams(3)" id="btnTeamMode3" class="px-4 py-2 rounded-full text-xs font-black bg-slate-100 text-slate-600 hover:bg-slate-200">
+            🐯 Đấu 3 Đội (Hổ vs Đại Bàng vs Cá Heo)
+          </button>
+        </div>
+
+        <!-- Scoreboard Deck -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6" id="auctionTeamsContainer">
+          <!-- Team A -->
+          <div class="border-2 border-rose-300 bg-rose-50/50 rounded-2xl p-4 text-center space-y-2">
+            <div class="font-black text-rose-800 text-base" id="teamNameA">🦖 Đội Đỏ (Red Dino)</div>
+            <div class="text-2xl font-black text-slate-900 bg-white border border-rose-200 py-1.5 rounded-xl">
+              🪙 <span id="goldA">100</span> Vàng
+            </div>
+            <div class="text-xs font-extrabold text-rose-700">Đang cược: <span id="bidA">0</span> Vàng</div>
+            <div class="flex justify-center gap-1 pt-1 flex-wrap">
+              <button onclick="addBid('A', 5)" class="bg-white hover:bg-rose-100 border border-rose-200 text-rose-800 px-2 py-1 rounded text-xs font-black">+5</button>
+              <button onclick="addBid('A', 10)" class="bg-white hover:bg-rose-100 border border-rose-200 text-rose-800 px-2 py-1 rounded text-xs font-black">+10</button>
+              <button onclick="addBid('A', 20)" class="bg-white hover:bg-rose-100 border border-rose-200 text-rose-800 px-2 py-1 rounded text-xs font-black">+20</button>
+              <button onclick="allInBid('A')" class="bg-rose-600 text-white px-2 py-1 rounded text-xs font-black">All-in</button>
+              <button onclick="clearBid('A')" class="bg-slate-200 text-slate-700 px-2 py-1 rounded text-xs font-black">Xóa</button>
+            </div>
+          </div>
+
+          <!-- Team B -->
+          <div class="border-2 border-sky-300 bg-sky-50/50 rounded-2xl p-4 text-center space-y-2">
+            <div class="font-black text-sky-800 text-base" id="teamNameB">🚀 Đội Xanh (Blue Rocket)</div>
+            <div class="text-2xl font-black text-slate-900 bg-white border border-sky-200 py-1.5 rounded-xl">
+              🪙 <span id="goldB">100</span> Vàng
+            </div>
+            <div class="text-xs font-extrabold text-sky-700">Đang cược: <span id="bidB">0</span> Vàng</div>
+            <div class="flex justify-center gap-1 pt-1 flex-wrap">
+              <button onclick="addBid('B', 5)" class="bg-white hover:bg-sky-100 border border-sky-200 text-sky-800 px-2 py-1 rounded text-xs font-black">+5</button>
+              <button onclick="addBid('B', 10)" class="bg-white hover:bg-sky-100 border border-sky-200 text-sky-800 px-2 py-1 rounded text-xs font-black">+10</button>
+              <button onclick="addBid('B', 20)" class="bg-white hover:bg-sky-100 border border-sky-200 text-sky-800 px-2 py-1 rounded text-xs font-black">+20</button>
+              <button onclick="allInBid('B')" class="bg-sky-600 text-white px-2 py-1 rounded text-xs font-black">All-in</button>
+              <button onclick="clearBid('B')" class="bg-slate-200 text-slate-700 px-2 py-1 rounded text-xs font-black">Xóa</button>
+            </div>
+          </div>
+
+          <!-- Team C (Optional) -->
+          <div id="teamCardC" class="border-2 border-amber-300 bg-amber-50/50 rounded-2xl p-4 text-center space-y-2 hidden">
+            <div class="font-black text-amber-800 text-base" id="teamNameC">🐯 Đội Vàng (Gold Tiger)</div>
+            <div class="text-2xl font-black text-slate-900 bg-white border border-amber-200 py-1.5 rounded-xl">
+              🪙 <span id="goldC">100</span> Vàng
+            </div>
+            <div class="text-xs font-extrabold text-amber-700">Đang cược: <span id="bidC">0</span> Vàng</div>
+            <div class="flex justify-center gap-1 pt-1 flex-wrap">
+              <button onclick="addBid('C', 5)" class="bg-white hover:bg-amber-100 border border-amber-200 text-amber-800 px-2 py-1 rounded text-xs font-black">+5</button>
+              <button onclick="addBid('C', 10)" class="bg-white hover:bg-amber-100 border border-amber-200 text-amber-800 px-2 py-1 rounded text-xs font-black">+10</button>
+              <button onclick="addBid('C', 20)" class="bg-white hover:bg-amber-100 border border-amber-200 text-amber-800 px-2 py-1 rounded text-xs font-black">+20</button>
+              <button onclick="allInBid('C')" class="bg-amber-600 text-white px-2 py-1 rounded text-xs font-black">All-in</button>
+              <button onclick="clearBid('C')" class="bg-slate-200 text-slate-700 px-2 py-1 rounded text-xs font-black">Xóa</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auction Stage Area -->
+        <div class="bg-gradient-to-b from-amber-50/80 to-white border-2 border-amber-300 rounded-3xl p-6 sm:p-8 space-y-5 text-center shadow-sm">
+          
+          <div class="flex justify-between items-center text-xs font-black flex-wrap gap-2">
+            <span class="bg-amber-200 text-amber-900 px-3 py-1 rounded-full" id="auctionLotTag">Gói Đấu Giá #1</span>
+            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full" id="auctionDiffTag">⭐ Độ Khó: Dễ (Giá khởi điểm 10 Vàng)</span>
+          </div>
+
+          <!-- Secret Sealed Envelope (Shown during bidding) -->
+          <div id="auctionSealedBox" class="bg-white border-2 border-dashed border-amber-300 rounded-2xl p-6 space-y-2">
+            <div class="text-4xl">🔒📦</div>
+            <div class="text-xs font-black text-amber-700 uppercase">CHỦ ĐỀ ĐẤU GIÁ (CHƯA MỞ CÂU HỎI)</div>
+            <div class="text-xl font-black text-slate-800" id="auctionTopicTitle">Chuyển Đổi Câu Bị Động Quá Khứ Đơn</div>
+            <p class="text-xs text-slate-500 font-semibold" id="auctionTopicHint">Các đội hãy bàn bạc và cược số vàng, sau đó Quản trò bấm "GÕ BÚA CHỐT GIÁ"!</p>
+          </div>
+
+          <!-- Question Revealed Box (Shown after Hammer) -->
+          <div id="auctionRevealedBox" class="hidden bg-white border-2 border-emerald-300 rounded-2xl p-6 space-y-3 text-left">
+            <div class="flex justify-between items-center text-xs font-black">
+              <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full" id="auctionWinnerPill">👑 Đội thắng quyền: Đang xác định...</span>
+              <span class="bg-rose-100 text-rose-700 px-3 py-1 rounded-full" id="auctionTimerPill">⏱️ 20s</span>
+            </div>
+            <div class="text-lg sm:text-xl font-black text-slate-800" id="auctionQText">Nội dung câu hỏi...</div>
+            <div class="text-xs text-slate-500 font-semibold" id="auctionQHint">Gợi ý...</div>
+          </div>
+
+          <!-- Second Chance Banner -->
+          <div id="auctionSecondChanceBanner" class="hidden bg-rose-50 border border-rose-300 rounded-xl p-3 text-xs font-extrabold text-rose-800 text-left">
+            ⚡ <b>CƠ HỘI CHUYỂN GIAO:</b> Đội thắng trả lời sai! Quyền trả lời chuyển sang Đội ra giá nhì!
+          </div>
+
+          <!-- Big Gavel Button -->
+          <div id="auctionGavelRow" class="pt-2">
+            <button onclick="strikeAuctionGavel()" class="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-base sm:text-lg px-8 py-3.5 rounded-2xl shadow-lg shadow-orange-200 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center gap-2 mx-auto">
+              <span>🔨</span> GÕ BÚA CHỐT ĐẤU GIÁ!
+            </button>
+          </div>
+
+          <!-- Judgement Row -->
+          <div id="auctionJudgementRow" class="hidden pt-2 flex flex-wrap justify-center gap-3">
+            <button onclick="judgeAuction(true)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm px-6 py-3 rounded-xl shadow-md shadow-emerald-200 transition">
+              ✅ ĐÚNG (Thu về gấp đôi cược)
+            </button>
+            <button onclick="judgeAuction(false)" class="bg-rose-600 hover:bg-rose-700 text-white font-black text-sm px-6 py-3 rounded-xl shadow-md shadow-rose-200 transition">
+              ❌ SAI (Mất cược & Nhường đội nhì)
+            </button>
+          </div>
+
+          <!-- Answer & Explanation -->
+          <div id="auctionAnswerBox" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-left space-y-1 text-xs sm:text-sm">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Action Control Row -->
+          <div class="flex justify-between items-center pt-2 flex-wrap gap-2 text-xs font-bold">
+            <button onclick="toggleAuctionAnswer()" class="text-slate-600 hover:text-slate-900 bg-slate-100 px-3 py-1.5 rounded-lg">
+              👀 Xem/Ẩn Đáp Án Chi Tiết
+            </button>
+            <button onclick="nextAuctionLot()" id="btnNextLot" class="hidden bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-xl font-black">
+              ➡️ Gói Đấu Giá Tiếp Theo
+            </button>
+            <button onclick="showRichLeaderboard()" class="text-amber-800 bg-amber-100 hover:bg-amber-200 px-3 py-1.5 rounded-lg">
+              👑 Bảng Xếp Hạng Vàng
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 5: IRREGULAR VERBS TABLE (V1 - V2 - V3) -->
+    <section id="tab-verbs" class="tab-content hidden space-y-6">
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        
+        <div class="flex justify-between items-center mb-6 flex-wrap gap-3">
+          <div>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-2">
+              <span>📖</span> Bảng Tra Cứu Động Từ Bất Quy Tắc (V1 - V2 - V3)
+            </h3>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">25 động từ xuất hiện nhiều nhất trong đề thi và bài học câu bị động.</p>
+          </div>
+          <!-- Search Input -->
+          <div class="w-full sm:w-64">
+            <input type="text" id="verbSearchInput" oninput="filterVerbsTable()" placeholder="🔍 Gõ từ muốn tìm..." class="w-full bg-slate-50 border border-slate-200 px-3.5 py-2 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-indigo-400">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-slate-50 text-slate-700 font-black border-b border-slate-200 uppercase tracking-wider text-[11px]">
+              <tr>
+                <th class="py-3 px-4">STT</th>
+                <th class="py-3 px-4">Nguyên Mẫu (V1)</th>
+                <th class="py-3 px-4">Quá Khứ (V2)</th>
+                <th class="py-3 px-4 text-purple-700">Phân Từ 2 (V3 - Bị Động)</th>
+                <th class="py-3 px-4">Nghĩa Tiếng Việt</th>
+                <th class="py-3 px-4 text-center">Phát Âm</th>
+              </tr>
+            </thead>
+            <tbody id="verbsTableBody" class="divide-y divide-slate-100 font-semibold text-slate-700">
+              <!-- Rendered by JS -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-12 text-center text-xs font-bold text-slate-400">
+      Quỳnh Chi Hub · Chuyên Đề Câu Bị Động Tiếng Anh · Học Vui Nhớ Lâu 🚀
+    </footer>
+
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. WEB AUDIO SYNTHESIZER & SOUND SYSTEM
+       ========================================================================== */
+    let soundEnabled = true;
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const soundBtn = document.getElementById('soundToggleBtn');
+      const soundIcon = document.getElementById('soundIcon');
+      soundIcon.textContent = soundEnabled ? '🔊' : '🔇';
+      soundBtn.innerHTML = `${soundIcon.outerHTML} Âm thanh: ${soundEnabled ? 'BẬT' : 'TẮT'}`;
+      if (soundEnabled) playSound('ping');
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+
+      if (type === 'ping') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+        gain.gain.setValueAtTime(0.25, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'wrong') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'gavel') {
+        [0, 0.12, 0.24].forEach((delay) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now + delay);
+          osc.frequency.exponentialRampToValueAtTime(80, now + delay + 0.09);
+          gain.gain.setValueAtTime(0.4, now + delay);
+          gain.gain.linearRampToValueAtTime(0.01, now + delay + 0.09);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + delay);
+          osc.stop(now + delay + 0.09);
+        });
+      } else if (type === 'fanfare') {
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+          gain.gain.setValueAtTime(0.2, now + idx * 0.1);
+          gain.gain.linearRampToValueAtTime(0.01, now + idx * 0.1 + 0.35);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.1);
+          osc.stop(now + idx * 0.1 + 0.35);
+        });
+      }
+    }
+
+    // Web Speech API Voice Pronunciation
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.88;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    /* ==========================================================================
+       2. CANVAS CONFETTI (Self-contained)
+       ========================================================================== */
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimationId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function triggerConfetti() {
+      initAudio();
+      playSound('fanfare');
+      confettiParticles = [];
+      const colors = ['#6366f1', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#f43f5e'];
+      for (let i = 0; i < 110; i++) {
+        confettiParticles.push({
+          x: canvas.width / 2,
+          y: canvas.height * 0.45,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.9) * 16,
+          size: Math.random() * 8 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+      if (!confettiAnimationId) renderConfetti();
+    }
+
+    function renderConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+      for (let p of confettiParticles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35;
+        p.vx *= 0.98;
+        p.rotation += p.rotationSpeed;
+        p.opacity -= 0.007;
+
+        if (p.opacity > 0 && p.y < canvas.height + 50) {
+          alive = true;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        }
+      }
+      if (alive) {
+        confettiAnimationId = requestAnimationFrame(renderConfetti);
+      } else {
+        cancelAnimationFrame(confettiAnimationId);
+        confettiAnimationId = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION TABS
+       ========================================================================== */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-200');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+      });
+
+      const activeSection = document.getElementById(tabId);
+      if (activeSection) activeSection.classList.remove('hidden');
+
+      const activeNavBtn = document.getElementById(tabId.replace('tab-', 'nav-'));
+      if (activeNavBtn) {
+        activeNavBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+        activeNavBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-200');
+      }
+      playSound('ping');
+    }
+
+    function switchPractice(practiceId) {
+      document.querySelectorAll('.practice-panel').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.sub-btn').forEach(b => {
+        b.classList.remove('bg-white', 'text-indigo-600', 'shadow-sm');
+        b.classList.add('text-slate-600');
+      });
+
+      const target = document.getElementById(practiceId.replace('p-', 'practice-'));
+      if (target) target.classList.remove('hidden');
+
+      const targetBtn = document.getElementById('btn-' + practiceId);
+      if (targetBtn) {
+        targetBtn.classList.remove('text-slate-600');
+        targetBtn.classList.add('bg-white', 'text-indigo-600', 'shadow-sm');
+      }
+      playSound('ping');
+    }
+
+    let userXP = 0;
+    function addXP(amount) {
+      userXP += amount;
+      document.getElementById('xpDisplay').textContent = `${userXP} Điểm EXP`;
+    }
+
+    /* ==========================================================================
+       4. PRACTICE EXERCISES DATA & LOGIC
+       ========================================================================== */
+
+    // 4.1 Scramble Sentences
+    const scrambleQuestions = [
+      {
+        target: "The room is cleaned every day.",
+        words: ["is", "The", "every", "cleaned", "room", "day."],
+        explain: "Chủ ngữ số ít 'The room' + is + V3 'cleaned' + trạng từ thời gian 'every day'."
+      },
+      {
+        target: "This book was written by Jack.",
+        words: ["written", "was", "This", "by", "book", "Jack."],
+        explain: "Quá khứ: 'This book' + was + written + by Jack."
+      },
+      {
+        target: "Bicycles are produced in this factory.",
+        words: ["in", "are", "Bicycles", "factory.", "produced", "this"],
+        explain: "Hiện tại số nhiều: Bicycles + are + produced + nơi chốn."
+      },
+      {
+        target: "The window was broken yesterday.",
+        words: ["was", "yesterday.", "The", "broken", "window"],
+        explain: "Quá khứ: The window + was + broken + yesterday."
+      },
+      {
+        target: "These cakes are made by my mother.",
+        words: ["cakes", "These", "my", "made", "are", "by", "mother."],
+        explain: "Hiện tại số nhiều: These cakes + are + made + by my mother."
+      },
+      {
+        target: "The new bridge was built in 2020.",
+        words: ["built", "The", "in", "bridge", "was", "new", "2020."],
+        explain: "Quá khứ: The new bridge + was + built + in 2020."
+      }
+    ];
+
+    let currentScrambleIdx = 0;
+    let selectedScrambleWords = [];
+
+    function renderScrambleQuestion() {
+      const q = scrambleQuestions[currentScrambleIdx];
+      document.getElementById('scrambleProgress').textContent = `Câu ${currentScrambleIdx + 1}/${scrambleQuestions.length}`;
+      const container = document.getElementById('scrambleCardContainer');
+
+      selectedScrambleWords = [];
+
+      container.innerHTML = `
+        <div class="space-y-4">
+          <div class="text-xs font-bold text-slate-500 uppercase">HÃY BẤM CHỌN TỪNG TỪ ĐỂ GHÉP THÀNH CÂU BỊ ĐỘNG ĐÚNG:</div>
+          
+          <!-- Answer Slot Area -->
+          <div id="scrambleAnswerSlot" class="min-h-[58px] bg-slate-50 border-2 border-dashed border-indigo-300 rounded-2xl p-3 flex flex-wrap gap-2 items-center">
+            <span class="text-slate-400 text-xs italic font-bold" id="scrambleEmptyHint">Chưa có từ nào được chọn...</span>
+          </div>
+
+          <!-- Pool of Word Chips -->
+          <div class="flex flex-wrap gap-2 pt-1" id="scramblePool">
+            ${q.words.map((w, idx) => `
+              <button onclick="pickWord('${w}', this)" class="scramble-chip bg-white hover:bg-indigo-50 border-2 border-slate-200 hover:border-indigo-400 text-slate-800 font-extrabold text-sm sm:text-base px-3.5 py-2 rounded-xl shadow-sm transition active:scale-95">
+                ${w}
+              </button>
+            `).join('')}
+          </div>
+
+          <!-- Feedback & Buttons -->
+          <div id="scrambleFeedback" class="hidden text-sm font-extrabold p-3 rounded-xl"></div>
+
+          <div class="flex gap-3 pt-2">
+            <button onclick="checkScrambleAnswer()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm px-5 py-2.5 rounded-xl shadow transition">
+              ✅ Kiểm Tra Đáp Án
+            </button>
+            <button onclick="resetCurrentScramble()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-sm px-4 py-2.5 rounded-xl transition">
+              🔄 Xếp Lại
+            </button>
+            <button onclick="nextScramble()" id="btnNextScramble" class="hidden bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm px-5 py-2.5 rounded-xl shadow transition">
+              ➡️ Câu Tiếp Theo
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function pickWord(word, btnEl) {
+      if (btnEl.disabled) return;
+      btnEl.disabled = true;
+      btnEl.classList.add('opacity-40', 'cursor-not-allowed');
+
+      selectedScrambleWords.push({ word, btn: btnEl });
+      updateScrambleSlot();
+      playSound('ping');
+    }
+
+    function removePickedWord(index) {
+      const removed = selectedScrambleWords.splice(index, 1)[0];
+      if (removed && removed.btn) {
+        removed.btn.disabled = false;
+        removed.btn.classList.remove('opacity-40', 'cursor-not-allowed');
+      }
+      updateScrambleSlot();
+      playSound('ping');
+    }
+
+    function updateScrambleSlot() {
+      const slot = document.getElementById('scrambleAnswerSlot');
+      if (selectedScrambleWords.length === 0) {
+        slot.innerHTML = `<span class="text-slate-400 text-xs italic font-bold" id="scrambleEmptyHint">Chưa có từ nào được chọn...</span>`;
+      } else {
+        slot.innerHTML = selectedScrambleWords.map((item, idx) => `
+          <button onclick="removePickedWord(${idx})" class="bg-indigo-600 text-white font-extrabold text-sm sm:text-base px-3 py-1.5 rounded-xl shadow-sm flex items-center gap-1.5 hover:bg-indigo-700 transition">
+            <span>${item.word}</span> <span class="text-xs opacity-75">✕</span>
+          </button>
+        `).join('');
+      }
+    }
+
+    function checkScrambleAnswer() {
+      const q = scrambleQuestions[currentScrambleIdx];
+      const built = selectedScrambleWords.map(item => item.word).join(' ');
+      const fb = document.getElementById('scrambleFeedback');
+      fb.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-900', 'bg-rose-100', 'text-rose-900');
+
+      if (built.toLowerCase() === q.target.toLowerCase()) {
+        fb.classList.add('bg-emerald-100', 'text-emerald-900');
+        fb.innerHTML = `🎉 <b>CHÍNH XÁC!</b> ${q.explain}`;
+        playSound('fanfare');
+        triggerConfetti();
+        addXP(20);
+        document.getElementById('btnNextScramble').classList.remove('hidden');
+      } else {
+        fb.classList.add('bg-rose-100', 'text-rose-900');
+        fb.innerHTML = `❌ <b>Chưa đúng rồi!</b> Hãy đọc kỹ trật tự Chủ ngữ ➔ To be ➔ V3 ➔ by O để ghép lại nhé!`;
+        playSound('wrong');
+      }
+    }
+
+    function resetCurrentScramble() {
+      renderScrambleQuestion();
+    }
+
+    function nextScramble() {
+      currentScrambleIdx = (currentScrambleIdx + 1) % scrambleQuestions.length;
+      renderScrambleQuestion();
+      playSound('ping');
+    }
+
+    // 4.2 Multiple Choice Quiz
+    const practiceQuizData = [
+      {
+        q: "1. The homework ______ by all students yesterday.",
+        options: ["is done", "was done", "were done", "did"],
+        ans: 1,
+        why: "Có 'yesterday' (quá khứ) + chủ ngữ 'homework' không đếm được (số ít) ➔ dùng was done."
+      },
+      {
+        q: "2. Many trees ______ in our school yard every year.",
+        options: ["are planted", "is planted", "were planted", "planted"],
+        ans: 0,
+        why: "Có 'every year' (hiện tại đơn) + chủ ngữ số nhiều 'Many trees' ➔ dùng are planted."
+      },
+      {
+        q: "3. This famous bridge ______ built in 1890.",
+        options: ["is", "were", "was", "are"],
+        ans: 2,
+        why: "Năm 1890 là quá khứ + cây cầu là số ít ➔ was built."
+      },
+      {
+        q: "4. Rice ______ grown in many Asian countries.",
+        options: ["are", "is", "was", "were"],
+        ans: 1,
+        why: "'Rice' là danh từ không đếm được, diễn tả sự thật hiển nhiên ở hiện tại ➔ is grown."
+      },
+      {
+        q: "5. Letters ______ delivered by the postman every morning.",
+        options: ["is", "was", "are", "were"],
+        ans: 2,
+        why: "Có 'every morning' (hiện tại) + 'Letters' số nhiều ➔ are delivered."
+      },
+      {
+        q: "6. The light bulb ______ by Thomas Edison in 1879.",
+        options: ["invented", "was invented", "is invented", "were invented"],
+        ans: 1,
+        why: "Năm 1879 là quá khứ + 'The light bulb' số ít ➔ was invented."
+      },
+      {
+        q: "7. Plastic bags shouldn't be used because they ______ not easily destroyed.",
+        options: ["are", "is", "was", "were"],
+        ans: 0,
+        why: "Chủ ngữ 'they' ở thì hiện tại ➔ are not."
+      },
+      {
+        q: "8. A strange animal ______ seen in the forest last night.",
+        options: ["is", "were", "was", "saw"],
+        ans: 2,
+        why: "Có 'last night' (quá khứ) + 'A strange animal' (1 con vật - số ít) ➔ was seen."
+      }
+    ];
+
+    function renderPracticeQuiz() {
+      const container = document.getElementById('practiceQuizGrid');
+      container.innerHTML = practiceQuizData.map((item, qIdx) => `
+        <div class="border border-slate-200 rounded-2xl p-4 sm:p-5 bg-white space-y-3" id="quizCard-${qIdx}">
+          <div class="font-black text-slate-800 text-sm sm:text-base">${item.q}</div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            ${item.options.map((opt, optIdx) => `
+              <button onclick="choosePracticeQuiz(${qIdx}, ${optIdx})" id="quizBtn-${qIdx}-${optIdx}" class="text-left font-extrabold text-xs sm:text-sm p-3 rounded-xl border border-slate-200 hover:border-indigo-400 hover:bg-indigo-50/50 transition">
+                <span class="text-slate-400 font-black mr-1">${String.fromCharCode(65 + optIdx)}.</span> ${opt}
+              </button>
+            `).join('')}
+          </div>
+          <div id="quizExp-${qIdx}" class="hidden text-xs font-bold p-3 rounded-xl mt-2"></div>
+        </div>
+      `).join('');
+    }
+
+    function choosePracticeQuiz(qIdx, selectedOpt) {
+      const q = practiceQuizData[qIdx];
+      const card = document.getElementById(`quizCard-${qIdx}`);
+      const btns = card.querySelectorAll('button');
+      btns.forEach(b => b.disabled = true);
+
+      const exp = document.getElementById(`quizExp-${qIdx}`);
+      exp.classList.remove('hidden');
+
+      const chosenBtn = document.getElementById(`quizBtn-${qIdx}-${selectedOpt}`);
+      const correctBtn = document.getElementById(`quizBtn-${qIdx}-${q.ans}`);
+
+      if (selectedOpt === q.ans) {
+        chosenBtn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+        exp.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+        exp.innerHTML = `🎉 <b>Chính xác!</b> ${q.why}`;
+        playSound('ping');
+        addXP(15);
+      } else {
+        chosenBtn.classList.add('bg-rose-500', 'text-white', 'border-rose-500');
+        correctBtn.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600');
+        exp.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+        exp.innerHTML = `❌ <b>Chưa đúng!</b> Đáp án đúng là <b>${String.fromCharCode(65 + q.ans)}. ${q.options[q.ans]}</b>.<br>${q.why}`;
+        playSound('wrong');
+      }
+    }
+
+    function resetPracticeQuiz() {
+      renderPracticeQuiz();
+      playSound('ping');
+    }
+
+    // 4.3 Sentence Rewrite (Active to Passive)
+    const rewriteQuestions = [
+      {
+        active: "People speak English in many countries.",
+        correct: ["English is spoken in many countries.", "English is spoken in many countries by people."],
+        hintFormula: "S (English) + is + V3 (spoken) + in many countries.",
+        tense: "Hiện tại đơn"
+      },
+      {
+        active: "My brother broke this vase yesterday.",
+        correct: ["This vase was broken by my brother yesterday.", "This vase was broken yesterday by my brother."],
+        hintFormula: "S (This vase) + was + V3 (broken) + by my brother + yesterday.",
+        tense: "Quá khứ đơn"
+      },
+      {
+        active: "They clean the windows every weekend.",
+        correct: ["The windows are cleaned every weekend.", "The windows are cleaned by them every weekend."],
+        hintFormula: "S (The windows) + are + V3 (cleaned) + every weekend.",
+        tense: "Hiện tại đơn"
+      },
+      {
+        active: "Shakespeare wrote Romeo and Juliet.",
+        correct: ["Romeo and Juliet was written by Shakespeare.", "Romeo and Juliet were written by Shakespeare."],
+        hintFormula: "S (Romeo and Juliet) + was written by Shakespeare.",
+        tense: "Quá khứ đơn"
+      },
+      {
+        active: "My mother makes delicious cookies.",
+        correct: ["Delicious cookies are made by my mother."],
+        hintFormula: "S (Delicious cookies) + are + V3 (made) + by my mother.",
+        tense: "Hiện tại đơn"
+      },
+      {
+        active: "They built this school in 2015.",
+        correct: ["This school was built in 2015.", "This school was built in 2015 by them."],
+        hintFormula: "S (This school) + was + V3 (built) + in 2015.",
+        tense: "Quá khứ đơn"
+      }
+    ];
+
+    let rewriteAttempts = {};
+
+    function renderRewriteExercises() {
+      const container = document.getElementById('rewriteContainer');
+      container.innerHTML = rewriteQuestions.map((item, idx) => `
+        <div class="border border-slate-200 rounded-2xl p-4 sm:p-5 bg-white space-y-3" id="rewriteCard-${idx}">
+          <div class="flex justify-between items-center text-xs font-black">
+            <span class="bg-indigo-100 text-indigo-700 px-2.5 py-1 rounded-md">Câu ${idx + 1} · ${item.tense}</span>
+            <button onclick="showRewriteHint(${idx})" id="hintBtn-${idx}" class="text-amber-600 hover:text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md hidden">
+              💡 Hiện gợi ý công thức
+            </button>
+          </div>
+
+          <div class="text-sm sm:text-base font-extrabold text-slate-800">
+            <span class="text-slate-400 font-normal">Active:</span> ${item.active}
+          </div>
+
+          <div class="flex gap-2">
+            <input type="text" id="rewriteInput-${idx}" placeholder="Nhập câu bị động tại đây..." class="flex-1 bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-bold focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            <button onclick="checkRewriteSentence(${idx})" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs sm:text-sm px-4 py-2 rounded-xl transition shadow">
+              Chấm Điểm
+            </button>
+          </div>
+
+          <div id="rewriteHintBox-${idx}" class="hidden bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold p-3 rounded-xl">
+            💡 <b>Gợi ý công thức:</b> ${item.hintFormula}
+          </div>
+
+          <div id="rewriteFeedback-${idx}" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+        </div>
+      `).join('');
+    }
+
+    function checkRewriteSentence(idx) {
+      const q = rewriteQuestions[idx];
+      const inputEl = document.getElementById(`rewriteInput-${idx}`);
+      const val = inputEl.value.trim().replace(/\s+/g, ' ');
+      const fb = document.getElementById(`rewriteFeedback-${idx}`);
+      fb.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-200', 'bg-rose-50', 'text-rose-900', 'border-rose-200');
+
+      if (!val) {
+        alert('Vui lòng gõ câu trả lời vào ô nhé!');
+        return;
+      }
+
+      rewriteAttempts[idx] = (rewriteAttempts[idx] || 0) + 1;
+
+      // Normalize string comparison
+      const cleanInput = val.replace(/[.,!?]/g, '').toLowerCase();
+      const isCorrect = q.correct.some(c => c.replace(/[.,!?]/g, '').toLowerCase() === cleanInput);
+
+      if (isCorrect) {
+        fb.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+        fb.innerHTML = `🎉 <b>XUẤT SẮC!</b> Câu bị động chuẩn xác: <i>"${q.correct[0]}"</i>`;
+        playSound('fanfare');
+        triggerConfetti();
+        addXP(25);
+      } else {
+        fb.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+        
+        // Detailed mistake detection
+        let errExpl = "Lỗi chưa chính xác.";
+        if (q.tense === "Hiện tại đơn" && (val.includes("was") || val.includes("were"))) {
+          errExpl = "Nhầm thì! Đây là Hiện tại đơn nên dùng <span class='text-rose-600 font-black underline'>am/is/are</span>, không dùng was/were!";
+        } else if (q.tense === "Quá khứ đơn" && (val.includes(" is ") || val.includes(" are "))) {
+          errExpl = "Nhầm thì! Đây là Quá khứ đơn nên dùng <span class='text-rose-600 font-black underline'>was/were</span>, không dùng is/are!";
+        } else if (!val.includes("ed") && !val.includes("spoken") && !val.includes("written") && !val.includes("built") && !val.includes("made")) {
+          errExpl = "Hãy kiểm tra lại động từ chính đã đổi sang dạng <span class='text-rose-600 font-black underline'>V3 / V-ed</span> chưa nhé!";
+        }
+
+        fb.innerHTML = `❌ <b>Chưa chuẩn xác:</b> ${errExpl}<br>👉 Hãy kiểm tra lại hoặc bấm nút Gợi ý bên trên nhé!`;
+        playSound('wrong');
+
+        if (rewriteAttempts[idx] >= 2) {
+          document.getElementById(`hintBtn-${idx}`).classList.remove('hidden');
+        }
+      }
+    }
+
+    function showRewriteHint(idx) {
+      document.getElementById(`rewriteHintBox-${idx}`).classList.toggle('hidden');
+      playSound('ping');
+    }
+
+    /* ==========================================================================
+       5. PASSIVE RUSH 60S CHALLENGE
+       ========================================================================== */
+    const rushQuestionsPool = [
+      {
+        cat: "Chọn To Be Thì Quá Khứ",
+        text: "The bridge ______ built in 1990.",
+        hint: "Chủ ngữ số ít 'The bridge' + mốc năm 1990",
+        opts: ["was", "were", "is", "are"],
+        ans: "was"
+      },
+      {
+        cat: "Chọn To Be Thì Hiện Tại",
+        text: "English ______ spoken all over the world.",
+        hint: "'English' là danh từ số ít ở hiện tại",
+        opts: ["is", "are", "was", "were"],
+        ans: "is"
+      },
+      {
+        cat: "Phân Biệt Thì Của Câu Bị Động",
+        text: "Câu này ở thì nào: 'The house was painted yesterday.'",
+        hint: "Nhìn vào chữ 'was painted' và 'yesterday'",
+        opts: ["Hiện Tại Đơn", "Quá Khứ Đơn", "Tương Lai", "Hiện Tại Hoàn Thành"],
+        ans: "Quá Khứ Đơn"
+      },
+      {
+        cat: "Chọn To Be Phù Hợp",
+        text: "These letters ______ sent two days ago.",
+        hint: "'These letters' là danh từ số nhiều + 'ago'",
+        opts: ["were", "was", "are", "is"],
+        ans: "were"
+      },
+      {
+        cat: "Chọn To Be Phù Hợp",
+        text: "Cars ______ produced in modern factories every day.",
+        hint: "'Cars' số nhiều + 'every day'",
+        opts: ["are", "is", "were", "was"],
+        ans: "are"
+      },
+      {
+        cat: "Phân Biệt Thì Của Câu Bị Động",
+        text: "Câu này ở thì nào: 'Breakfast is served at 7 AM.'",
+        hint: "Nhìn vào chữ 'is served'",
+        opts: ["Hiện Tại Đơn", "Quá Khứ Đơn", "Quá Khứ Tiếp Diễn", "Hiện Tại Tiếp Diễn"],
+        ans: "Hiện Tại Đơn"
+      },
+      {
+        cat: "Chọn Động Từ V3",
+        text: "This song was ______ by Taylor Swift.",
+        hint: "V3 của động từ WRITE là gì?",
+        opts: ["written", "wrote", "write", "writing"],
+        ans: "written"
+      },
+      {
+        cat: "Chọn Động Từ V3",
+        text: "The cake was ______ by my sister.",
+        hint: "V3 của động từ MAKE là gì?",
+        opts: ["made", "make", "maked", "making"],
+        ans: "made"
+      }
+    ];
+
+    let rushTimerInterval = null;
+    let rushTimeLeft = 60;
+    let rushScore = 0;
+    let rushStreak = 0;
+    let currentRushQIdx = 0;
+
+    function startRushGame() {
+      document.getElementById('rushIntroScreen').classList.add('hidden');
+      document.getElementById('rushEndScreen').classList.add('hidden');
+      document.getElementById('rushPlayScreen').classList.remove('hidden');
+
+      rushTimeLeft = 60;
+      rushScore = 0;
+      rushStreak = 0;
+      updateRushStats();
+
+      loadRushQuestion();
+
+      if (rushTimerInterval) clearInterval(rushTimerInterval);
+      rushTimerInterval = setInterval(() => {
+        rushTimeLeft--;
+        document.getElementById('rushTimer').textContent = `${rushTimeLeft}s`;
+        if (rushTimeLeft <= 10 && rushTimeLeft > 0) playSound('ping');
+        if (rushTimeLeft <= 0) {
+          endRushGame();
+        }
+      }, 1000);
+      playSound('fanfare');
+    }
+
+    function updateRushStats() {
+      document.getElementById('rushTimer').textContent = `${rushTimeLeft}s`;
+      document.getElementById('rushStreak').textContent = rushStreak;
+      document.getElementById('rushScore').textContent = rushScore;
+    }
+
+    function loadRushQuestion() {
+      const q = rushQuestionsPool[Math.floor(Math.random() * rushQuestionsPool.length)];
+      document.getElementById('rushQCategory').textContent = q.cat;
+      document.getElementById('rushQText').textContent = q.text;
+      document.getElementById('rushQHint').textContent = `💡 ${q.hint}`;
+
+      const grid = document.getElementById('rushOptionsGrid');
+      grid.innerHTML = q.opts.map(opt => `
+        <button onclick="answerRush('${opt}', '${q.ans}')" class="bg-white hover:bg-indigo-600 hover:text-white border-2 border-slate-200 text-slate-800 font-black text-sm sm:text-base py-3 px-4 rounded-2xl shadow-sm transition transform active:scale-95">
+          ${opt}
+        </button>
+      `).join('');
+    }
+
+    function answerRush(chosen, correct) {
+      if (chosen === correct) {
+        rushStreak++;
+        const multiplier = rushStreak >= 3 ? 2 : 1;
+        rushScore += (10 * multiplier);
+        playSound('ping');
+      } else {
+        rushStreak = 0;
+        playSound('wrong');
+      }
+      updateRushStats();
+      loadRushQuestion();
+    }
+
+    function endRushGame() {
+      clearInterval(rushTimerInterval);
+      document.getElementById('rushPlayScreen').classList.add('hidden');
+      document.getElementById('rushEndScreen').classList.remove('hidden');
+
+      document.getElementById('rushFinalScore').textContent = `${rushScore} Điểm`;
+
+      let badge = "Tập Sự Bị Động 🌱";
+      if (rushScore >= 120) badge = "Đại Cao Thủ Bị Động 👑";
+      else if (rushScore >= 70) badge = "Bậc Thầy Ngữ Pháp ⭐";
+      document.getElementById('rushRankBadge').textContent = `Danh hiệu: ${badge}`;
+
+      triggerConfetti();
+      addXP(rushScore);
+    }
+
+    /* ==========================================================================
+       6. TEAM AUCTION QUIZ ENGINE (ĐẤU GIÁ CÂU HỎI)
+       ========================================================================== */
+    let auctionTeamsCount = 2;
+    let gold = { A: 100, B: 100, C: 100 };
+    let bids = { A: 0, B: 0, C: 0 };
+    let currentAuctionLot = 0;
+    let activeBidder = null;
+    let activeBidAmount = 0;
+    let runnerUpBidder = null;
+    let runnerUpBidAmount = 0;
+    let auctionTimer = null;
+    let auctionTimeSec = 20;
+
+    const auctionLots = [
+      {
+        topic: "Chuyển Đổi Câu Bị Động Quá Khứ Đơn",
+        diff: "⭐ Độ Khó: Dễ (Khởi điểm 10 Vàng)",
+        active: "Thomas Edison invented the phonograph in 1877.",
+        passive: "The phonograph was invented by Thomas Edison in 1877.",
+        hint: "The phonograph (số ít) + was invented by Thomas Edison in 1877."
+      },
+      {
+        topic: "Nhận Biết Đúng Dạng To Be Trong Hiện Tại",
+        diff: "⭐⭐ Độ Khó: Trung Bình (Khởi điểm 20 Vàng)",
+        active: "Workers make millions of cars in this company.",
+        passive: "Millions of cars are made in this company.",
+        hint: "'Millions of cars' là số nhiều ở hiện tại nên dùng 'are made'."
+      },
+      {
+        topic: "Thử Thách Lược Bỏ 'By Someone'",
+        diff: "⭐⭐⭐ Độ Khó: Thử Thách (Khởi điểm 30 Vàng)",
+        active: "Someone stole my bicycle last night.",
+        passive: "My bicycle was stolen last night.",
+        hint: "Chủ ngữ 'Someone' không rõ ràng nên lược bỏ (không cần by someone)."
+      },
+      {
+        topic: "Vị Trí Của Nơi Chốn & Thời Gian",
+        diff: "⭐⭐⭐ Độ Khó: Thử Thách (Khởi điểm 30 Vàng)",
+        active: "The chef cooked a wonderful meal in the kitchen yesterday.",
+        passive: "A wonderful meal was cooked in the kitchen by the chef yesterday.",
+        hint: "Quy tắc thần chú: Nơi chốn (in the kitchen) + by O (by the chef) + Thời gian (yesterday)."
+      },
+      {
+        topic: "Chuyển Đổi Danh Từ Số Nhiều",
+        diff: "⭐⭐ Độ Khó: Trung Bình (Khởi điểm 20 Vàng)",
+        active: "The teacher explained all grammar rules clearly.",
+        passive: "All grammar rules were explained clearly by the teacher.",
+        hint: "'All grammar rules' số nhiều trong quá khứ dùng 'were explained'."
+      }
+    ];
+
+    function setAuctionTeams(num) {
+      auctionTeamsCount = num;
+      document.getElementById('btnTeamMode2').classList.toggle('bg-indigo-600', num === 2);
+      document.getElementById('btnTeamMode2').classList.toggle('text-white', num === 2);
+      document.getElementById('btnTeamMode2').classList.toggle('bg-slate-100', num !== 2);
+
+      document.getElementById('btnTeamMode3').classList.toggle('bg-indigo-600', num === 3);
+      document.getElementById('btnTeamMode3').classList.toggle('text-white', num === 3);
+      document.getElementById('btnTeamMode3').classList.toggle('bg-slate-100', num !== 3);
+
+      document.getElementById('teamCardC').classList.toggle('hidden', num !== 3);
+      playSound('ping');
+    }
+
+    function addBid(team, val) {
+      if (bids[team] + val > gold[team]) {
+        bids[team] = gold[team];
+        alert(`Đội chỉ còn tối đa ${gold[team]} Vàng!`);
+      } else {
+        bids[team] += val;
+      }
+      document.getElementById(`bid${team}`).textContent = bids[team];
+      playSound('ping');
+    }
+
+    function allInBid(team) {
+      bids[team] = gold[team];
+      document.getElementById(`bid${team}`).textContent = bids[team];
+      playSound('fanfare');
+      alert(`🔥 TẤT TAY! Đội ${team} đặt cược toàn bộ ${gold[team]} Vàng!`);
+    }
+
+    function clearBid(team) {
+      bids[team] = 0;
+      document.getElementById(`bid${team}`).textContent = '0';
+    }
+
+    function resetAuctionGame() {
+      if (confirm('Phát lại 100 Vàng ban đầu cho các đội?')) {
+        gold = { A: 100, B: 100, C: 100 };
+        bids = { A: 0, B: 0, C: 0 };
+        document.getElementById('goldA').textContent = '100';
+        document.getElementById('goldB').textContent = '100';
+        document.getElementById('goldC').textContent = '100';
+        clearBid('A');
+        clearBid('B');
+        clearBid('C');
+        loadAuctionLot();
+        playSound('fanfare');
+      }
+    }
+
+    function loadAuctionLot() {
+      if (auctionTimer) clearInterval(auctionTimer);
+      const lot = auctionLots[currentAuctionLot % auctionLots.length];
+
+      document.getElementById('auctionLotTag').textContent = `Gói Đấu Giá #${(currentAuctionLot % auctionLots.length) + 1}`;
+      document.getElementById('auctionDiffTag').textContent = lot.diff;
+      document.getElementById('auctionTopicTitle').textContent = lot.topic;
+      document.getElementById('auctionTopicHint').textContent = `💡 Gợi ý: ${lot.hint}`;
+
+      document.getElementById('auctionSealedBox').classList.remove('hidden');
+      document.getElementById('auctionRevealedBox').classList.add('hidden');
+      document.getElementById('auctionSecondChanceBanner').classList.add('hidden');
+      document.getElementById('auctionGavelRow').classList.remove('hidden');
+      document.getElementById('auctionJudgementRow').classList.add('hidden');
+      document.getElementById('auctionAnswerBox').classList.add('hidden');
+      document.getElementById('btnNextLot').classList.add('hidden');
+
+      clearBid('A');
+      clearBid('B');
+      clearBid('C');
+    }
+
+    function strikeAuctionGavel() {
+      playSound('gavel');
+
+      const teams = auctionTeamsCount === 2 ? ['A', 'B'] : ['A', 'B', 'C'];
+      const teamBids = teams.map(t => ({ team: t, bid: bids[t], gold: gold[t] }));
+
+      const maxBid = Math.max(...teamBids.map(b => b.bid));
+      if (maxBid <= 0) {
+        alert('⚠️ Chưa có đội nào đặt cược vàng! Hãy cược ít nhất 5 Vàng để tham gia đấu giá!');
+        return;
+      }
+
+      const topBidders = teamBids.filter(b => b.bid === maxBid);
+      if (topBidders.length > 1) {
+        alert(`🔔 Hòa giá (${maxBid} Vàng)! Các đội hãy đấu thêm 5 Vàng để giành quyền trả lời!`);
+        return;
+      }
+
+      teamBids.sort((a, b) => b.bid - a.bid);
+      activeBidder = teamBids[0].team;
+      activeBidAmount = teamBids[0].bid;
+
+      runnerUpBidder = teamBids[1].bid > 0 ? teamBids[1].team : null;
+      runnerUpBidAmount = teamBids[1].bid > 0 ? teamBids[1].bid : 0;
+
+      // Reveal Question
+      const lot = auctionLots[currentAuctionLot % auctionLots.length];
+      document.getElementById('auctionSealedBox').classList.add('hidden');
+      document.getElementById('auctionRevealedBox').classList.remove('hidden');
+      document.getElementById('auctionGavelRow').classList.add('hidden');
+      document.getElementById('auctionJudgementRow').classList.remove('hidden');
+
+      const teamName = activeBidder === 'A' ? 'Đội Đỏ 🦖' : (activeBidder === 'B' ? 'Đội Xanh 🚀' : 'Đội Vàng 🐯');
+      document.getElementById('auctionWinnerPill').textContent = `👑 ${teamName} THẮNG QUYỀN VỚI ${activeBidAmount} VÀNG!`;
+
+      document.getElementById('auctionQText').innerHTML = `
+        <span class="text-xs text-slate-400 block font-normal">Chuyển sang Bị Động:</span>
+        "${lot.active}"
+      `;
+      document.getElementById('auctionQHint').textContent = `Gợi ý: ${lot.hint}`;
+
+      document.getElementById('auctionAnswerBox').innerHTML = `
+        <div class="font-bold text-emerald-950">✅ ĐÁP ÁN BỊ ĐỘNG CHUẨN:</div>
+        <div class="text-emerald-700 font-extrabold text-base my-1">"${lot.passive}"</div>
+        <div class="text-slate-600 text-xs">${lot.hint}</div>
+      `;
+
+      // 20s countdown
+      auctionTimeSec = 20;
+      document.getElementById('auctionTimerPill').textContent = `⏱️ ${auctionTimeSec}s`;
+      if (auctionTimer) clearInterval(auctionTimer);
+      auctionTimer = setInterval(() => {
+        auctionTimeSec--;
+        document.getElementById('auctionTimerPill').textContent = `⏱️ ${auctionTimeSec}s`;
+        if (auctionTimeSec <= 5 && auctionTimeSec > 0) playSound('ping');
+        if (auctionTimeSec <= 0) {
+          clearInterval(auctionTimer);
+          playSound('wrong');
+        }
+      }, 1000);
+    }
+
+    function judgeAuction(isCorrect) {
+      if (auctionTimer) clearInterval(auctionTimer);
+
+      if (isCorrect) {
+        gold[activeBidder] += activeBidAmount;
+        document.getElementById(`gold${activeBidder}`).textContent = gold[activeBidder];
+
+        playSound('fanfare');
+        triggerConfetti();
+
+        document.getElementById('auctionJudgementRow').classList.add('hidden');
+        document.getElementById('auctionAnswerBox').classList.remove('hidden');
+        document.getElementById('btnNextLot').classList.remove('hidden');
+
+        alert(`🎉 XUẤT SẮC! Đội trả lời đúng, thu về gấp đôi (+${activeBidAmount * 2} Vàng)!`);
+      } else {
+        gold[activeBidder] = Math.max(0, gold[activeBidder] - activeBidAmount);
+        document.getElementById(`gold${activeBidder}`).textContent = gold[activeBidder];
+        playSound('wrong');
+
+        if (runnerUpBidder && runnerUpBidAmount > 0) {
+          const runnerName = runnerUpBidder === 'A' ? 'Đội Đỏ 🦖' : (runnerUpBidder === 'B' ? 'Đội Xanh 🚀' : 'Đội Vàng 🐯');
+          const banner = document.getElementById('auctionSecondChanceBanner');
+          banner.classList.remove('hidden');
+          banner.innerHTML = `⚡ <b>CƠ HỘI CHUYỂN GIAO:</b> Quyền trả lời chuyển sang <b>${runnerName}</b> (cược ${runnerUpBidAmount} Vàng)!`;
+
+          activeBidder = runnerUpBidder;
+          activeBidAmount = runnerUpBidAmount;
+          runnerUpBidder = null; // Single pass
+
+          // Restart 15s
+          auctionTimeSec = 15;
+          document.getElementById('auctionTimerPill').textContent = `⏱️ ${auctionTimeSec}s`;
+          auctionTimer = setInterval(() => {
+            auctionTimeSec--;
+            document.getElementById('auctionTimerPill').textContent = `⏱️ ${auctionTimeSec}s`;
+            if (auctionTimeSec <= 5 && auctionTimeSec > 0) playSound('ping');
+            if (auctionTimeSec <= 0) clearInterval(auctionTimer);
+          }, 1000);
+        } else {
+          document.getElementById('auctionJudgementRow').classList.add('hidden');
+          document.getElementById('auctionAnswerBox').classList.remove('hidden');
+          document.getElementById('btnNextLot').classList.remove('hidden');
+          alert('❌ Rất tiếc, câu trả lời chưa đúng và không còn đội nào giành quyền!');
+        }
+      }
+    }
+
+    function toggleAuctionAnswer() {
+      document.getElementById('auctionAnswerBox').classList.toggle('hidden');
+      playSound('ping');
+    }
+
+    function nextAuctionLot() {
+      currentAuctionLot++;
+      loadAuctionLot();
+      playSound('ping');
+    }
+
+    function showRichLeaderboard() {
+      let ranks = [
+        { name: 'Đội Đỏ 🦖', gold: gold.A },
+        { name: 'Đội Xanh 🚀', gold: gold.B }
+      ];
+      if (auctionTeamsCount === 3) {
+        ranks.push({ name: 'Đội Vàng 🐯', gold: gold.C });
+      }
+      ranks.sort((a, b) => b.gold - a.gold);
+
+      let msg = "👑 BẢNG PHÚ HỘ VÀNG CÂU BỊ ĐỘNG 🪙\n\n";
+      ranks.forEach((r, idx) => {
+        msg += `${idx + 1}. ${r.name}: ${r.gold} Vàng\n`;
+      });
+      triggerConfetti();
+      alert(msg);
+    }
+
+    /* ==========================================================================
+       7. IRREGULAR VERBS TABLE DATA & SEARCH
+       ========================================================================== */
+    const irregularVerbs = [
+      { v1: "make", v2: "made", v3: "made", vn: "làm, tạo ra" },
+      { v1: "write", v2: "wrote", v3: "written", vn: "viết" },
+      { v1: "build", v2: "built", v3: "built", vn: "xây dựng" },
+      { v1: "break", v2: "broke", v3: "broken", vn: "làm vỡ, gãy" },
+      { v1: "eat", v2: "ate", v3: "eaten", vn: "ăn" },
+      { v1: "buy", v2: "bought", v3: "bought", vn: "mua" },
+      { v1: "give", v2: "gave", v3: "given", vn: "cho, tặng" },
+      { v1: "take", v2: "took", v3: "taken", vn: "cầm, chụp, lấy" },
+      { v1: "see", v2: "saw", v3: "seen", vn: "nhìn thấy" },
+      { v1: "send", v2: "sent", v3: "sent", vn: "gửi đi" },
+      { v1: "speak", v2: "spoke", v3: "spoken", vn: "nói" },
+      { v1: "find", v2: "found", v3: "found", vn: "tìm thấy" },
+      { v1: "hear", v2: "heard", v3: "heard", vn: "nghe thấy" },
+      { v1: "paint (quy tắc)", v2: "painted", v3: "painted", vn: "vẽ, sơn" },
+      { v1: "clean (quy tắc)", v2: "cleaned", v3: "cleaned", vn: "quét dọn" },
+      { v1: "invent (quy tắc)", v2: "invented", v3: "invented", vn: "phát minh" },
+      { v1: "grow", v2: "grew", v3: "grown", vn: "trồng, phát triển" },
+      { v1: "drive", v2: "drove", v3: "driven", vn: "lái xe" },
+      { v1: "drink", v2: "drank", v3: "drunk", vn: "uống" },
+      { v1: "teach", v2: "taught", v3: "taught", vn: "dạy học" },
+      { v1: "catch", v2: "caught", v3: "caught", vn: "bắt được" },
+      { v1: "read", v2: "read", v3: "read", vn: "đọc sách" },
+      { v1: "sell", v2: "sold", v3: "sold", vn: "bán" },
+      { v1: "tell", v2: "told", v3: "told", vn: "kể, bảo" },
+      { v1: "steal", v2: "stole", v3: "stolen", vn: "trộm cắp" }
+    ];
+
+    function renderVerbsTable(data) {
+      const tbody = document.getElementById('verbsTableBody');
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400">Không tìm thấy động từ nào phù hợp!</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = data.map((v, i) => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="py-3 px-4 font-mono text-slate-400">#${i + 1}</td>
+          <td class="py-3 px-4 font-bold text-slate-800">${v.v1}</td>
+          <td class="py-3 px-4 text-slate-600">${v.v2}</td>
+          <td class="py-3 px-4 font-black text-purple-700 bg-purple-50/50">${v.v3}</td>
+          <td class="py-3 px-4 text-slate-600">${v.vn}</td>
+          <td class="py-3 px-4 text-center">
+            <button onclick="speakText('${v.v1}, ${v.v2}, ${v.v3}')" class="text-indigo-600 hover:text-indigo-800 bg-indigo-50 p-1.5 rounded-lg text-sm" title="Nghe phát âm 3 cột">
+              📢
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterVerbsTable() {
+      const q = document.getElementById('verbSearchInput').value.toLowerCase().trim();
+      const filtered = irregularVerbs.filter(v => 
+        v.v1.toLowerCase().includes(q) ||
+        v.v2.toLowerCase().includes(q) ||
+        v.v3.toLowerCase().includes(q) ||
+        v.vn.toLowerCase().includes(q)
+      );
+      renderVerbsTable(filtered);
+    }
+
+    // Initialize all modules on load
+    renderScrambleQuestion();
+    renderPracticeQuiz();
+    renderRewriteExercises();
+    loadAuctionLot();
+    renderVerbsTable(irregularVerbs);
+
+  </script>
+</body>
+</html>
