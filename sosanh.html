@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bí Kíp Câu So Sánh: So Sánh Bằng, So Sánh Hơn, So Sánh Nhất & Less / Fewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@600;700;800&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Nunito', 'Quicksand', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(#cbd5e1 1.2px, transparent 1.2px),
+        radial-gradient(#e2e8f0 1.2px, #f8fafc 1.2px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+    #confettiCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 99999;
+    }
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    .animate-pulse-soft {
+      animation: pulseSoft 2.5s infinite ease-in-out;
+    }
+    @media print {
+      body {
+        background: #ffffff !important;
+        background-image: none !important;
+        color: #000000 !important;
+        padding: 0 !important;
+      }
+      header, nav, #confettiCanvas, .no-print, #soundToggleBtn, #xpDisplay {
+        display: none !important;
+      }
+      .tab-content {
+        display: block !important;
+      }
+      #tab-theory, #tab-rush, #tab-auction, #tab-adjectives {
+        display: none !important;
+      }
+      #tab-exercises {
+        display: block !important;
+      }
+      .exercise-card {
+        page-break-inside: avoid;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        margin-bottom: 16px !important;
+      }
+      .print-dots {
+        display: block !important;
+        border-bottom: 1.5px dotted #64748b;
+        margin-top: 14px;
+        min-height: 24px;
+      }
+    }
+  </style>
+</head>
+<body class="text-slate-800 min-h-screen pb-16 antialiased">
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <!-- Container -->
+  <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6 sm:py-6">
+
+    <!-- Top Sticky Header -->
+    <header class="sticky top-3 z-50 bg-white/95 backdrop-blur-md border border-slate-200 rounded-2xl shadow-sm px-5 py-3.5 mb-6 flex flex-wrap justify-between items-center gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 bg-gradient-to-tr from-amber-500 via-indigo-600 to-purple-600 text-white rounded-xl flex items-center justify-center text-2xl shadow-md shadow-indigo-200">
+          ⚖️
+        </div>
+        <div>
+          <h1 class="text-lg sm:text-xl font-black text-slate-900 leading-tight">Chuyên Đề Câu So Sánh (Comparisons)</h1>
+          <p class="text-xs font-bold text-indigo-600 flex items-center gap-1.5 flex-wrap">
+            <span>Bằng · Hơn · Nhất · Kém Hơn (Less / Fewer)</span>
+            <span class="text-slate-300">|</span>
+            <span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">Có Chấm Tự Động & Lời Giải</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+        <div class="bg-amber-50 border border-amber-200 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-black text-amber-800 flex items-center gap-1.5 shadow-sm">
+          <span>⭐</span> <span id="xpDisplay">0 EXP</span>
+        </div>
+        <button id="soundToggleBtn" onclick="toggleSound()" class="bg-slate-100 hover:bg-slate-200 border border-slate-300 px-3 py-1.5 rounded-full text-xs sm:text-sm font-extrabold text-slate-700 flex items-center gap-1.5 transition">
+          <span id="soundIcon">🔊</span> BẬT
+        </button>
+        <button onclick="window.print()" class="no-print bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 px-3 py-1.5 rounded-full text-xs sm:text-sm font-extrabold text-indigo-700 flex items-center gap-1.5 transition">
+          🖨️ In Đề
+        </button>
+      </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="flex gap-2 bg-white border border-slate-200 p-2 rounded-2xl shadow-sm mb-6 overflow-x-auto scrollbar-none no-print">
+      <button onclick="switchTab('tab-theory')" id="nav-theory" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-black transition flex items-center justify-center gap-2 bg-indigo-600 text-white shadow-md shadow-indigo-200">
+        📚 1. Lý Thuyết Chuẩn
+      </button>
+      <button onclick="switchTab('tab-exercises')" id="nav-exercises" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-black transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        ✍️ 2. Làm Bài Tập (I, II, III, V)
+      </button>
+      <button onclick="switchTab('tab-rush')" id="nav-rush" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-black transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        ⚡ 3. Thử Thách 60s
+      </button>
+      <button onclick="switchTab('tab-auction')" id="nav-auction" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-black transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        🔨 4. Game Đấu Giá Đội
+      </button>
+      <button onclick="switchTab('tab-adjectives')" id="nav-adjectives" class="nav-btn flex-1 min-w-[130px] py-2.5 px-4 rounded-xl text-sm font-black transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100">
+        📖 5. Tra Cứu Tính Từ
+      </button>
+    </nav>
+
+    <!-- =========================================================================
+         TAB 1: LÝ THUYẾT SO SÁNH TRỰC QUAN & DỄ NHỚ
+         ========================================================================= -->
+    <section id="tab-theory" class="tab-content block space-y-6">
+
+      <!-- Hero Banner -->
+      <div class="bg-gradient-to-r from-indigo-700 via-indigo-800 to-purple-800 text-white p-6 sm:p-8 rounded-3xl shadow-lg relative overflow-hidden">
+        <div class="relative z-10 max-w-3xl">
+          <span class="bg-white/20 text-white text-xs font-black uppercase px-3 py-1 rounded-full tracking-wider">Cẩm Nang Toàn Diện</span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2 mb-3">Bí Quyết Nắm Trọn 4 Cấu Trúc So Sánh 💡</h2>
+          <p class="text-indigo-100 text-sm sm:text-base font-medium leading-relaxed">
+            Trong tiếng Anh, câu so sánh dùng để đối chiếu 2 hoặc nhiều người, vật, hoặc sự việc với nhau. Dưới đây là 4 trụ cột cốt lõi: <b>So sánh bằng</b>, <b>So sánh hơn</b>, <b>So sánh nhất</b> và phân biệt đặc biệt <b>Less / Fewer / The Least / The Fewest</b>.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-bold">
+            <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg">⚖️ As...As (Bằng nhau)</span>
+            <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg">📈 -er / more than (Hơn)</span>
+            <span class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg">👑 the -est / the most (Nhất)</span>
+            <span class="bg-amber-400/30 text-amber-100 border border-amber-300/40 px-3 py-1.5 rounded-lg">📉 Less / Fewer (Kém hơn)</span>
+          </div>
+        </div>
+        <div class="absolute right-4 bottom-2 text-8xl opacity-15 pointer-events-none select-none">
+          ⚖️✨
+        </div>
+      </div>
+
+      <!-- 4 Core Pillars Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <!-- Pillar 1: So Sánh Bằng -->
+        <div class="bg-white border-2 border-emerald-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-black px-3 py-1 rounded-full uppercase">1. So Sánh Bằng</span>
+            <span class="text-emerald-600 font-extrabold text-sm">Equality Comparison</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Bằng nhau / Không bằng nhau</h3>
+          
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 my-3 text-center">
+            <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider block mb-1">CÔNG THỨC</span>
+            <div class="text-base sm:text-lg font-black text-emerald-950 font-mono">
+              Khẳng định: S1 + V + <span class="text-emerald-700 bg-white px-2 py-0.5 rounded border border-emerald-300">as + Adj / Adv + as</span> + S2 / O
+            </div>
+            <div class="text-base sm:text-lg font-black text-emerald-950 font-mono mt-1.5">
+              Phủ định: S1 + V(not) + <span class="text-emerald-700 bg-white px-2 py-0.5 rounded border border-emerald-300">as / so + Adj / Adv + as</span> + S2 / O
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm font-semibold text-slate-700">
+            <div class="flex items-start gap-2">
+              <span class="text-emerald-600 font-black">●</span>
+              <span>Giữa <b>as ... as</b> luôn là <b>tính từ / trạng từ NGUYÊN MẪU</b> (không thêm -er, không thêm more).</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-emerald-600 font-black">●</span>
+              <span><b>Ví dụ:</b> <i>Hoa is as tall as Lan.</i> (Hoa cao bằng Lan)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-emerald-600 font-black">●</span>
+              <span><b>Ví dụ phủ định:</b> <i>Bikes are <b>not as fast as</b> motorbikes.</i> (Xe đạp không nhanh bằng xe máy)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 2: So Sánh Hơn -->
+        <div class="bg-white border-2 border-indigo-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-black px-3 py-1 rounded-full uppercase">2. So Sánh Hơn</span>
+            <span class="text-indigo-600 font-extrabold text-sm">Comparative Form</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Hơn cái kia (Đối chiếu 2 đối tượng)</h3>
+          
+          <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 my-3 text-center">
+            <span class="text-xs font-bold text-indigo-700 uppercase tracking-wider block mb-1">CÔNG THỨC</span>
+            <div class="text-sm sm:text-base font-black text-indigo-950 font-mono">
+              Tính từ ngắn (1 âm tiết): S1 + to be + <span class="text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-300">Adj + er + than</span> + S2 / O
+            </div>
+            <div class="text-sm sm:text-base font-black text-indigo-950 font-mono mt-1.5">
+              Tính từ dài (≥ 2 âm tiết): S1 + to be + <span class="text-indigo-700 bg-white px-2 py-0.5 rounded border border-indigo-300">more + Adj + than</span> + S2 / O
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm font-semibold text-slate-700">
+            <div class="flex items-start gap-2">
+              <span class="text-indigo-600 font-black">●</span>
+              <span><b>Ngắn:</b> <i>Lan is <b>taller than</b> Hoa.</i> | <i>A dog is <b>heavier than</b> a cat.</i></span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-indigo-600 font-black">●</span>
+              <span><b>Dài:</b> <i>A new house is <b>more expensive than</b> an old house.</i></span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-indigo-600 font-black">●</span>
+              <span><b>Lưu ý đuôi -y:</b> <i>happy ➔ happier, heavy ➔ heavier</i> (đổi y thành i rồi thêm er).</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 3: So Sánh Nhất -->
+        <div class="bg-white border-2 border-purple-200 rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-purple-100 text-purple-800 text-xs font-black px-3 py-1 rounded-full uppercase">3. So Sánh Nhất</span>
+            <span class="text-purple-600 font-extrabold text-sm">Superlative Form</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Đứng đầu trong nhóm (≥ 3 đối tượng)</h3>
+          
+          <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 my-3 text-center">
+            <span class="text-xs font-bold text-purple-700 uppercase tracking-wider block mb-1">CÔNG THỨC</span>
+            <div class="text-sm sm:text-base font-black text-purple-950 font-mono">
+              Tính từ ngắn: S + to be + <span class="text-purple-700 bg-white px-2 py-0.5 rounded border border-purple-300">the + Adj + est</span> (+ N + in/of...)
+            </div>
+            <div class="text-sm sm:text-base font-black text-purple-950 font-mono mt-1.5">
+              Tính từ dài: S + to be + <span class="text-purple-700 bg-white px-2 py-0.5 rounded border border-purple-300">the most + Adj</span> (+ N + in/of...)
+            </div>
+          </div>
+
+          <div class="space-y-2 text-xs sm:text-sm font-semibold text-slate-700">
+            <div class="flex items-start gap-2">
+              <span class="text-purple-600 font-black">●</span>
+              <span>Bắt buộc phải có chữ <b>"the"</b> phía trước.</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-purple-600 font-black">●</span>
+              <span><b>Ngắn:</b> <i>Summer is <b>the hottest</b> in a year.</i> (Gấp đôi chữ t: hot ➔ the hottest).</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-purple-600 font-black">●</span>
+              <span><b>Dài:</b> <i>Jane is <b>the most beautiful</b> in her family.</i></span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-purple-600 font-black">●</span>
+              <span><b>Cụm từ hay gặp:</b> <i>in class, in the world, in a year, of all, person I know...</i></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pillar 4: Less / Fewer / The Least / The Fewest -->
+        <div class="bg-white border-2 border-amber-300 rounded-3xl p-6 shadow-sm hover:shadow-md transition">
+          <div class="flex justify-between items-center mb-3">
+            <span class="bg-amber-100 text-amber-900 text-xs font-black px-3 py-1 rounded-full uppercase">4. So Sánh Kém Hơn & Lượng Từ</span>
+            <span class="text-amber-700 font-extrabold text-sm">Less vs Fewer</span>
+          </div>
+          <h3 class="text-xl font-black text-slate-800 mb-2">Quy Tắc "Vàng" Phân Biệt Ít Hơn / Ít Nhất</h3>
+          
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 my-3 text-xs sm:text-sm font-bold space-y-2">
+            <div class="p-2 bg-white rounded-xl border border-amber-200 flex items-center justify-between">
+              <span class="text-blue-700 font-black">FEWER / THE FEWEST</span>
+              <span class="text-slate-600">+ Danh từ đếm được số nhiều (seats, orders, products, rooms, flowers...)</span>
+            </div>
+            <div class="p-2 bg-white rounded-xl border border-amber-200 flex items-center justify-between">
+              <span class="text-rose-700 font-black">LESS / THE LEAST</span>
+              <span class="text-slate-600">+ Danh từ KHÔNG đếm được (equipment, money, experience, furniture) HOẶC đi trước Tính từ/Trạng từ (less valuable, less popular, less conveniently)</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 text-xs sm:text-sm font-semibold text-slate-700">
+            <div class="flex items-start gap-2">
+              <span class="text-amber-600 font-black">👉</span>
+              <span><i>My team has <b>fewer</b> seats than your team.</i> (seats = đếm được)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-600 font-black">👉</span>
+              <span><i>I earn <b>less</b> money.</i> (money = không đếm được)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-600 font-black">👉</span>
+              <span><i>This is <b>the least</b> popular area.</i> (popular là tính từ dài)</span>
+            </div>
+            <div class="flex items-start gap-2">
+              <span class="text-amber-600 font-black">👉</span>
+              <span><i>This house has got <b>the fewest</b> rooms.</i> (rooms là số nhiều, so sánh nhất 3 nhà)</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Irregular Adjectives & Transformation Cheat Sheet -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 bg-indigo-100 text-indigo-700 rounded-xl flex items-center justify-center font-black text-xl">
+            ⭐
+          </div>
+          <div>
+            <h3 class="text-xl font-black text-slate-800">Bảng Tính Từ Bất Quy Tắc Cần Học Thuộc Lòng</h3>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">Các tính từ biến đổi đặc biệt, không thêm -er hay -est bình thường</p>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm font-semibold border-collapse">
+            <thead>
+              <tr class="bg-indigo-50 border-b border-indigo-100 text-indigo-900">
+                <th class="p-3 font-black rounded-l-xl">Tính từ gốc (Base)</th>
+                <th class="p-3 font-black">Nghĩa</th>
+                <th class="p-3 font-black text-indigo-700">So sánh hơn (Comparative)</th>
+                <th class="p-3 font-black text-purple-700">So sánh nhất (Superlative)</th>
+                <th class="p-3 font-black rounded-r-xl">Phát âm</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-black text-slate-800">good / well</td>
+                <td class="p-3 text-slate-600">tốt, giỏi</td>
+                <td class="p-3 font-black text-indigo-600">better than</td>
+                <td class="p-3 font-black text-purple-600">the best</td>
+                <td class="p-3"><button onclick="speakText('good, better, the best')" class="text-xs bg-slate-100 hover:bg-indigo-100 px-2.5 py-1 rounded-lg text-indigo-700 font-bold">🔊 Nghe</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-black text-slate-800">bad / badly</td>
+                <td class="p-3 text-slate-600">tồi, tệ, kém</td>
+                <td class="p-3 font-black text-rose-600">worse than</td>
+                <td class="p-3 font-black text-rose-700">the worst</td>
+                <td class="p-3"><button onclick="speakText('bad, worse, the worst')" class="text-xs bg-slate-100 hover:bg-indigo-100 px-2.5 py-1 rounded-lg text-indigo-700 font-bold">🔊 Nghe</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-black text-slate-800">little</td>
+                <td class="p-3 text-slate-600">ít (không đếm được)</td>
+                <td class="p-3 font-black text-amber-600">less than</td>
+                <td class="p-3 font-black text-amber-700">the least</td>
+                <td class="p-3"><button onclick="speakText('little, less, the least')" class="text-xs bg-slate-100 hover:bg-indigo-100 px-2.5 py-1 rounded-lg text-indigo-700 font-bold">🔊 Nghe</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-black text-slate-800">few</td>
+                <td class="p-3 text-slate-600">ít (đếm được số nhiều)</td>
+                <td class="p-3 font-black text-sky-600">fewer than</td>
+                <td class="p-3 font-black text-sky-700">the fewest</td>
+                <td class="p-3"><button onclick="speakText('few, fewer, the fewest')" class="text-xs bg-slate-100 hover:bg-indigo-100 px-2.5 py-1 rounded-lg text-indigo-700 font-bold">🔊 Nghe</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-black text-slate-800">many / much</td>
+                <td class="p-3 text-slate-600">nhiều</td>
+                <td class="p-3 font-black text-emerald-600">more than</td>
+                <td class="p-3 font-black text-emerald-700">the most</td>
+                <td class="p-3"><button onclick="speakText('many, much, more, the most')" class="text-xs bg-slate-100 hover:bg-indigo-100 px-2.5 py-1 rounded-lg text-indigo-700 font-bold">🔊 Nghe</button></td>
+              </tr>
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-black text-slate-800">far</td>
+                <td class="p-3 text-slate-600">xa</td>
+                <td class="p-3 font-black text-slate-700">farther / further than</td>
+                <td class="p-3 font-black text-slate-800">the farthest / furthest</td>
+                <td class="p-3"><button onclick="speakText('far, farther, further, farthest')" class="text-xs bg-slate-100 hover:bg-indigo-100 px-2.5 py-1 rounded-lg text-indigo-700 font-bold">🔊 Nghe</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Rewrite Guide Card -->
+      <div class="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-3xl p-6 shadow-sm">
+        <h3 class="text-lg font-black text-amber-950 mb-2 flex items-center gap-2">
+          🔄 Mẹo Vàng Làm Bài Tập Viết Lại Câu So Sánh Không Đổi Nghĩa (Part III)
+        </h3>
+        <p class="text-xs sm:text-sm text-amber-900 font-medium leading-relaxed mb-4">
+          Khi đổi vị trí hai chủ ngữ trong câu so sánh hơn, ta có 2 cách chính:
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm font-bold">
+          <div class="bg-white p-3.5 rounded-2xl border border-amber-200">
+            <span class="text-amber-800 font-black block mb-1">Cách 1: Dùng Tính Từ Trái Nghĩa</span>
+            <div class="text-slate-600 italic">taller ➔ shorter</div>
+            <div class="text-slate-600 italic">bigger ➔ smaller</div>
+            <div class="text-slate-600 italic">better ➔ worse</div>
+            <div class="text-slate-600 italic">heavier ➔ lighter</div>
+            <div class="text-slate-600 italic">younger ➔ older</div>
+          </div>
+          <div class="bg-white p-3.5 rounded-2xl border border-amber-200">
+            <span class="text-amber-800 font-black block mb-1">Cách 2: Dùng So Sánh Không Bằng (not as ... as)</span>
+            <div class="text-slate-600 italic">A is taller than B. ➔ B is not as tall as A.</div>
+            <div class="text-slate-600 italic">A cooks better than B. ➔ B doesn't cook as well as A.</div>
+            <div class="text-emerald-700 mt-2 text-xs">✨ Cả 2 cách trên hệ thống website đều chấm ĐÚNG 100%!</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         TAB 2: LÀM BÀI TẬP TRỰC TIẾP (EXERCISES I, II, III, V)
+         ========================================================================= -->
+    <section id="tab-exercises" class="tab-content hidden space-y-6">
+
+      <!-- Exercise Control Bar -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm flex flex-wrap items-center justify-between gap-3 no-print">
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="text-xs font-black text-slate-500 uppercase">Chọn phần:</span>
+          <button onclick="filterExercisePart('all')" id="btn-part-all" class="part-filter-btn bg-indigo-600 text-white text-xs font-black px-3.5 py-1.5 rounded-xl shadow-sm transition">
+            Tất Cả (36 câu)
+          </button>
+          <button onclick="filterExercisePart('part-1')" id="btn-part-1" class="part-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-black px-3 py-1.5 rounded-xl transition">
+            Phần I: Less / Fewer (8 câu)
+          </button>
+          <button onclick="filterExercisePart('part-2')" id="btn-part-2" class="part-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-black px-3 py-1.5 rounded-xl transition">
+            Phần II: Dạng So Sánh (16 câu)
+          </button>
+          <button onclick="filterExercisePart('part-3')" id="btn-part-3" class="part-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-black px-3 py-1.5 rounded-xl transition">
+            Phần III: Viết Lại Câu (8 câu)
+          </button>
+          <button onclick="filterExercisePart('part-5')" id="btn-part-5" class="part-filter-btn bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-black px-3 py-1.5 rounded-xl transition">
+            Phần V: Less / Least / Fewer / Fewest (8 câu)
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button onclick="checkAllCurrentExercises()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black px-4 py-2 rounded-xl shadow transition flex items-center gap-1.5">
+            ✅ Chấm Tất Cả
+          </button>
+          <button onclick="resetAllExercises()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-black px-3 py-2 rounded-xl transition">
+            🔄 Làm Lại
+          </button>
+          <button onclick="toggleAllExplanations()" id="btnToggleExpl" class="bg-amber-100 hover:bg-amber-200 text-amber-900 text-xs font-black px-3 py-2 rounded-xl transition">
+            💡 Hiện Đáp Án
+          </button>
+        </div>
+      </div>
+
+      <!-- Status / Summary Badge -->
+      <div id="exerciseSummaryBox" class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm font-bold text-indigo-900">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📊</span>
+          <span>Tiến độ hoàn thành: <b id="answeredCount" class="text-indigo-700">0</b> / <span id="totalExCount">36</span> câu</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="text-emerald-700">Đúng: <b id="correctCount">0</b></span>
+          <span class="text-rose-600">Sai: <b id="wrongCount">0</b></span>
+          <span class="text-amber-700">Tỷ lệ: <b id="accuracyPercent">0%</b></span>
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           SECTION I: FILL IN LESS OR FEWER IN BRACKETS (8 câu)
+           ===================================================================== -->
+      <div id="section-part-1" class="exercise-section space-y-4">
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-5 py-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="font-black text-base sm:text-lg">I. Fill in LESS or FEWER in brackets</h3>
+            <p class="text-xs text-blue-100 font-semibold">Điền LESS (danh từ không đếm được / tính từ) hoặc FEWER (danh từ đếm được số nhiều)</p>
+          </div>
+          <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black">8 Câu Hỏi</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="container-part-1">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           SECTION II: COMPLETE SENTENCES USING COMPARISON OF ADJ (16 câu)
+           ===================================================================== -->
+      <div id="section-part-2" class="exercise-section space-y-4">
+        <div class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-5 py-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="font-black text-base sm:text-lg">II. Complete the following sentences, using the comparison of adj</h3>
+            <p class="text-xs text-purple-100 font-semibold">Hoàn thành câu theo dạng yêu cầu: comparatives (so sánh hơn), as...as (so sánh bằng), superlatives (so sánh nhất)</p>
+          </div>
+          <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black">16 Câu Hỏi</span>
+        </div>
+
+        <div class="space-y-4" id="container-part-2">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           SECTION III: REWRITE THE SENTENCES SO THAT MEANING IS UNCHANGED (8 câu)
+           ===================================================================== -->
+      <div id="section-part-3" class="exercise-section space-y-4">
+        <div class="bg-gradient-to-r from-amber-600 to-orange-600 text-white px-5 py-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="font-black text-base sm:text-lg">III. Rewrite the sentences so that their meaning is unchanged</h3>
+            <p class="text-xs text-amber-100 font-semibold">Viết lại câu giữ nguyên ý nghĩa (dùng tính từ trái nghĩa hoặc cấu trúc so sánh không bằng)</p>
+          </div>
+          <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black">8 Câu Hỏi</span>
+        </div>
+
+        <div class="space-y-4" id="container-part-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- =====================================================================
+           SECTION V: COMPLETE WITH LESS, THE LEAST, FEWER, THE FEWEST (8 câu)
+           ===================================================================== -->
+      <div id="section-part-5" class="exercise-section space-y-4">
+        <div class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white px-5 py-3.5 rounded-2xl flex items-center justify-between shadow-sm">
+          <div>
+            <h3 class="font-black text-base sm:text-lg">V. Complete the sentences with less, the least, fewer, or the fewest</h3>
+            <p class="text-xs text-teal-100 font-semibold">Bài tập nâng cao phân biệt 4 cấp độ lượng từ (Sách Tiếng Anh 11 Friends Global - Unit 4B)</p>
+          </div>
+          <span class="bg-white/20 px-3 py-1 rounded-full text-xs font-black">8 Câu Hỏi</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="container-part-5">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         TAB 3: THỬ THÁCH 60S (SPEEDRUN QUIZ)
+         ========================================================================= -->
+    <section id="tab-rush" class="tab-content hidden space-y-6">
+      
+      <!-- Rush Intro Card -->
+      <div id="rushIntroScreen" class="bg-gradient-to-r from-amber-500 via-rose-500 to-indigo-600 text-white p-8 rounded-3xl text-center shadow-lg">
+        <div class="text-6xl mb-3 animate-bounce">⚡</div>
+        <h2 class="text-2xl sm:text-3xl font-black mb-2">Thử Thách 60 Giây Phản Xạ So Sánh!</h2>
+        <p class="max-w-xl mx-auto text-amber-100 text-sm sm:text-base font-semibold leading-relaxed mb-6">
+          Bạn có 60 giây để trả lời nhiều câu hỏi trắc nghiệm câu so sánh nhất có thể! Mỗi câu đúng sẽ cộng <b>+20 EXP</b> và tích lũy streak chuỗi liên tiếp. Sẵn sàng chưa?
+        </p>
+        <button onclick="startRushGame()" class="bg-white text-rose-600 hover:bg-amber-50 text-base sm:text-lg font-black px-8 py-3.5 rounded-2xl shadow-xl transition transform hover:scale-105 active:scale-95">
+          🚀 BẮT ĐẦU NGAY (60 GIÂY)
+        </button>
+      </div>
+
+      <!-- Rush Playing Screen -->
+      <div id="rushPlayScreen" class="hidden bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="flex justify-between items-center mb-6 border-b border-slate-100 pb-4 flex-wrap gap-3">
+          <div class="flex items-center gap-3">
+            <span class="text-3xl font-black text-rose-600 font-mono" id="rushTimer">60s</span>
+            <div class="text-xs font-extrabold text-slate-500">
+              Điểm: <span id="rushScoreDisplay" class="text-indigo-600 font-black text-base">0</span>
+            </div>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 px-3.5 py-1 rounded-full text-xs font-black text-amber-800" id="rushStreakDisplay">
+            🔥 Chuỗi: 0 câu
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div>
+            <span class="text-xs font-black uppercase text-indigo-600 tracking-wider" id="rushCat">CHỦ ĐỀ SO SÁNH</span>
+            <h3 class="text-lg sm:text-xl font-black text-slate-900 mt-1" id="rushQuestionText">...</h3>
+            <p class="text-xs text-slate-400 font-semibold mt-1" id="rushHintText"></p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="rushOptionsGrid">
+            <!-- Options populated by JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Rush End Screen -->
+      <div id="rushEndScreen" class="hidden bg-white border border-slate-200 rounded-3xl p-8 text-center shadow-sm">
+        <div class="text-6xl mb-3">🏆</div>
+        <h2 class="text-2xl font-black text-slate-900 mb-2">Hết Giờ! Hoàn Thành Thử Thách!</h2>
+        <p class="text-slate-600 text-sm font-semibold mb-6" id="rushResultDesc">...</p>
+        <div class="flex justify-center gap-3">
+          <button onclick="startRushGame()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm px-6 py-3 rounded-xl shadow transition">
+            🔄 Chơi Lại Lần Nữa
+          </button>
+          <button onclick="switchTab('tab-exercises')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-black text-sm px-6 py-3 rounded-xl transition">
+            ✍️ Quay Lại Bài Tập
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         TAB 4: GAME ĐẤU GIÁ CÂU HỎI LỚP HỌC (AUCTION QUIZ)
+         ========================================================================= -->
+    <section id="tab-auction" class="tab-content hidden space-y-6">
+      
+      <!-- Auction Banner -->
+      <div class="bg-gradient-to-r from-purple-800 via-indigo-900 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-lg relative overflow-hidden">
+        <div class="relative z-10 max-w-2xl">
+          <span class="bg-amber-400/30 text-amber-300 text-xs font-black uppercase px-3 py-1 rounded-full tracking-wider border border-amber-300/30">Lớp Học Vui Nhộn</span>
+          <h2 class="text-2xl sm:text-3xl font-black mt-2 mb-2">Đấu Giá Câu Hỏi So Sánh (Auction Quiz) 🔨</h2>
+          <p class="text-slate-300 text-xs sm:text-sm font-medium leading-relaxed">
+            Giáo viên hoặc nhóm trưởng chia lớp làm 2 hoặc 3 đội. Mỗi đội bắt đầu với <b>$1,000 vốn ảo</b>. Đội nào đặt cược cao nhất sẽ giành quyền trả lời. Trả lời đúng nhận gấp đôi tiền cược, sai bị trừ tiền cược!
+          </p>
+        </div>
+        <div class="absolute right-4 bottom-2 text-8xl opacity-15 pointer-events-none select-none">
+          🔨💰
+        </div>
+      </div>
+
+      <!-- Teams Scoreboard -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4" id="auctionTeamsBoard">
+        <!-- Team 1 -->
+        <div class="bg-white border-2 border-indigo-200 rounded-2xl p-4 shadow-sm text-center">
+          <span class="text-xs font-black uppercase text-indigo-600">Đội 1: Sư Tử Xanh 🦁</span>
+          <div class="text-2xl sm:text-3xl font-black text-indigo-950 font-mono my-1" id="team1Score">$1000</div>
+          <div class="flex justify-center gap-1.5 mt-2">
+            <button onclick="adjustTeamScore(1, 100)" class="bg-emerald-50 text-emerald-700 text-xs font-black px-2 py-1 rounded hover:bg-emerald-100">+100</button>
+            <button onclick="adjustTeamScore(1, -100)" class="bg-rose-50 text-rose-700 text-xs font-black px-2 py-1 rounded hover:bg-rose-100">-100</button>
+          </div>
+        </div>
+
+        <!-- Team 2 -->
+        <div class="bg-white border-2 border-rose-200 rounded-2xl p-4 shadow-sm text-center">
+          <span class="text-xs font-black uppercase text-rose-600">Đội 2: Đại Bàng Đỏ 🦅</span>
+          <div class="text-2xl sm:text-3xl font-black text-rose-950 font-mono my-1" id="team2Score">$1000</div>
+          <div class="flex justify-center gap-1.5 mt-2">
+            <button onclick="adjustTeamScore(2, 100)" class="bg-emerald-50 text-emerald-700 text-xs font-black px-2 py-1 rounded hover:bg-emerald-100">+100</button>
+            <button onclick="adjustTeamScore(2, -100)" class="bg-rose-50 text-rose-700 text-xs font-black px-2 py-1 rounded hover:bg-rose-100">-100</button>
+          </div>
+        </div>
+
+        <!-- Team 3 -->
+        <div class="bg-white border-2 border-amber-200 rounded-2xl p-4 shadow-sm text-center">
+          <span class="text-xs font-black uppercase text-amber-600">Đội 3: Rồng Vàng 🐲</span>
+          <div class="text-2xl sm:text-3xl font-black text-amber-950 font-mono my-1" id="team3Score">$1000</div>
+          <div class="flex justify-center gap-1.5 mt-2">
+            <button onclick="adjustTeamScore(3, 100)" class="bg-emerald-50 text-emerald-700 text-xs font-black px-2 py-1 rounded hover:bg-emerald-100">+100</button>
+            <button onclick="adjustTeamScore(3, -100)" class="bg-rose-50 text-rose-700 text-xs font-black px-2 py-1 rounded hover:bg-rose-100">-100</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Auction Question Stage -->
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+          <div class="flex items-center gap-2">
+            <span class="bg-indigo-100 text-indigo-800 text-xs font-black px-3 py-1 rounded-full" id="auctionQIndex">Vật Phẩm Đấu Giá #1</span>
+            <span class="text-xs font-extrabold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200" id="auctionQDiff">Mức Độ: Vừa</span>
+          </div>
+          <button onclick="playGavelSound()" class="bg-amber-500 hover:bg-amber-600 text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow transition flex items-center gap-1">
+            🔨 Gõ Búa Chốt Giá
+          </button>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 mb-5">
+          <div class="text-xs font-black text-slate-400 uppercase tracking-wider">CÂU HỎI THÁCH ĐẤU:</div>
+          <h4 class="text-lg sm:text-xl font-black text-slate-900 mt-1" id="auctionQuestionTitle">...</h4>
+        </div>
+
+        <!-- Bet Controls -->
+        <div class="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-4 mb-5 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-black text-indigo-900">Đội trúng đấu giá:</span>
+            <select id="auctionWinningTeam" class="bg-white border border-indigo-200 text-xs font-black rounded-xl px-3 py-2 text-indigo-900">
+              <option value="1">Đội 1 (Sư Tử Xanh)</option>
+              <option value="2">Đội 2 (Đại Bàng Đỏ)</option>
+              <option value="3">Đội 3 (Rồng Vàng)</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs font-black text-indigo-900">Mức tiền cược:</span>
+            <input type="number" id="auctionBetAmount" value="200" step="50" min="50" max="1000" class="w-24 bg-white border border-indigo-200 rounded-xl px-3 py-1.5 text-xs font-black text-indigo-900">
+          </div>
+        </div>
+
+        <!-- Reveal & Judgment -->
+        <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
+          <button onclick="revealAuctionAnswer()" id="btnRevealAuction" class="bg-slate-800 hover:bg-slate-900 text-white font-black text-xs sm:text-sm px-5 py-2.5 rounded-xl transition">
+            👁️ Mở Đáp Án & Giải Thích
+          </button>
+
+          <div class="flex gap-2">
+            <button onclick="judgeAuctionTeam(true)" class="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow">
+              ✅ Đội Trả Lời ĐÚNG (+Tiền)
+            </button>
+            <button onclick="judgeAuctionTeam(false)" class="bg-rose-600 hover:bg-rose-700 text-white font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow">
+              ❌ Đội Trả Lời SAI (-Tiền)
+            </button>
+            <button onclick="nextAuctionQuestion()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs sm:text-sm px-4 py-2.5 rounded-xl transition shadow">
+              ➡️ Câu Tiếp Theo
+            </button>
+          </div>
+        </div>
+
+        <!-- Secret Answer Box -->
+        <div id="auctionAnswerBox" class="hidden mt-5 bg-emerald-50 border border-emerald-200 p-4 rounded-2xl text-xs sm:text-sm font-semibold text-emerald-950">
+          <!-- Populated by JS -->
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================================================================
+         TAB 5: BẢNG TRA CỨU TÍNH TỪ & QUY TẮC SO SÁNH
+         ========================================================================= -->
+    <section id="tab-adjectives" class="tab-content hidden space-y-6">
+
+      <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+          <div>
+            <h3 class="text-xl font-black text-slate-800">Từ Điển Tra Cứu Tính Từ So Sánh</h3>
+            <p class="text-xs sm:text-sm font-semibold text-slate-500">Gõ từ để tìm nhanh dạng so sánh hơn, so sánh nhất và nghe phát âm chuẩn</p>
+          </div>
+          <div class="w-full sm:w-72">
+            <input type="text" id="adjSearchInput" oninput="filterAdjectivesTable()" placeholder="🔍 Gõ tính từ (vd: good, heavy, expensive...)" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2 text-xs sm:text-sm font-bold focus:outline-none focus:ring-2 focus:ring-indigo-400">
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs sm:text-sm font-semibold border-collapse">
+            <thead>
+              <tr class="bg-indigo-50 border-b border-indigo-100 text-indigo-900">
+                <th class="p-3 font-black rounded-l-xl">Tính từ</th>
+                <th class="p-3 font-black">Loại</th>
+                <th class="p-3 font-black">Nghĩa tiếng Việt</th>
+                <th class="p-3 font-black text-indigo-700">So sánh hơn</th>
+                <th class="p-3 font-black text-purple-700">So sánh nhất</th>
+                <th class="p-3 font-black rounded-r-xl">Phát âm</th>
+              </tr>
+            </thead>
+            <tbody id="adjectivesTableBody" class="divide-y divide-slate-100">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <!-- Audio Synth & Main Logic Script -->
+  <script>
+    /* ==========================================================================
+       1. WEB AUDIO API SYNTHESIZER
+       ========================================================================== */
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const icon = document.getElementById('soundIcon');
+      const btn = document.getElementById('soundToggleBtn');
+      if (soundEnabled) {
+        icon.textContent = '🔊';
+        btn.innerHTML = '<span>🔊</span> BẬT';
+        playSound('ping');
+      } else {
+        icon.textContent = '🔇';
+        btn.innerHTML = '<span>🔇</span> TẮT';
+      }
+    }
+
+    function playSound(type) {
+      if (!soundEnabled) return;
+      initAudio();
+      const now = audioCtx.currentTime;
+
+      if (type === 'ping') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.12);
+      } else if (type === 'wrong') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, now);
+        osc.frequency.linearRampToValueAtTime(110, now + 0.25);
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.linearRampToValueAtTime(0.01, now + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === 'fanfare') {
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, now + idx * 0.1);
+          gain.gain.setValueAtTime(0.2, now + idx * 0.1);
+          gain.gain.linearRampToValueAtTime(0.01, now + idx * 0.1 + 0.35);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.1);
+          osc.stop(now + idx * 0.1 + 0.35);
+        });
+      } else if (type === 'gavel') {
+        [0, 0.12, 0.24].forEach((delay) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now + delay);
+          osc.frequency.exponentialRampToValueAtTime(80, now + delay + 0.09);
+          gain.gain.setValueAtTime(0.4, now + delay);
+          gain.gain.linearRampToValueAtTime(0.01, now + delay + 0.09);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + delay);
+          osc.stop(now + delay + 0.09);
+        });
+      }
+    }
+
+    function playGavelSound() {
+      playSound('gavel');
+    }
+
+    function speakText(text) {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'en-US';
+        u.rate = 0.88;
+        window.speechSynthesis.speak(u);
+      }
+    }
+
+    /* ==========================================================================
+       2. CANVAS CONFETTI
+       ========================================================================== */
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiAnimationId = null;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function triggerConfetti() {
+      initAudio();
+      playSound('fanfare');
+      confettiParticles = [];
+      const colors = ['#6366f1', '#ec4899', '#f59e0b', '#10b981', '#06b6d4', '#f43f5e'];
+      for (let i = 0; i < 110; i++) {
+        confettiParticles.push({
+          x: canvas.width / 2,
+          y: canvas.height * 0.45,
+          vx: (Math.random() - 0.5) * 16,
+          vy: (Math.random() - 0.9) * 16,
+          size: Math.random() * 8 + 6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotationSpeed: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+      if (!confettiAnimationId) renderConfetti();
+    }
+
+    function renderConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let alive = false;
+      for (let p of confettiParticles) {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.35;
+        p.vx *= 0.98;
+        p.rotation += p.rotationSpeed;
+        p.opacity -= 0.007;
+
+        if (p.opacity > 0 && p.y < canvas.height + 50) {
+          alive = true;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = Math.max(0, p.opacity);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        }
+      }
+      if (alive) {
+        confettiAnimationId = requestAnimationFrame(renderConfetti);
+      } else {
+        cancelAnimationFrame(confettiAnimationId);
+        confettiAnimationId = null;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+
+    /* ==========================================================================
+       3. NAVIGATION TABS & EXP SYSTEM
+       ========================================================================== */
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-200');
+        btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+      });
+
+      const activeSection = document.getElementById(tabId);
+      if (activeSection) activeSection.classList.remove('hidden');
+
+      const activeNavBtn = document.getElementById(tabId.replace('tab-', 'nav-'));
+      if (activeNavBtn) {
+        activeNavBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+        activeNavBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-md', 'shadow-indigo-200');
+      }
+      playSound('ping');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    let userXP = 0;
+    function addXP(amount) {
+      userXP += amount;
+      document.getElementById('xpDisplay').textContent = `${userXP} EXP`;
+    }
+
+    /* ==========================================================================
+       4. DATA BÀI TẬP (EXERCISES I, II, III, V)
+       ========================================================================== */
+
+    // Normalize utility
+    function cleanStr(s) {
+      return (s || '')
+        .trim()
+        .toLowerCase()
+        .replace(/[.,!?;:]/g, '')
+        .replace(/\s+/g, ' ');
+    }
+
+    /* --- PHẦN I: Fill in less or fewer in brackets (8 câu) --- */
+    const part1Data = [
+      {
+        id: "p1-1",
+        num: 1,
+        sentence: "My team has ______ seats than your team.",
+        blanks: [
+          {
+            correct: ["fewer"],
+            hint: "Từ 'seats' (chỗ ngồi) là danh từ đếm được số nhiều có đuôi 's' ➔ Dùng FEWER."
+          }
+        ],
+        fullCorrectText: "My team has fewer seats than your team.",
+        viTranslation: "Đội của tôi có ít ghế hơn đội của bạn.",
+        grammarRule: "FEWER + danh từ đếm được số nhiều (seats)"
+      },
+      {
+        id: "p1-2",
+        num: 2,
+        sentence: "This laboratory has ______ equipment than we thought.",
+        blanks: [
+          {
+            correct: ["less"],
+            hint: "'equipment' (trang thiết bị) là danh từ KHÔNG đếm được trong tiếng Anh ➔ Dùng LESS."
+          }
+        ],
+        fullCorrectText: "This laboratory has less equipment than we thought.",
+        viTranslation: "Phòng thí nghiệm này có ít trang thiết bị hơn chúng tôi nghĩ.",
+        grammarRule: "LESS + danh từ không đếm được (equipment)"
+      },
+      {
+        id: "p1-3",
+        num: 3,
+        sentence: "This week, I received ______ orders than last week, so I earn ______ money.",
+        isMultiBlank: true,
+        blanks: [
+          {
+            correct: ["fewer"],
+            hint: "Ô 1: 'orders' (đơn đặt hàng) là danh từ đếm được số nhiều ➔ FEWER."
+          },
+          {
+            correct: ["less"],
+            hint: "Ô 2: 'money' (tiền bạc) là danh từ không đếm được ➔ LESS."
+          }
+        ],
+        fullCorrectText: "This week, I received fewer orders than last week, so I earn less money.",
+        viTranslation: "Tuần này tôi nhận được ít đơn hàng hơn tuần trước, nên tôi kiếm được ít tiền hơn.",
+        grammarRule: "FEWER + orders (đếm được), LESS + money (không đếm được)"
+      },
+      {
+        id: "p1-4",
+        num: 4,
+        sentence: "This department is ______ valuable than that department.",
+        blanks: [
+          {
+            correct: ["less"],
+            hint: "'valuable' (có giá trị) là tính từ ➔ So sánh kém hơn trước tính từ dùng LESS (less valuable than)."
+          }
+        ],
+        fullCorrectText: "This department is less valuable than that department.",
+        viTranslation: "Phòng ban này ít có giá trị hơn phòng ban kia.",
+        grammarRule: "LESS + tính từ (less valuable than)"
+      },
+      {
+        id: "p1-5",
+        num: 5,
+        sentence: "Our new boss has ______ experience than ours old.",
+        blanks: [
+          {
+            correct: ["less"],
+            hint: "'experience' (kinh nghiệm làm việc) là danh từ không đếm được ➔ Dùng LESS."
+          }
+        ],
+        fullCorrectText: "Our new boss has less experience than our old one.",
+        viTranslation: "Sếp mới của chúng tôi có ít kinh nghiệm hơn sếp cũ.",
+        grammarRule: "LESS + danh từ không đếm được (experience)"
+      },
+      {
+        id: "p1-6",
+        num: 6,
+        sentence: "This month, the factory makes ______ products than last month.",
+        blanks: [
+          {
+            correct: ["fewer"],
+            hint: "'products' (sản phẩm) là danh từ đếm được số nhiều có đuôi 's' ➔ Dùng FEWER."
+          }
+        ],
+        fullCorrectText: "This month, the factory makes fewer products than last month.",
+        viTranslation: "Tháng này, nhà máy sản xuất ít sản phẩm hơn tháng trước.",
+        grammarRule: "FEWER + danh từ đếm được số nhiều (products)"
+      },
+      {
+        id: "p1-7",
+        num: 7,
+        sentence: "Her new single is ______ popular than I thought.",
+        blanks: [
+          {
+            correct: ["less"],
+            hint: "'popular' (phổ biến, được yêu thích) là tính từ dài ➔ Dùng LESS (less popular than)."
+          }
+        ],
+        fullCorrectText: "Her new single is less popular than I thought.",
+        viTranslation: "Đĩa đơn mới của cô ấy ít nổi tiếng hơn tôi tưởng.",
+        grammarRule: "LESS + tính từ dài (less popular than)"
+      },
+      {
+        id: "p1-8",
+        num: 8,
+        sentence: "We write ______ songs than we used to.",
+        blanks: [
+          {
+            correct: ["fewer"],
+            hint: "'songs' (bài hát) là danh từ đếm được số nhiều ➔ Dùng FEWER."
+          }
+        ],
+        fullCorrectText: "We write fewer songs than we used to.",
+        viTranslation: "Chúng tôi sáng tác ít bài hát hơn trước đây.",
+        grammarRule: "FEWER + danh từ đếm được số nhiều (songs)"
+      }
+    ];
+
+    /* --- PHẦN II: Complete the following sentences, using comparison of adj (16 câu) --- */
+    const part2Data = [
+      {
+        id: "p2-1",
+        num: 1,
+        prompt: "A new house / expensive / an old house (comparatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "A new house is more expensive than an old house.",
+              "A new house is more expensive than an old house"
+            ],
+            hint: "Chủ ngữ số ít 'A new house' + is + more expensive than + an old house."
+          }
+        ],
+        modelAnswer: "A new house is more expensive than an old house.",
+        explain: "Expensive là tính từ dài (3 âm tiết) ➔ Dùng 'more expensive than'."
+      },
+      {
+        id: "p2-2",
+        num: 2,
+        prompt: "Bikes / fast / motorbikes (as ....as)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "Bikes are not as fast as motorbikes.",
+              "Bikes aren't as fast as motorbikes.",
+              "Bikes are not so fast as motorbikes.",
+              "Bikes aren't so fast as motorbikes.",
+              "Bikes are as fast as motorbikes.",
+              "Bikes are not as fast as motorbikes",
+              "Bikes aren't as fast as motorbikes"
+            ],
+            hint: "Thực tế và ngữ pháp chuẩn: 'Bikes are not as fast as motorbikes.' (Xe đạp không nhanh bằng xe máy)."
+          }
+        ],
+        modelAnswer: "Bikes are not as fast as motorbikes.",
+        explain: "Chủ ngữ số nhiều 'Bikes' ➔ to be là 'are'. Thể phủ định so sánh bằng: 'are not as fast as'."
+      },
+      {
+        id: "p2-3",
+        num: 3,
+        prompt: "My television / modern / his television (comparatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "My television is more modern than his television.",
+              "My television is more modern than his.",
+              "My television is more modern than his television",
+              "My television is more modern than his"
+            ],
+            hint: "Modern là tính từ 2 âm tiết dài ➔ Dùng 'is more modern than'."
+          }
+        ],
+        modelAnswer: "My television is more modern than his television.",
+        explain: "'Modern' là tính từ 2 âm tiết trọng âm 1 ➔ dùng 'more modern than'."
+      },
+      {
+        id: "p2-4",
+        num: 4,
+        prompt: "Summer / hot / in a year (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "Summer is the hottest season in a year.",
+              "Summer is the hottest in a year.",
+              "Summer is the hottest time in a year.",
+              "Summer is the hottest time of the year.",
+              "Summer is the hottest in the year.",
+              "Summer is the hottest in a year",
+              "Summer is the hottest season in a year"
+            ],
+            hint: "Hot là tính từ ngắn 1 âm tiết (1 phụ âm sau 1 nguyên âm) ➔ gấp đôi 't': 'is the hottest in a year'."
+          }
+        ],
+        modelAnswer: "Summer is the hottest in a year.",
+        explain: "Hot ➔ the hottest (gấp đôi phụ âm t). Mùa hè nóng nhất trong năm."
+      },
+      {
+        id: "p2-5",
+        num: 5,
+        prompt: "Jane / beautiful / in her family (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "Jane is the most beautiful in her family.",
+              "Jane is the most beautiful person in her family.",
+              "Jane is the most beautiful girl in her family.",
+              "Jane is the most beautiful in her family",
+              "Jane is the most beautiful girl in her family"
+            ],
+            hint: "Beautiful là tính từ dài (3 âm tiết) ➔ 'is the most beautiful in her family'."
+          }
+        ],
+        modelAnswer: "Jane is the most beautiful in her family.",
+        explain: "Beautiful ➔ the most beautiful. Jane đẹp nhất trong gia đình cô ấy."
+      },
+      {
+        id: "p2-6",
+        num: 6,
+        prompt: "Skirts / cheap / dresses (as....as)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "Skirts are as cheap as dresses.",
+              "Skirts are not as cheap as dresses.",
+              "Skirts aren't as cheap as dresses.",
+              "Skirts are as cheap as dresses",
+              "Skirts are not as cheap as dresses"
+            ],
+            hint: "Skirts số nhiều ➔ 'are as cheap as dresses' (hoặc phủ định: 'are not as cheap as dresses')."
+          }
+        ],
+        modelAnswer: "Skirts are as cheap as dresses.",
+        explain: "Cấu trúc so sánh bằng: S + to be + as + Adj + as + O."
+      },
+      {
+        id: "p2-7",
+        num: 7,
+        prompt: "Her English / good / in class (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "Her English is the best in class.",
+              "Her English is the best in the class.",
+              "Her English is the best in class",
+              "Her English is the best in the class"
+            ],
+            hint: "Tính từ 'good' bất quy tắc dạng so sánh nhất là 'the best'."
+          }
+        ],
+        modelAnswer: "Her English is the best in class.",
+        explain: "Good ➔ the best. Tiếng Anh của cô ấy là giỏi nhất trong lớp."
+      },
+      {
+        id: "p2-8",
+        num: 8,
+        prompt: "A bike / convenient / a car (as......as)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "A bike is not as convenient as a car.",
+              "A bike isn't as convenient as a car.",
+              "A bike is not so convenient as a car.",
+              "A bike is as convenient as a car.",
+              "A bike is not as convenient as a car",
+              "A bike isn't as convenient as a car"
+            ],
+            hint: "Theo thực tế xe đạp không tiện bằng ô tô: 'is not as convenient as a car' (hoặc 'is as convenient as a car')."
+          }
+        ],
+        modelAnswer: "A bike is not as convenient as a car.",
+        explain: "Chủ ngữ số ít 'A bike' + is (not) as convenient as a car."
+      },
+      {
+        id: "p2-9",
+        num: 9,
+        prompt: "My sister / good-looking / I (comparatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "My sister is more good-looking than me.",
+              "My sister is more good-looking than I am.",
+              "My sister is better-looking than me.",
+              "My sister is better-looking than I am.",
+              "My sister is more good-looking than me",
+              "My sister is more good-looking than I am"
+            ],
+            hint: "Good-looking có 2 cách so sánh hơn: 'more good-looking than me' hoặc 'better-looking than me'."
+          }
+        ],
+        modelAnswer: "My sister is more good-looking than me.",
+        explain: "Good-looking là tính từ ghép ➔ dùng 'more good-looking than' hoặc 'better-looking than'."
+      },
+      {
+        id: "p2-10",
+        num: 10,
+        prompt: "This / wonderful / book I have known (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "This is the most wonderful book I have known.",
+              "This is the most wonderful book that I have known.",
+              "This is the most wonderful book I have ever known.",
+              "This is the most wonderful book I have known"
+            ],
+            hint: "Wonderful là tính từ dài ➔ 'This is the most wonderful book I have known.'"
+          }
+        ],
+        modelAnswer: "This is the most wonderful book I have known.",
+        explain: "Wonderful ➔ the most wonderful. Đây là cuốn sách tuyệt vời nhất mà tôi từng biết."
+      },
+      {
+        id: "p2-11",
+        num: 11,
+        prompt: "She / happy / person I know (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "She is the happiest person I know.",
+              "She is the happiest person that I know.",
+              "She is the happiest person I know"
+            ],
+            hint: "Happy kết thúc bằng chữ 'y' ➔ đổi y thành i rồi thêm -est: 'the happiest'."
+          }
+        ],
+        modelAnswer: "She is the happiest person I know.",
+        explain: "Happy ➔ the happiest. Cô ấy là người hạnh phúc nhất mà tôi biết."
+      },
+      {
+        id: "p2-12",
+        num: 12,
+        prompt: "This bike / cheap / in the store (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "This bike is the cheapest in the store.",
+              "This bike is the cheapest one in the store.",
+              "This bike is the cheapest in the store"
+            ],
+            hint: "Cheap là tính từ ngắn 1 âm tiết ➔ thêm -est: 'is the cheapest in the store'."
+          }
+        ],
+        modelAnswer: "This bike is the cheapest in the store.",
+        explain: "Cheap ➔ the cheapest. Chiếc xe đạp này rẻ nhất trong cửa hàng."
+      },
+      {
+        id: "p2-13",
+        num: 13,
+        prompt: "This house / comfortable / that one",
+        inputs: [
+          {
+            label: "(comparatives):",
+            correct: [
+              "This house is more comfortable than that one.",
+              "This house is more comfortable than that one"
+            ],
+            hint: "Comfortable là tính từ dài ➔ is more comfortable than that one."
+          },
+          {
+            label: "(as....as):",
+            correct: [
+              "This house is as comfortable as that one.",
+              "This house is not as comfortable as that one.",
+              "This house isn't as comfortable as that one.",
+              "This house is as comfortable as that one",
+              "This house is not as comfortable as that one"
+            ],
+            hint: "So sánh bằng: is as comfortable as that one (hoặc phủ định: is not as comfortable as that one)."
+          }
+        ],
+        modelAnswer: "(comparatives) This house is more comfortable than that one.\n(as....as) This house is as comfortable as that one.",
+        explain: "Comfortable là tính từ dài. So sánh hơn dùng 'more... than', so sánh bằng dùng 'as... as'."
+      },
+      {
+        id: "p2-14",
+        num: 14,
+        prompt: "A dog / heavy / a cat",
+        inputs: [
+          {
+            label: "(comparatives):",
+            correct: [
+              "A dog is heavier than a cat.",
+              "A dog is heavier than a cat"
+            ],
+            hint: "Heavy kết thúc đuôi 'y' ➔ đổi y thành i rồi thêm er: 'is heavier than a cat'."
+          },
+          {
+            label: "(as....as):",
+            correct: [
+              "A cat is not as heavy as a dog.",
+              "A dog is not as heavy as a cat.",
+              "A dog is as heavy as a cat.",
+              "A cat isn't as heavy as a dog.",
+              "A dog isn't as heavy as a cat.",
+              "A cat is not as heavy as a dog",
+              "A dog is as heavy as a cat"
+            ],
+            hint: "So sánh bằng (hoặc không bằng): A dog is not as heavy as a cat (hoặc A cat is not as heavy as a dog / A dog is as heavy as a cat)."
+          }
+        ],
+        modelAnswer: "(comparatives) A dog is heavier than a cat.\n(as....as) A cat is not as heavy as a dog. (hoặc A dog is as heavy as a cat.)",
+        explain: "Heavy ➔ heavier. Chó nặng hơn mèo."
+      },
+      {
+        id: "p2-15",
+        num: 15,
+        prompt: "My red pencil / long / of all (superlatives)",
+        inputs: [
+          {
+            label: "Câu hoàn chỉnh:",
+            correct: [
+              "My red pencil is the longest of all.",
+              "My red pencil is the longest one of all.",
+              "My red pencil is the longest of all"
+            ],
+            hint: "Long là tính từ ngắn ➔ thêm -est: 'is the longest of all'."
+          }
+        ],
+        modelAnswer: "My red pencil is the longest of all.",
+        explain: "Long ➔ the longest. Bút chì đỏ của tôi dài nhất trong tất cả."
+      },
+      {
+        id: "p2-16",
+        num: 16,
+        prompt: "The new teacher / nice / old one",
+        inputs: [
+          {
+            label: "(comparatives):",
+            correct: [
+              "The new teacher is nicer than the old one.",
+              "The new teacher is nicer than the old one"
+            ],
+            hint: "Nice có sẵn đuôi 'e' ➔ chỉ thêm 'r': 'is nicer than the old one'."
+          },
+          {
+            label: "(as.......as):",
+            correct: [
+              "The new teacher is as nice as the old one.",
+              "The new teacher is not as nice as the old one.",
+              "The old one is not as nice as the new teacher.",
+              "The new teacher isn't as nice as the old one.",
+              "The new teacher is as nice as the old one",
+              "The new teacher is not as nice as the old one"
+            ],
+            hint: "So sánh bằng: 'The new teacher is as nice as the old one.' (hoặc phủ định 'is not as nice as')."
+          }
+        ],
+        modelAnswer: "(comparatives) The new teacher is nicer than the old one.\n(as....as) The new teacher is as nice as the old one.",
+        explain: "Nice ➔ nicer than. Giáo viên mới tốt bụng hơn / tốt bụng bằng giáo viên cũ."
+      }
+    ];
+
+    /* --- PHẦN III: Rewrite sentences so that their meaning is unchanged (8 câu) --- */
+    const part3Data = [
+      {
+        id: "p3-1",
+        num: 1,
+        given: "Lan is taller than Hoa.",
+        startWith: "Hoa is",
+        correctVariants: [
+          "shorter than Lan",
+          "shorter than Lan.",
+          "not as tall as Lan",
+          "not as tall as Lan.",
+          "not so tall as Lan",
+          "not so tall as Lan.",
+          "isn't as tall as Lan",
+          "isn't as tall as Lan."
+        ],
+        fullExpected: "Hoa is shorter than Lan. (hoặc: Hoa is not as tall as Lan.)",
+        explain: "Lan cao hơn Hoa ➔ Hoa thấp hơn Lan (shorter than Lan) HOẶC Hoa không cao bằng Lan (not as tall as Lan)."
+      },
+      {
+        id: "p3-2",
+        num: 2,
+        given: "I am bigger than my sister.",
+        startWith: "My sister is",
+        correctVariants: [
+          "smaller than me",
+          "smaller than me.",
+          "smaller than I am",
+          "smaller than I am.",
+          "not as big as me",
+          "not as big as me.",
+          "not as big as I am",
+          "not as big as I am.",
+          "isn't as big as me",
+          "isn't as big as me.",
+          "not so big as me"
+        ],
+        fullExpected: "My sister is smaller than me. (hoặc: My sister is not as big as me.)",
+        explain: "Tôi to hơn em gái ➔ Em gái tôi nhỏ hơn tôi (smaller than me) HOẶC không to bằng tôi (not as big as me)."
+      },
+      {
+        id: "p3-3",
+        num: 3,
+        given: "Jane cooks better than me.",
+        startWith: "I cook",
+        correctVariants: [
+          "worse than Jane",
+          "worse than Jane.",
+          "not as well as Jane",
+          "not as well as Jane.",
+          "not as good as Jane",
+          "not as good as Jane.",
+          "don't cook as well as Jane",
+          "do not cook as well as Jane"
+        ],
+        fullExpected: "I cook worse than Jane. (hoặc: I don't cook as well as Jane.)",
+        explain: "Jane nấu ăn giỏi hơn tôi ➔ Tôi nấu ăn tệ hơn Jane (worse than Jane) HOẶC không ngon bằng Jane (not as well as Jane)."
+      },
+      {
+        id: "p3-4",
+        num: 4,
+        given: "My mom is younger than my dad.",
+        startWith: "My dad is",
+        correctVariants: [
+          "older than my mom",
+          "older than my mom.",
+          "older than my mother",
+          "older than my mother.",
+          "not as young as my mom",
+          "not as young as my mom."
+        ],
+        fullExpected: "My dad is older than my mom.",
+        explain: "Mẹ tôi trẻ hơn bố tôi ➔ Bố tôi lớn tuổi hơn mẹ tôi (older than my mom)."
+      },
+      {
+        id: "p3-5",
+        num: 5,
+        given: "Nam is thinner than Minh.",
+        startWith: "Minh is",
+        correctVariants: [
+          "fatter than Nam",
+          "fatter than Nam.",
+          "heavier than Nam",
+          "heavier than Nam.",
+          "not as thin as Nam",
+          "not as thin as Nam.",
+          "isn't as thin as Nam"
+        ],
+        fullExpected: "Minh is fatter than Nam. (hoặc: Minh is heavier than Nam.)",
+        explain: "Nam gầy hơn Minh ➔ Minh béo/mập hơn Nam (fatter than Nam) HOẶC Minh không gầy bằng Nam."
+      },
+      {
+        id: "p3-6",
+        num: 6,
+        given: "My father is heavier than me.",
+        startWith: "I am",
+        correctVariants: [
+          "lighter than my father",
+          "lighter than my father.",
+          "lighter than him",
+          "lighter than him.",
+          "not as heavy as my father",
+          "not as heavy as my father.",
+          "not as heavy as him",
+          "not as heavy as him."
+        ],
+        fullExpected: "I am lighter than my father. (hoặc: I am not as heavy as my father.)",
+        explain: "Bố tôi nặng hơn tôi ➔ Tôi nhẹ hơn bố tôi (lighter than my father) HOẶC không nặng bằng bố tôi."
+      },
+      {
+        id: "p3-7",
+        num: 7,
+        given: "That tree is higher than this tree.",
+        startWith: "This tree is",
+        correctVariants: [
+          "lower than that tree",
+          "lower than that tree.",
+          "shorter than that tree",
+          "shorter than that tree.",
+          "not as high as that tree",
+          "not as high as that tree.",
+          "not as tall as that tree",
+          "not as tall as that tree."
+        ],
+        fullExpected: "This tree is lower than that tree. (hoặc: This tree is shorter than that tree.)",
+        explain: "Cái cây đó cao hơn cây này ➔ Cây này thấp hơn cây đó (lower / shorter than that tree)."
+      },
+      {
+        id: "p3-8",
+        num: 8,
+        given: "My shirt is older than your shirt.",
+        startWith: "Your shirt is",
+        correctVariants: [
+          "newer than my shirt",
+          "newer than my shirt.",
+          "newer than mine",
+          "newer than mine.",
+          "not as old as my shirt",
+          "not as old as my shirt.",
+          "not as old as mine",
+          "not as old as mine."
+        ],
+        fullExpected: "Your shirt is newer than my shirt. (hoặc: Your shirt is newer than mine.)",
+        explain: "Áo tôi cũ hơn áo bạn ➔ Áo bạn mới hơn áo tôi (newer than my shirt / newer than mine)."
+      }
+    ];
+
+    /* --- PHẦN V: Complete sentences with less, the least, fewer, or the fewest (8 câu) --- */
+    const part5Data = [
+      {
+        id: "p5-1",
+        num: 1,
+        sentence: "The kitchen is _____________ rooms of the three houses.",
+        options: ["the fewest", "the least", "fewer", "less"],
+        correct: ["the fewest", "the least"],
+        primaryAnswer: "the fewest",
+        hint: "Nhắc đến 'rooms' (danh từ đếm được số nhiều) và so sánh 3 ngôi nhà (so sánh nhất) ➔ 'the fewest' (hoặc 'the least' theo một số dị bản đề in sách Friends Global 11 Unit 4B).",
+        fullCorrectText: "The kitchen has got the fewest rooms of the three houses.",
+        explain: "So sánh nhất giữa 3 ngôi nhà ('of the three houses'). Đi với danh từ đếm được 'rooms' dùng THE FEWEST. (Hệ thống chấp nhận cả 'the fewest' và 'the least')."
+      },
+      {
+        id: "p5-2",
+        num: 2,
+        sentence: "My flat is _____________ conveniently located than yours,",
+        options: ["less", "fewer", "the least", "the fewest"],
+        correct: ["less"],
+        primaryAnswer: "less",
+        hint: "So sánh hơn giữa 2 căn hộ (có chữ 'than') + 'conveniently' (trạng từ/tính từ) ➔ dùng LESS.",
+        fullCorrectText: "My flat is less conveniently located than yours.",
+        explain: "Trước trạng từ/tính từ trong so sánh hơn giữa 2 đối tượng đi với 'than' ➔ dùng LESS."
+      },
+      {
+        id: "p5-3",
+        num: 3,
+        sentence: "This house has got _____________ rooms of the three we've looked at.",
+        options: ["the fewest", "the least", "fewer", "less"],
+        correct: ["the fewest"],
+        primaryAnswer: "the fewest",
+        hint: "'rooms' là danh từ đếm được số nhiều + so sánh nhất trong số 3 căn nhà ➔ THE FEWEST.",
+        fullCorrectText: "This house has got the fewest rooms of the three we've looked at.",
+        explain: "Danh từ đếm được số nhiều 'rooms' + so sánh nhất giữa 3 ngôi nhà ('of the three') ➔ THE FEWEST (ít phòng nhất)."
+      },
+      {
+        id: "p5-4",
+        num: 4,
+        sentence: "Which costs _____________, the semi-detached house or the terraced house?",
+        options: ["less", "fewer", "the least", "the fewest"],
+        correct: ["less"],
+        primaryAnswer: "less",
+        hint: "So sánh chi phí ('costs') giữa 2 ngôi nhà (A hay B) ➔ dùng LESS (chi phí/tiền bạc là đại lượng không đếm được).",
+        fullCorrectText: "Which costs less, the semi-detached house or the terraced house?",
+        explain: "Chi phí tiền bạc là không đếm được, so sánh đối chiếu giữa 2 lựa chọn (A hay B) ➔ Dùng LESS ('costs less': tốn ít tiền hơn)."
+      },
+      {
+        id: "p5-5",
+        num: 5,
+        sentence: "This is _____________ popular area of the city.",
+        options: ["the least", "the fewest", "less", "fewer"],
+        correct: ["the least"],
+        primaryAnswer: "the least",
+        hint: "Đứng trước tính từ dài 'popular' trong so sánh nhất toàn thành phố ➔ THE LEAST.",
+        fullCorrectText: "This is the least popular area of the city.",
+        explain: "So sánh nhất kém nhất của tính từ dài: the least + popular (khu vực ít được yêu thích nhất của thành phố)."
+      },
+      {
+        id: "p5-6",
+        num: 6,
+        sentence: "Which room has got _____________ furniture, the dining room, living room, or kitchen?",
+        options: ["the least", "the fewest", "less", "fewer"],
+        correct: ["the least"],
+        primaryAnswer: "the least",
+        hint: "'furniture' (đồ nội thất) là danh từ KHÔNG đếm được + so sánh nhất giữa 3 phòng ➔ THE LEAST.",
+        fullCorrectText: "Which room has got the least furniture, the dining room, living room, or kitchen?",
+        explain: "Furniture là danh từ không đếm được. So sánh nhất giữa 3 phòng ➔ Dùng THE LEAST furniture."
+      },
+      {
+        id: "p5-7",
+        num: 7,
+        sentence: "There are _____________ flowers in the flower bed this year than last.",
+        options: ["fewer", "less", "the fewest", "the least"],
+        correct: ["fewer"],
+        primaryAnswer: "fewer",
+        hint: "'flowers' (những bông hoa) là danh từ đếm được số nhiều + có chữ 'than' ➔ FEWER.",
+        fullCorrectText: "There are fewer flowers in the flower bed this year than last.",
+        explain: "Flowers là danh từ đếm được số nhiều. So sánh hơn với 'than' ➔ Dùng FEWER."
+      },
+      {
+        id: "p5-8",
+        num: 8,
+        sentence: "Wales is _____________ remote than the north of Scotland.",
+        options: ["less", "fewer", "the least", "the fewest"],
+        correct: ["less"],
+        primaryAnswer: "less",
+        hint: "'remote' (xa xôi, hẻo lánh) là tính từ + so sánh hơn giữa Wales và Scotland (có 'than') ➔ LESS.",
+        fullCorrectText: "Wales is less remote than the north of Scotland.",
+        explain: "Remote là tính từ. So sánh hơn kém đi với than ➔ Dùng LESS remote than."
+      }
+    ];
+
+    /* ==========================================================================
+       5. RENDER EXERCISES VÀ CHẤM ĐIỂM THÔNG MINH
+       ========================================================================== */
+    const userAnswers = {};
+    const questionStates = {}; // id -> { correct: bool, answered: bool }
+
+    function renderAllExercises() {
+      renderPart1();
+      renderPart2();
+      renderPart3();
+      renderPart5();
+      updateScoreSummary();
+    }
+
+    // Render Part 1
+    function renderPart1() {
+      const container = document.getElementById('container-part-1');
+      container.innerHTML = part1Data.map(q => {
+        let inputHtml = '';
+        if (q.isMultiBlank) {
+          inputHtml = `
+            <div class="flex flex-wrap items-center gap-2 mt-2">
+              <span class="text-xs font-bold text-slate-500">Ô 1 (orders):</span>
+              <input type="text" id="${q.id}-0" placeholder="fewer / less" class="ex-input w-28 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-extrabold focus:outline-none focus:ring-2 focus:ring-indigo-400">
+              <span class="text-xs font-bold text-slate-500 ml-2">Ô 2 (money):</span>
+              <input type="text" id="${q.id}-1" placeholder="fewer / less" class="ex-input w-28 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-extrabold focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            </div>
+          `;
+        } else {
+          inputHtml = `
+            <div class="flex items-center gap-2 mt-2">
+              <input type="text" id="${q.id}-0" placeholder="Điền less hoặc fewer..." class="ex-input flex-1 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-extrabold focus:outline-none focus:ring-2 focus:ring-indigo-400">
+            </div>
+          `;
+        }
+
+        return `
+          <div id="card-${q.id}" class="exercise-card bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm transition hover:shadow-md">
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 bg-blue-100 text-blue-700 rounded-full flex items-center justify-center text-xs font-black">
+                  ${q.num}
+                </span>
+                <span class="text-xs font-bold text-slate-400 uppercase">Câu ${q.num}</span>
+              </div>
+              <button onclick="speakText('${q.sentence.replace(/______/g, 'blank')}')" class="text-slate-400 hover:text-indigo-600 text-xs font-bold p-1 rounded transition" title="Nghe câu tiếng Anh">
+                🔊 Nghe
+              </button>
+            </div>
+
+            <div class="text-xs sm:text-sm font-extrabold text-slate-800 leading-relaxed">
+              ${q.sentence}
+            </div>
+
+            ${inputHtml}
+
+            <div class="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
+              <button onclick="checkPart1Question('${q.id}')" class="bg-indigo-600 hover:bg-indigo-700 text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition">
+                Kiểm Tra
+              </button>
+              <button onclick="toggleHint('${q.id}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs px-3 py-1.5 rounded-xl transition">
+                💡 Gợi Ý
+              </button>
+            </div>
+
+            <div id="hint-${q.id}" class="hidden mt-3 bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold p-3 rounded-xl">
+              💡 <b>Gợi ý:</b> ${q.blanks.map(b => b.hint).join('<br>')}
+              <div class="mt-1 text-slate-500 italic">Dịch: ${q.viTranslation}</div>
+            </div>
+
+            <div id="feedback-${q.id}" class="hidden mt-3 text-xs font-bold p-3 rounded-xl"></div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Check Part 1 question
+    function checkPart1Question(id) {
+      const q = part1Data.find(item => item.id === id);
+      if (!q) return;
+
+      const fb = document.getElementById(`feedback-${id}`);
+      const card = document.getElementById(`card-${id}`);
+      let allCorrect = true;
+      let hasInput = false;
+
+      q.blanks.forEach((b, idx) => {
+        const inp = document.getElementById(`${id}-${idx}`);
+        const val = cleanStr(inp ? inp.value : '');
+        if (val) hasInput = true;
+        const isMatch = b.correct.map(cleanStr).includes(val);
+        if (!isMatch) allCorrect = false;
+      });
+
+      if (!hasInput) {
+        alert('Bạn hãy nhập từ vào ô trống trước khi bấm kiểm tra nhé!');
+        return;
+      }
+
+      fb.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-200', 'bg-rose-50', 'text-rose-900', 'border-rose-200');
+
+      if (allCorrect) {
+        fb.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+        fb.innerHTML = `🎉 <b>CHÍNH XÁC!</b> Đáp án đúng là: <i>"${q.fullCorrectText}"</i><br><span class="text-xs text-emerald-700 font-semibold mt-1 block">📌 Quy tắc: ${q.grammarRule}</span>`;
+        card.classList.add('border-emerald-400');
+        card.classList.remove('border-rose-300');
+        playSound('ping');
+        addXP(15);
+        questionStates[id] = { correct: true, answered: true };
+      } else {
+        fb.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+        fb.innerHTML = `❌ <b>Chưa chính xác!</b><br>💡 Xem lại danh từ đếm được hay không đếm được. Bấm <b>Gợi ý</b> để xem phân tích nhé!`;
+        card.classList.add('border-rose-300');
+        card.classList.remove('border-emerald-400');
+        playSound('wrong');
+        questionStates[id] = { correct: false, answered: true };
+      }
+      updateScoreSummary();
+    }
+
+    // Render Part 2
+    function renderPart2() {
+      const container = document.getElementById('container-part-2');
+      container.innerHTML = part2Data.map(q => {
+        const inputFields = q.inputs.map((inp, idx) => `
+          <div class="mt-2">
+            <label class="block text-xs font-black text-slate-500 mb-1">${inp.label}</label>
+            <input type="text" id="${q.id}-${idx}" placeholder="Gõ câu so sánh hoàn chỉnh vào đây..." class="ex-input w-full bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-extrabold focus:outline-none focus:ring-2 focus:ring-purple-400">
+          </div>
+        `).join('');
+
+        return `
+          <div id="card-${q.id}" class="exercise-card bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm transition hover:shadow-md">
+            <div class="flex justify-between items-start gap-2 mb-2">
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 bg-purple-100 text-purple-700 rounded-full flex items-center justify-center text-xs font-black">
+                  ${q.num}
+                </span>
+                <span class="text-xs font-bold text-slate-400 uppercase">Câu ${q.num}</span>
+              </div>
+              <button onclick="speakText('${q.prompt.replace(/[/()]/g, ' ')}')" class="text-slate-400 hover:text-purple-600 text-xs font-bold p-1 rounded transition" title="Nghe từ gợi ý">
+                🔊 Nghe
+              </button>
+            </div>
+
+            <div class="text-xs sm:text-base font-black text-slate-800">
+              ${q.prompt}
+            </div>
+
+            ${inputFields}
+
+            <div class="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
+              <button onclick="checkPart2Question('${q.id}')" class="bg-purple-600 hover:bg-purple-700 text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition">
+                Kiểm Tra
+              </button>
+              <button onclick="toggleHint('${q.id}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs px-3 py-1.5 rounded-xl transition">
+                💡 Gợi Ý
+              </button>
+            </div>
+
+            <div id="hint-${q.id}" class="hidden mt-3 bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold p-3 rounded-xl">
+              💡 <b>Gợi ý:</b> ${q.inputs.map(i => i.hint).join('<br>')}
+            </div>
+
+            <div id="feedback-${q.id}" class="hidden mt-3 text-xs font-bold p-3 rounded-xl"></div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Check Part 2 question
+    function checkPart2Question(id) {
+      const q = part2Data.find(item => item.id === id);
+      if (!q) return;
+
+      const fb = document.getElementById(`feedback-${id}`);
+      const card = document.getElementById(`card-${id}`);
+      let allCorrect = true;
+      let hasInput = false;
+
+      q.inputs.forEach((inp, idx) => {
+        const el = document.getElementById(`${id}-${idx}`);
+        const val = cleanStr(el ? el.value : '');
+        if (val) hasInput = true;
+        const matches = inp.correct.some(c => cleanStr(c) === val);
+        if (!matches) allCorrect = false;
+      });
+
+      if (!hasInput) {
+        alert('Bạn hãy nhập câu trả lời vào ô trước nhé!');
+        return;
+      }
+
+      fb.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-200', 'bg-rose-50', 'text-rose-900', 'border-rose-200');
+
+      if (allCorrect) {
+        fb.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+        fb.innerHTML = `🎉 <b>TUYỆT VỜI!</b> Câu so sánh chuẩn xác:<br><i class="text-indigo-800 font-extrabold">${q.modelAnswer.replace(/\n/g, '<br>')}</i><br><span class="text-xs text-emerald-700 font-semibold mt-1 block">💡 Phân tích: ${q.explain}</span>`;
+        card.classList.add('border-emerald-400');
+        card.classList.remove('border-rose-300');
+        playSound('ping');
+        addXP(20);
+        questionStates[id] = { correct: true, answered: true };
+      } else {
+        fb.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+        fb.innerHTML = `❌ <b>Chưa chính xác!</b> Hãy kiểm tra lại: Động từ to be (is/are), dạng tính từ (-er hay more, -est hay the most), hoặc từ 'than'/'as'. Bấm <b>Gợi ý</b> để xem trợ giúp nhé!`;
+        card.classList.add('border-rose-300');
+        card.classList.remove('border-emerald-400');
+        playSound('wrong');
+        questionStates[id] = { correct: false, answered: true };
+      }
+      updateScoreSummary();
+    }
+
+    // Render Part 3 (Viết lại câu)
+    function renderPart3() {
+      const container = document.getElementById('container-part-3');
+      container.innerHTML = part3Data.map(q => `
+        <div id="card-${q.id}" class="exercise-card bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm transition hover:shadow-md">
+          <div class="flex justify-between items-start gap-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-xs font-black">
+                ${q.num}
+              </span>
+              <span class="text-xs font-bold text-slate-400 uppercase">Câu ${q.num}</span>
+            </div>
+            <button onclick="speakText('${q.given}')" class="text-slate-400 hover:text-amber-600 text-xs font-bold p-1 rounded transition" title="Nghe câu gốc">
+              🔊 Nghe
+            </button>
+          </div>
+
+          <div class="text-xs sm:text-base font-black text-slate-800 mb-2">
+            ${q.given}
+          </div>
+
+          <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 mt-2">
+            <span class="text-xs sm:text-sm font-black text-indigo-700 whitespace-nowrap">➔ ${q.startWith}</span>
+            <input type="text" id="${q.id}-0" placeholder="Viết tiếp phần còn lại của câu..." class="ex-input flex-1 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-xs sm:text-sm font-extrabold focus:outline-none focus:ring-2 focus:ring-amber-400">
+          </div>
+
+          <div class="flex items-center gap-2 mt-3 pt-2 border-t border-slate-100">
+            <button onclick="checkPart3Question('${q.id}')" class="bg-amber-600 hover:bg-amber-700 text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition">
+              Kiểm Tra
+            </button>
+            <button onclick="toggleHint('${q.id}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs px-3 py-1.5 rounded-xl transition">
+              💡 Gợi Ý
+            </button>
+          </div>
+
+          <div id="hint-${q.id}" class="hidden mt-3 bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold p-3 rounded-xl">
+            💡 <b>Gợi ý viết lại:</b> ${q.explain}
+          </div>
+
+          <div id="feedback-${q.id}" class="hidden mt-3 text-xs font-bold p-3 rounded-xl"></div>
+        </div>
+      `).join('');
+    }
+
+    // Check Part 3 question
+    function checkPart3Question(id) {
+      const q = part3Data.find(item => item.id === id);
+      if (!q) return;
+
+      const fb = document.getElementById(`feedback-${id}`);
+      const card = document.getElementById(`card-${id}`);
+      const inp = document.getElementById(`${id}-0`);
+      let val = cleanStr(inp ? inp.value : '');
+
+      if (!val) {
+        alert('Bạn hãy nhập vế viết lại câu vào ô trống nhé!');
+        return;
+      }
+
+      // Check if user accidentally typed the prefix (e.g. "Hoa is shorter than Lan")
+      const prefixClean = cleanStr(q.startWith);
+      if (val.startsWith(prefixClean)) {
+        val = cleanStr(val.substring(prefixClean.length));
+      }
+
+      const isMatch = q.correctVariants.some(c => cleanStr(c) === val);
+
+      fb.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-200', 'bg-rose-50', 'text-rose-900', 'border-rose-200');
+
+      if (isMatch) {
+        fb.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+        fb.innerHTML = `🎉 <b>RẤT XUẤT SẮC!</b> Câu viết lại chuẩn nghĩa:<br><i>"${q.fullExpected}"</i>`;
+        card.classList.add('border-emerald-400');
+        card.classList.remove('border-rose-300');
+        playSound('ping');
+        addXP(25);
+        questionStates[id] = { correct: true, answered: true };
+      } else {
+        fb.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+        fb.innerHTML = `❌ <b>Chưa chính xác!</b> Hãy chú ý tính từ trái nghĩa hoặc cấu trúc 'not as ... as'. Bấm <b>Gợi ý</b> để xem cách đổi nhé!`;
+        card.classList.add('border-rose-300');
+        card.classList.remove('border-emerald-400');
+        playSound('wrong');
+        questionStates[id] = { correct: false, answered: true };
+      }
+      updateScoreSummary();
+    }
+
+    // Render Part 5
+    function renderPart5() {
+      const container = document.getElementById('container-part-5');
+      container.innerHTML = part5Data.map(q => `
+        <div id="card-${q.id}" class="exercise-card bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm transition hover:shadow-md">
+          <div class="flex justify-between items-start gap-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center text-xs font-black">
+                ${q.num}
+              </span>
+              <span class="text-xs font-bold text-slate-400 uppercase">Câu ${q.num}</span>
+            </div>
+            <button onclick="speakText('${q.sentence.replace(/_____________/g, 'blank')}')" class="text-slate-400 hover:text-teal-600 text-xs font-bold p-1 rounded transition" title="Nghe câu tiếng Anh">
+              🔊 Nghe
+            </button>
+          </div>
+
+          <div class="text-xs sm:text-sm font-extrabold text-slate-800 leading-relaxed mb-3">
+            ${q.sentence}
+          </div>
+
+          <!-- Options Buttons or Select -->
+          <div class="flex flex-wrap gap-2 mb-3">
+            ${q.options.map(opt => `
+              <button onclick="selectPart5Option('${q.id}', '${opt}')" id="optBtn-${q.id}-${opt.replace(/\s+/g, '-')}" class="opt-btn-${q.id} bg-slate-50 hover:bg-teal-50 border border-slate-200 hover:border-teal-400 text-slate-700 font-extrabold text-xs px-3 py-1.5 rounded-xl transition">
+                ${opt}
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="flex items-center gap-2 pt-2 border-t border-slate-100">
+            <input type="text" id="${q.id}-0" placeholder="Chọn hoặc gõ từ..." class="ex-input flex-1 bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs font-extrabold focus:outline-none focus:ring-2 focus:ring-teal-400">
+            <button onclick="checkPart5Question('${q.id}')" class="bg-teal-600 hover:bg-teal-700 text-white font-black text-xs px-3.5 py-1.5 rounded-xl shadow-sm transition">
+              Kiểm Tra
+            </button>
+            <button onclick="toggleHint('${q.id}')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs px-3 py-1.5 rounded-xl transition">
+              💡
+            </button>
+          </div>
+
+          <div id="hint-${q.id}" class="hidden mt-3 bg-amber-50 border border-amber-200 text-amber-900 text-xs font-semibold p-3 rounded-xl">
+            💡 <b>Gợi ý:</b> ${q.hint}
+          </div>
+
+          <div id="feedback-${q.id}" class="hidden mt-3 text-xs font-bold p-3 rounded-xl"></div>
+        </div>
+      `).join('');
+    }
+
+    function selectPart5Option(id, opt) {
+      const inp = document.getElementById(`${id}-0`);
+      if (inp) inp.value = opt;
+      document.querySelectorAll(`.opt-btn-${id}`).forEach(b => {
+        b.classList.remove('bg-teal-600', 'text-white', 'border-teal-600');
+        b.classList.add('bg-slate-50', 'text-slate-700');
+      });
+      const btn = document.getElementById(`optBtn-${id}-${opt.replace(/\s+/g, '-')}`);
+      if (btn) {
+        btn.classList.remove('bg-slate-50', 'text-slate-700');
+        btn.classList.add('bg-teal-600', 'text-white', 'border-teal-600');
+      }
+      playSound('ping');
+    }
+
+    // Check Part 5 question
+    function checkPart5Question(id) {
+      const q = part5Data.find(item => item.id === id);
+      if (!q) return;
+
+      const fb = document.getElementById(`feedback-${id}`);
+      const card = document.getElementById(`card-${id}`);
+      const inp = document.getElementById(`${id}-0`);
+      const val = cleanStr(inp ? inp.value : '');
+
+      if (!val) {
+        alert('Bạn hãy chọn hoặc điền đáp án trước nhé!');
+        return;
+      }
+
+      const isCorrect = q.correct.some(c => cleanStr(c) === val);
+
+      fb.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-200', 'bg-rose-50', 'text-rose-900', 'border-rose-200');
+
+      if (isCorrect) {
+        fb.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-200');
+        fb.innerHTML = `🎉 <b>CHÍNH XÁC!</b> Đáp án: <b class="text-teal-700">${q.primaryAnswer}</b><br><span class="text-xs text-emerald-800 font-semibold mt-1 block">📌 Phân tích: ${q.explain}</span>`;
+        card.classList.add('border-emerald-400');
+        card.classList.remove('border-rose-300');
+        playSound('ping');
+        addXP(20);
+        questionStates[id] = { correct: true, answered: true };
+      } else {
+        fb.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-200');
+        fb.innerHTML = `❌ <b>Chưa chính xác!</b> Hãy xem lại số lượng đối tượng (2 hay 3) và danh từ đếm được hay không đếm được. Bấm <b>Gợi ý</b> để xem giải thích nhé!`;
+        card.classList.add('border-rose-300');
+        card.classList.remove('border-emerald-400');
+        playSound('wrong');
+        questionStates[id] = { correct: false, answered: true };
+      }
+      updateScoreSummary();
+    }
+
+    function toggleHint(id) {
+      const h = document.getElementById(`hint-${id}`);
+      if (h) h.classList.toggle('hidden');
+      playSound('ping');
+    }
+
+    // Filter which part is currently displayed
+    function filterExercisePart(part) {
+      document.querySelectorAll('.part-filter-btn').forEach(b => {
+        b.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+        b.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      const currentBtn = document.getElementById(`btn-${part}`);
+      if (currentBtn) {
+        currentBtn.classList.remove('bg-slate-100', 'text-slate-700');
+        currentBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+      }
+
+      const sections = ['part-1', 'part-2', 'part-3', 'part-5'];
+      if (part === 'all') {
+        sections.forEach(p => {
+          const el = document.getElementById(`section-${p}`);
+          if (el) el.classList.remove('hidden');
+        });
+      } else {
+        sections.forEach(p => {
+          const el = document.getElementById(`section-${p}`);
+          if (el) {
+            if (p === part) el.classList.remove('hidden');
+            else el.classList.add('hidden');
+          }
+        });
+      }
+      playSound('ping');
+    }
+
+    // Check All Current Exercises
+    function checkAllCurrentExercises() {
+      part1Data.forEach(q => checkPart1Question(q.id));
+      part2Data.forEach(q => checkPart2Question(q.id));
+      part3Data.forEach(q => checkPart3Question(q.id));
+      part5Data.forEach(q => checkPart5Question(q.id));
+
+      const totalCorrect = Object.values(questionStates).filter(s => s.correct).length;
+      if (totalCorrect >= 30) {
+        triggerConfetti();
+      }
+    }
+
+    // Reset All Exercises
+    function resetAllExercises() {
+      if (!confirm('Bạn có chắc chắn muốn làm lại toàn bộ bài tập không?')) return;
+      document.querySelectorAll('.ex-input').forEach(i => i.value = '');
+      document.querySelectorAll('.exercise-card').forEach(c => {
+        c.classList.remove('border-emerald-400', 'border-rose-300');
+      });
+      document.querySelectorAll('[id^="feedback-"]').forEach(f => f.classList.add('hidden'));
+      document.querySelectorAll('[id^="hint-"]').forEach(h => h.classList.add('hidden'));
+      for (const k in questionStates) delete questionStates[k];
+      updateScoreSummary();
+      playSound('ping');
+    }
+
+    // Toggle All Explanations & Answers
+    let allExplVisible = false;
+    function toggleAllExplanations() {
+      allExplVisible = !allExplVisible;
+      const btn = document.getElementById('btnToggleExpl');
+      if (allExplVisible) {
+        btn.textContent = '🙈 Ẩn Đáp Án';
+        document.querySelectorAll('[id^="hint-"]').forEach(h => h.classList.remove('hidden'));
+      } else {
+        btn.textContent = '💡 Hiện Đáp Án';
+        document.querySelectorAll('[id^="hint-"]').forEach(h => h.classList.add('hidden'));
+      }
+      playSound('ping');
+    }
+
+    function updateScoreSummary() {
+      const answered = Object.values(questionStates).filter(s => s.answered).length;
+      const correct = Object.values(questionStates).filter(s => s.correct).length;
+      const wrong = answered - correct;
+      const pct = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+      document.getElementById('answeredCount').textContent = answered;
+      document.getElementById('correctCount').textContent = correct;
+      document.getElementById('wrongCount').textContent = wrong;
+      document.getElementById('accuracyPercent').textContent = `${pct}%`;
+    }
+
+    /* ==========================================================================
+       6. SPEEDRUN 60S RUSH QUIZ LOGIC
+       ========================================================================== */
+    const rushQuestionsPool = [
+      {
+        cat: "Phân biệt Less hay Fewer",
+        text: "I have ______ friends than you.",
+        hint: "'friends' là danh từ đếm được số nhiều",
+        opts: ["fewer", "less", "the least", "fewest"],
+        ans: "fewer"
+      },
+      {
+        cat: "Tính từ ngắn hay dài",
+        text: "Dạng so sánh hơn của 'heavy' là gì?",
+        hint: "Đuôi 'y' đổi thành 'i' + er",
+        opts: ["heavier", "more heavy", "heaviest", "more heavier"],
+        ans: "heavier"
+      },
+      {
+        cat: "So sánh nhất",
+        text: "Summer is ______ season in a year.",
+        hint: "Hot gấp đôi phụ âm t",
+        opts: ["the hottest", "hottest", "the most hot", "hotter"],
+        ans: "the hottest"
+      },
+      {
+        cat: "So sánh bằng",
+        text: "Lan is as ______ as her sister.",
+        hint: "Giữa as...as là tính từ nguyên mẫu",
+        opts: ["tall", "taller", "tallest", "more tall"],
+        ans: "tall"
+      },
+      {
+        cat: "Tính từ bất quy tắc",
+        text: "Dạng so sánh nhất của 'good' là gì?",
+        hint: "good ➔ better ➔ the ...",
+        opts: ["the best", "the goodest", "the better", "most good"],
+        ans: "the best"
+      },
+      {
+        cat: "Phân biệt Less hay Fewer",
+        text: "We need ______ water to cook this soup.",
+        hint: "'water' là danh từ không đếm được",
+        opts: ["less", "fewer", "the fewest", "fews"],
+        ans: "less"
+      },
+      {
+        cat: "Tính từ bất quy tắc",
+        text: "Dạng so sánh hơn của 'bad' là gì?",
+        hint: "bad ➔ worse ➔ the worst",
+        opts: ["worse", "badder", "more bad", "worst"],
+        ans: "worse"
+      },
+      {
+        cat: "Lượng từ nâng cao",
+        text: "This house has got ______ rooms of the three.",
+        hint: "rooms số nhiều + so sánh 3 ngôi nhà",
+        opts: ["the fewest", "the least", "fewer", "less"],
+        ans: "the fewest"
+      },
+      {
+        cat: "So sánh hơn tính từ dài",
+        text: "A Ferrari is ______ than a normal car.",
+        hint: "'expensive' là tính từ 3 âm tiết",
+        opts: ["more expensive", "expensiver", "most expensive", "the more expensive"],
+        ans: "more expensive"
+      },
+      {
+        cat: "Viết lại câu tương đương",
+        text: "Lan is taller than Hoa ➔ Hoa is ______ than Lan.",
+        hint: "Tính từ trái nghĩa với taller",
+        opts: ["shorter", "smaller", "lower", "fatter"],
+        ans: "shorter"
+      }
+    ];
+
+    let rushTimerInterval = null;
+    let rushTimeLeft = 60;
+    let rushScore = 0;
+    let rushStreak = 0;
+    let currentRushQIdx = 0;
+
+    function startRushGame() {
+      document.getElementById('rushIntroScreen').classList.add('hidden');
+      document.getElementById('rushEndScreen').classList.add('hidden');
+      document.getElementById('rushPlayScreen').classList.remove('hidden');
+
+      rushTimeLeft = 60;
+      rushScore = 0;
+      rushStreak = 0;
+      updateRushStats();
+
+      rushQuestionsPool.sort(() => Math.random() - 0.5);
+      currentRushQIdx = 0;
+      loadRushQuestion();
+
+      clearInterval(rushTimerInterval);
+      rushTimerInterval = setInterval(() => {
+        rushTimeLeft--;
+        document.getElementById('rushTimer').textContent = `${rushTimeLeft}s`;
+        if (rushTimeLeft <= 0) {
+          endRushGame();
+        }
+      }, 1000);
+      playSound('ping');
+    }
+
+    function updateRushStats() {
+      document.getElementById('rushTimer').textContent = `${rushTimeLeft}s`;
+      document.getElementById('rushScoreDisplay').textContent = rushScore;
+      document.getElementById('rushStreakDisplay').textContent = `🔥 Chuỗi: ${rushStreak} câu`;
+    }
+
+    function loadRushQuestion() {
+      if (currentRushQIdx >= rushQuestionsPool.length) {
+        currentRushQIdx = 0;
+      }
+      const q = rushQuestionsPool[currentRushQIdx];
+      document.getElementById('rushCat').textContent = q.cat;
+      document.getElementById('rushQuestionText').textContent = q.text;
+      document.getElementById('rushHintText').textContent = q.hint;
+
+      const grid = document.getElementById('rushOptionsGrid');
+      grid.innerHTML = q.opts.map(opt => `
+        <button onclick="handleRushAnswer('${opt}', this)" class="bg-slate-50 hover:bg-indigo-50 border-2 border-slate-200 hover:border-indigo-400 text-slate-800 font-extrabold text-sm sm:text-base py-3 px-4 rounded-2xl shadow-sm transition active:scale-95 text-left">
+          👉 ${opt}
+        </button>
+      `).join('');
+    }
+
+    function handleRushAnswer(selectedOpt, btnEl) {
+      const q = rushQuestionsPool[currentRushQIdx];
+      if (selectedOpt === q.ans) {
+        rushScore += 20;
+        rushStreak++;
+        addXP(20);
+        playSound('ping');
+        btnEl.classList.remove('bg-slate-50', 'border-slate-200');
+        btnEl.classList.add('bg-emerald-500', 'text-white', 'border-emerald-600');
+      } else {
+        rushStreak = 0;
+        playSound('wrong');
+        btnEl.classList.remove('bg-slate-50', 'border-slate-200');
+        btnEl.classList.add('bg-rose-500', 'text-white', 'border-rose-600');
+      }
+      updateRushStats();
+
+      setTimeout(() => {
+        currentRushQIdx++;
+        loadRushQuestion();
+      }, 400);
+    }
+
+    function endRushGame() {
+      clearInterval(rushTimerInterval);
+      document.getElementById('rushPlayScreen').classList.add('hidden');
+      document.getElementById('rushEndScreen').classList.remove('hidden');
+      document.getElementById('rushResultDesc').innerHTML = `
+        Bạn đã ghi được <b>${rushScore} điểm</b> trong 60 giây!<br>
+        Nhận ngay <b>+${rushScore} EXP</b> vào tài khoản học tập! 🌟
+      `;
+      if (rushScore >= 100) {
+        triggerConfetti();
+      } else {
+        playSound('fanfare');
+      }
+    }
+
+    /* ==========================================================================
+       7. GAME ĐẤU GIÁ CÂU HỎI LỚP HỌC (AUCTION QUIZ)
+       ========================================================================= */
+    const auctionQuestions = [
+      {
+        num: 1,
+        diff: "Khởi Động ($200)",
+        title: "Trong câu: 'This laboratory has ______ equipment than we thought.', vì sao đáp án bắt buộc phải là LESS mà không được là FEWER?",
+        ans: "Bởi vì 'equipment' (trang thiết bị) là danh từ KHÔNG đếm được trong tiếng Anh. Quy tắc vàng: LESS + danh từ không đếm được, còn FEWER + danh từ đếm được số nhiều.",
+        points: 200
+      },
+      {
+        num: 2,
+        diff: "Kịch Tính ($300)",
+        title: "Viết lại câu sau sao cho nghĩa không đổi: 'Jane cooks better than me.' (bắt đầu bằng 'I cook...')",
+        ans: "I cook worse than Jane. (hoặc: I don't cook as well as Jane.)",
+        points: 300
+      },
+      {
+        num: 3,
+        diff: "Hóc Búa ($400)",
+        title: "Điền từ thích hợp vào chỗ trống: 'Which costs ______, the semi-detached house or the terraced house?' (ít tốn tiền hơn)",
+        ans: "LESS. Chi phí tiền bạc ('costs') là đại lượng không đếm được, và đây là so sánh đối chiếu giữa 2 ngôi nhà nên dùng dạng so sánh hơn LESS (costs less: tốn ít hơn).",
+        points: 400
+      },
+      {
+        num: 4,
+        diff: "Siêu Khó ($500)",
+        title: "Tìm 2 lỗi sai trong câu sau và sửa lại: 'She is the most happy person I know and she has less books than me.'",
+        ans: "Lỗi 1: 'most happy' ➔ 'happiest' (tính từ 2 âm tiết tận cùng -y đổi thành -iest).<br>Lỗi 2: 'less books' ➔ 'fewer books' (books là danh từ đếm được số nhiều nên phải dùng FEWER).",
+        points: 500
+      },
+      {
+        num: 5,
+        diff: "Chung Kết ($600)",
+        title: "Hoàn chỉnh câu sau theo dạng so sánh nhất: 'This / wonderful / book I have known'",
+        ans: "This is the most wonderful book I have known. (hoặc: ...that I have known / ...I have ever known).",
+        points: 600
+      }
+    ];
+
+    let currentAuctionIdx = 0;
+    const teamScores = { 1: 1000, 2: 1000, 3: 1000 };
+
+    function adjustTeamScore(teamId, delta) {
+      teamScores[teamId] = Math.max(0, teamScores[teamId] + delta);
+      document.getElementById(`team${teamId}Score`).textContent = `$${teamScores[teamId]}`;
+      playSound('ping');
+    }
+
+    function renderCurrentAuction() {
+      const q = auctionQuestions[currentAuctionIdx];
+      document.getElementById('auctionQIndex').textContent = `Vật Phẩm Đấu Giá #${q.num}`;
+      document.getElementById('auctionQDiff').textContent = `Mức Độ: ${q.diff}`;
+      document.getElementById('auctionQuestionTitle').textContent = q.title;
+      document.getElementById('auctionAnswerBox').classList.add('hidden');
+      document.getElementById('auctionBetAmount').value = q.points;
+    }
+
+    function revealAuctionAnswer() {
+      const q = auctionQuestions[currentAuctionIdx];
+      const box = document.getElementById('auctionAnswerBox');
+      box.innerHTML = `
+        <div class="font-black text-emerald-900 text-sm mb-1">📢 ĐÁP ÁN CHÍNH THỨC CỦA GIÁO VIÊN / TRỌNG TÀI:</div>
+        <div class="text-slate-800 leading-relaxed font-bold">${q.ans}</div>
+      `;
+      box.classList.remove('hidden');
+      playSound('ping');
+    }
+
+    function judgeAuctionTeam(isCorrect) {
+      const teamId = document.getElementById('auctionWinningTeam').value;
+      const bet = parseInt(document.getElementById('auctionBetAmount').value, 10) || 100;
+      if (isCorrect) {
+        adjustTeamScore(teamId, bet);
+        triggerConfetti();
+      } else {
+        adjustTeamScore(teamId, -bet);
+        playSound('wrong');
+      }
+    }
+
+    function nextAuctionQuestion() {
+      currentAuctionIdx = (currentAuctionIdx + 1) % auctionQuestions.length;
+      renderCurrentAuction();
+      playSound('ping');
+    }
+
+    /* ==========================================================================
+       8. BẢNG TRA CỨU TÍNH TỪ SO SÁNH
+       ========================================================================== */
+    const adjectivesDictionary = [
+      { base: "good", type: "Bất quy tắc", vi: "tốt, giỏi", comp: "better than", sup: "the best" },
+      { base: "bad", type: "Bất quy tắc", vi: "tệ, xấu", comp: "worse than", sup: "the worst" },
+      { base: "far", type: "Bất quy tắc", vi: "xa", comp: "farther / further than", sup: "the farthest / furthest" },
+      { base: "little", type: "Bất quy tắc", vi: "ít (không đếm)", comp: "less than", sup: "the least" },
+      { base: "few", type: "Ngắn (-er/-est)", vi: "ít (đếm được)", comp: "fewer than", sup: "the fewest" },
+      { base: "many / much", type: "Bất quy tắc", vi: "nhiều", comp: "more than", sup: "the most" },
+      { base: "cheap", type: "Tính từ ngắn", vi: "rẻ", comp: "cheaper than", sup: "the cheapest" },
+      { base: "expensive", type: "Tính từ dài", vi: "đắt tiền", comp: "more expensive than", sup: "the most expensive" },
+      { base: "fast", type: "Tính từ ngắn", vi: "nhanh", comp: "faster than", sup: "the fastest" },
+      { base: "hot", type: "Ngắn (gấp đôi t)", vi: "nóng", comp: "hotter than", sup: "the hottest" },
+      { base: "big", type: "Ngắn (gấp đôi g)", vi: "to, lớn", comp: "bigger than", sup: "the biggest" },
+      { base: "fat", type: "Ngắn (gấp đôi t)", vi: "béo, mập", comp: "fatter than", sup: "the fattest" },
+      { base: "thin", type: "Ngắn (gấp đôi n)", vi: "gầy, mỏng", comp: "thinner than", sup: "the thinnest" },
+      { base: "heavy", type: "Đuôi -y ➔ -ier", vi: "nặng", comp: "heavier than", sup: "the heaviest" },
+      { base: "happy", type: "Đuôi -y ➔ -ier", vi: "hạnh phúc, vui vẻ", comp: "happier than", sup: "the happiest" },
+      { base: "tall", type: "Tính từ ngắn", vi: "cao", comp: "taller than", sup: "the tallest" },
+      { base: "short", type: "Tính từ ngắn", vi: "thấp, ngắn", comp: "shorter than", sup: "the shortest" },
+      { base: "old", type: "Tính từ ngắn", vi: "già, cũ", comp: "older than", sup: "the oldest" },
+      { base: "young", type: "Tính từ ngắn", vi: "trẻ", comp: "younger than", sup: "the youngest" },
+      { base: "modern", type: "Tính từ dài", vi: "hiện đại", comp: "more modern than", sup: "the most modern" },
+      { base: "convenient", type: "Tính từ dài", vi: "thuận tiện", comp: "more convenient than", sup: "the most convenient" },
+      { base: "comfortable", type: "Tính từ dài", vi: "thoải mái, tiện nghi", comp: "more comfortable than", sup: "the most comfortable" },
+      { base: "wonderful", type: "Tính từ dài", vi: "tuyệt vời", comp: "more wonderful than", sup: "the most wonderful" },
+      { base: "beautiful", type: "Tính từ dài", vi: "xinh đẹp", comp: "more beautiful than", sup: "the most beautiful" },
+      { base: "popular", type: "Tính từ dài", vi: "phổ biến, được yêu thích", comp: "more popular than", sup: "the most popular" },
+      { base: "valuable", type: "Tính từ dài", vi: "có giá trị", comp: "more valuable than", sup: "the most valuable" },
+      { base: "remote", type: "Tính từ dài/2 âm", vi: "xa xôi, hẻo lánh", comp: "more / less remote than", sup: "the most / least remote" },
+      { base: "nice", type: "Có sẵn -e ➔ thêm r", vi: "tốt bụng, đẹp", comp: "nicer than", sup: "the nicest" }
+    ];
+
+    function renderAdjectivesTable(filterText = '') {
+      const tbody = document.getElementById('adjectivesTableBody');
+      const q = filterText.toLowerCase().trim();
+      const filtered = adjectivesDictionary.filter(item => 
+        item.base.toLowerCase().includes(q) ||
+        item.vi.toLowerCase().includes(q) ||
+        item.comp.toLowerCase().includes(q) ||
+        item.sup.toLowerCase().includes(q)
+      );
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-slate-400">Không tìm thấy tính từ nào phù hợp với từ khóa "${filterText}"</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => `
+        <tr class="hover:bg-slate-50 transition">
+          <td class="p-3 font-black text-slate-800">${item.base}</td>
+          <td class="p-3 text-slate-500 font-bold text-xs"><span class="bg-slate-100 px-2 py-0.5 rounded">${item.type}</span></td>
+          <td class="p-3 text-slate-600">${item.vi}</td>
+          <td class="p-3 font-black text-indigo-600">${item.comp}</td>
+          <td class="p-3 font-black text-purple-600">${item.sup}</td>
+          <td class="p-3">
+            <button onclick="speakText('${item.base}, ${item.comp}, ${item.sup}')" class="text-xs bg-slate-100 hover:bg-indigo-100 text-indigo-700 font-bold px-2.5 py-1 rounded-lg transition">
+              🔊 Nghe
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterAdjectivesTable() {
+      const q = document.getElementById('adjSearchInput').value;
+      renderAdjectivesTable(q);
+    }
+
+    /* ==========================================================================
+       9. INITIALIZATION
+       ========================================================================== */
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAllExercises();
+      renderCurrentAuction();
+      renderAdjectivesTable();
+    });
+  </script>
+</body>
+</html>
